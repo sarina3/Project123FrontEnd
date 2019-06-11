@@ -1,0 +1,20 @@
+<div class="holder">
+  <div class="photo">
+    <img [src]="selectedPhoto.src" alt="image">
+    <div class="left-arrow">
+      <button type="button" class="nav-arrow" (click)="prev()">
+        <span class="fas fa-angle-left"></span>
+      </button>
+    </div>
+    <div class="right-arrow">
+      <button class="nav-arrow" type="button" (click)="next()">
+        <span class="fas fa-angle-right"></span>
+      </button>
+    </div>
+  </div>
+  <div class="next-pictures" #presentation>
+    <div class="small-photo" *ngFor="let photo of photos;let i = index">
+      <img [src]="photo.src" (click)="select(i)">
+    </div>
+  </div>
+</div>

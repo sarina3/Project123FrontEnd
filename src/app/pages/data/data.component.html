@@ -1,0 +1,119 @@
+<div class="page">
+  <h1>Data</h1>
+  <div *ngFor="let image of images" (click)="showDetail(image)" class="image inline" data-toggle="modal" data-target="#myModal">
+    <img [src]="'../../../assets/images/' + image.name" height="225px" width="300px">
+  </div>
+</div>
+
+<div *ngIf="image" id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Detail</h4>
+      </div>
+      <div class="modal-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Attribute</th>
+              <th scope="col">Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngIf="image.id">
+              <td>id</td>
+              <td>{{ image.id }}</td>
+            </tr>
+            <tr *ngIf="image.name">
+              <td>name</td>
+              <td>{{ image.name }}</td>
+            </tr>
+            <tr *ngIf="image.metaClinicalAge_approx">
+              <td>metaClinicalAge_approx</td>
+              <td>{{ image.metaClinicalAge_approx }}</td>
+            </tr>
+            <tr *ngIf="image.metaClinicalAnatom_site_general">
+              <td>metaClinicalAnatom_site_general</td>
+              <td>{{ image.metaClinicalAnatom_site_general }}</td>
+            </tr>
+            <tr *ngIf="image.metaClinicalBenign_malignant">
+              <td>metaClinicalBenign_malignant</td>
+              <td>{{ image.metaClinicalBenign_malignant }}</td>
+            </tr>
+            <tr *ngIf="image.metaClinicalClin_size_long_diam_mm">
+              <td>metaClinicalClin_size_long_diam_mm</td>
+              <td>{{ image.metaClinicalClin_size_long_diam_mm }}</td>
+            </tr>
+            <tr *ngIf="image.metaClinicalDiagnosis">
+              <td>metaClinicalDiagnosis</td>
+              <td>{{ image.metaClinicalDiagnosis }}</td>
+            </tr>
+            <tr *ngIf="image.metaClinicalDiagnosis_confirm_type">
+              <td>metaClinicalDiagnosis_confirm_type</td>
+              <td>{{ image.metaClinicalDiagnosis_confirm_type }}</td>
+            </tr>
+            <tr *ngIf="image.metaClinicalFamily_hx_mm">
+              <td>metaClinicalFamily_hx_mm</td>
+              <td>{{ image.metaClinicalFamily_hx_mm }}</td>
+            </tr>
+            <tr *ngIf="image.metaClinicalMel_class">
+              <td>metaClinicalMel_class</td>
+              <td>{{ image.metaClinicalMel_class }}</td>
+            </tr>
+            <tr *ngIf="image.metaClinicalMel_mitotic_index">
+              <td>metaClinicalMel_mitotic_index</td>
+              <td>{{ image.metaClinicalMel_mitotic_index }}</td>
+            </tr>
+            <tr *ngIf="image.metaClinicalMel_thick_mm">
+              <td>metaClinicalMel_thick_mm</td>
+              <td>{{ image.metaClinicalMel_thick_mm }}</td>
+            </tr>
+            <tr *ngIf="image.metaClinicalMel_type">
+              <td>metaClinicalMel_type</td>
+              <td>{{ image.metaClinicalMel_type }}</td>
+            </tr>
+            <tr *ngIf="image.metaClinicalMel_ulcer">
+              <td>metaClinicalMel_ulcer</td>
+              <td>{{ image.metaClinicalMel_ulcer }}</td>
+            </tr>
+            <tr *ngIf="image.metaClinicalMelanocytic">
+              <td>metaClinicalMelanocytic</td>
+              <td>{{ image.metaClinicalMelanocytic }}</td>
+            </tr>
+            <tr *ngIf="image.metaClinicalNevus_type">
+              <td>metaClinicalNevus_type</td>
+              <td>{{ image.metaClinicalNevus_type }}</td>
+            </tr>
+            <tr *ngIf="image.metaClinicalPersonal_hx_mm">
+              <td>metaClinicalPersonal_hx_mm</td>
+              <td>{{ image.metaClinicalPersonal_hx_mm }}</td>
+            </tr>
+            <tr *ngIf="image.metaClinicalSex">
+              <td>metaClinicalSex</td>
+              <td>{{ image.metaClinicalSex }}</td>
+            </tr>
+            <tr *ngIf="image.metaAcquisitionDermoscopic_type">
+              <td>metaAcquisitionDermoscopic_type</td>
+              <td>{{ image.metaAcquisitionDermoscopic_type }}</td>
+            </tr>
+            <tr *ngIf="image.metaAcquisitionImage_type">
+              <td>metaAcquisitionImage_type</td>
+              <td>{{ image.metaAcquisitionImage_type }}</td>
+            </tr>
+            <tr *ngIf="image.metaAcquisitionPixelsX">
+              <td>metaAcquisitionPixelsX</td>
+              <td>{{ image.metaAcquisitionPixelsX }}</td>
+            </tr>
+            <tr *ngIf="image.metaAcquisitionPixelsY">
+              <td>metaAcquisitionPixelsY</td>
+              <td>{{ image.metaAcquisitionPixelsY }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

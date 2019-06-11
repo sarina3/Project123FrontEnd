@@ -1,0 +1,12 @@
+<div class="page">
+  <h1>Model</h1>
+  <div>
+    <label>Activation function &nbsp;</label>
+    <select (change)="activationFunctionChange($event.target.selectedIndex)">
+      <option *ngFor="let activationFunction of activationFunctions">
+        {{ activationFunction.name }}
+      </option>
+    </select>
+  </div>
+  <button class="btn btn-success" (click)="trainModel()">Predict</button>
+</div>

@@ -1,0 +1,15 @@
+<div class="page">
+  <h1>Predict</h1>
+
+  <app-ack-webcam (imageDone)="onImageCreate($event)"></app-ack-webcam>
+  
+  <div class="container">
+    <div class="row">
+      <div *ngIf="image" class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <img [src]="image" [attr.width]="320" [attr.height]="240">
+      </div>
+    </div>
+  </div>
+  
+  <button *ngIf="image" class="btn btn-success" (click)="predict()">Predict</button>
+</div>
