@@ -1,11 +1,12 @@
 import { Component, OnInit, Renderer2, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { ImagesService } from 'src/app/services/images.service';
 
 @Component({
   selector: 'app-photo-viewer',
   templateUrl: './photo-viewer.component.html',
   styleUrls: ['./photo-viewer.component.scss']
 })
-export class PhotoViewerComponent implements AfterViewInit {
+export class PhotoViewerComponent implements AfterViewInit,OnInit {
 
   selectedPhoto = { src: '../../../assets/images/ISIC_0024306.jpg' };
   photos = [
@@ -18,10 +19,17 @@ export class PhotoViewerComponent implements AfterViewInit {
   indexLocal = 0;
   indexGlobal = 0;
   @ViewChild('presentation') presentation: ElementRef;
-  constructor(private renderer: Renderer2) { }
+  constructor(private renderer: Renderer2, private imagesService: ImagesService) { }
 
   ngAfterViewInit() {
     this.renderer.addClass(this.presentation.nativeElement.children[this.indexLocal],'active');
+  }
+
+  ngOnInit(){
+    this.imagesService.getImage().subscribe(
+      (response)=> console.log(response),
+      (error) => console.log(error)
+    );
   }
 
   next() {

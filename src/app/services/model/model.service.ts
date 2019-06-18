@@ -22,5 +22,5 @@ export class ModelService {
       .post(url, activationFunction, this.myHttpOptions)
       .pipe(
         map(res => console.log(res)));
-  }
+  } 
 }
