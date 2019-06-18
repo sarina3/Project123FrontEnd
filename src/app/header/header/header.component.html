@@ -5,13 +5,13 @@
   <div class="collapse navbar-collapse" id="navbar-collapse">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a href="#" class="nav-link">Training session</a>
+        <p routerLink="/model" routerLinkActive="active" class="nav-link">Training session</p>
       </li>
       <li class="nav-item">
-        <a routerLink="/testing-session" routerLinkActive="active"  class="nav-link">Testing session</a>
+        <p routerLink="/testing-session" routerLinkActive="active" class="nav-link">Testing session</p>
       </li>
       <li class="nav-item dropdown">
-        <a 
+        <p 
           href="#"
           class="nav-link dropdown-toggle"
           id="dataset-dropdown" 
@@ -20,13 +20,14 @@
           aria-haspopup="true" 
           aria-expanded="false">
           Dataset
-        </a>
+      </p>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a routerLink="/dataset/show" routerLinkActive="active" class="dropdown-item">Dataset preview</a>
+          <p routerLink="/dataset/show" routerLinkActive="active" class="dropdown-item">Dataset preview</p>
+          <p routerLink="/dataset/data" routerLinkActive="active" class="dropdown-item">Dataset</p>
         </div>
       </li>
       <li class="nav-item dropdown">
-        <a 
+        <p 
           href="#"
           class="nav-link dropdown-toggle"
           id="model-dropdown"
@@ -35,14 +36,14 @@
           aria-haspopup="true" 
           aria-expanded="false">
           Model
-        </a>
+      </p>
         <div class="dropdown-menu" aria-labelledby="model-dropdown">
-          <a routerLink="/model" routerLinkActive="active" class="dropdown-item">Show model</a>
-          <a href="#" class="dropdown-item">Show model parameters</a>
+          <p routerLink="/model" routerLinkActive="active" class="dropdown-item">Show model</p>
+          <p href="#" class="dropdown-item">Show model parameters</p>
         </div>
       </li>
       <li class="nav-item">
-          <a routerLink="/about" routerLinkActive="active" class="nav-link">About</a>
+          <p routerLink="/about" routerLinkActive="active" class="nav-link">About</p>
       </li>
     </ul>
   </div>

@@ -5,9 +5,9 @@ import { DataComponent } from './pages/data/data.component';
 import { ModelComponent } from './pages/model/model.component';
 import { AboutComponent } from './pages/about/about.component';
 import { PredictComponent } from './pages/predict/predict.component';
-import { AppComponent } from './app.component';
 
 const routes: Routes = [
+  { path: 'dataset/data', component: DataComponent},
   { path: 'dataset/show', component: PhotoViewerComponent},
   { path: 'data', component: DataComponent },
   { path: 'model', component: ModelComponent },

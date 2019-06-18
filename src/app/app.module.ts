@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -12,7 +13,6 @@ import { PredictComponent } from './pages/predict/predict.component';
 import { AckWebcamComponent } from './components/ack-webcam/ack-webcam.component';
 import { HttpClientModule } from '@angular/common/http';
 import { WebCamModule } from 'ack-angular-webcam';
-import { NO_ERRORS_SCHEMA } from '@angular/compiler/src/core';
 
 @NgModule({
   declarations: [
@@ -29,6 +29,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/compiler/src/core';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     HttpClientModule,
     WebCamModule
   ],

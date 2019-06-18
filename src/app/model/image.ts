@@ -1,5 +1,4 @@
 export class Image {
-    image: string;
     id: string;
     name: string;
     metaClinicalAge_approx: number;
@@ -24,31 +23,29 @@ export class Image {
     metaAcquisitionPixelsY: number;
 
     constructor(
-        image: string,
-        id?: string,
-        name?: string,
-        metaClinicalAge_approx?: number,
-        metaClinicalAnatom_site_general?: string,
-        metaClinicalBenign_malignant?: string,
-        metaClinicalClin_size_long_diam_mm?: any,
-        metaClinicalDiagnosis?: string,
-        metaClinicalDiagnosis_confirm_type?: string,
-        metaClinicalFamily_hx_mm?: any,
-        metaClinicalMel_class?: any,
-        metaClinicalMel_mitotic_index?: any,
-        metaClinicalMel_thick_mm?: any,
-        metaClinicalMel_type?: any,
-        metaClinicalMel_ulcer?: any,
-        metaClinicalMelanocytic?: boolean,
-        metaClinicalNevus_type?: any,
-        metaClinicalPersonal_hx_mm?: any,
-        metaClinicalSex?: string,
-        metaAcquisitionDermoscopic_type?: any,
-        metaAcquisitionImage_type?: string,
-        metaAcquisitionPixelsX?: number,
-        metaAcquisitionPixelsY?: number
+        id: string,
+        name: string,
+        metaClinicalAge_approx: number,
+        metaClinicalAnatom_site_general: string,
+        metaClinicalBenign_malignant: string,
+        metaClinicalClin_size_long_diam_mm: any,
+        metaClinicalDiagnosis: string,
+        metaClinicalDiagnosis_confirm_type: string,
+        metaClinicalFamily_hx_mm: any,
+        metaClinicalMel_class: any,
+        metaClinicalMel_mitotic_index: any,
+        metaClinicalMel_thick_mm: any,
+        metaClinicalMel_type: any,
+        metaClinicalMel_ulcer: any,
+        metaClinicalMelanocytic: boolean,
+        metaClinicalNevus_type: any,
+        metaClinicalPersonal_hx_mm: any,
+        metaClinicalSex: string,
+        metaAcquisitionDermoscopic_type: any,
+        metaAcquisitionImage_type: string,
+        metaAcquisitionPixelsX: number,
+        metaAcquisitionPixelsY: number
     ) {
-        this.image = image,
         this.id = id,
         this.name = name,
         this.metaClinicalAge_approx = metaClinicalAge_approx,

@@ -1,6 +1,7 @@
 <div class="page">
   <h1>Data</h1>
   <div *ngFor="let image of images" (click)="showDetail(image)" class="image inline" data-toggle="modal" data-target="#myModal">
+    <p>Diagnosis: {{ image.metaClinicalBenign_malignant ? image.metaClinicalBenign_malignant : ' - ' }}</p>
     <img [src]="'../../../assets/images/' + image.name" height="225px" width="300px">
   </div>
 </div>

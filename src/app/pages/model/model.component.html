@@ -2,11 +2,15 @@
   <h1>Model</h1>
   <div>
     <label>Activation function &nbsp;</label>
-    <select (change)="activationFunctionChange($event.target.selectedIndex)">
-      <option *ngFor="let activationFunction of activationFunctions">
+    <select [(ngModel)]="activationFunction">
+      <option *ngFor="let activationFunction of activationFunctions" [ngValue]="activationFunction.id">
         {{ activationFunction.name }}
       </option>
     </select>
   </div>
-  <button class="btn btn-success" (click)="trainModel()">Predict</button>
+  <div>
+    <label>Use cross validation &nbsp;</label>
+    <input type="checkbox" (change)="useCrossValidationChange()">
+  </div>
+  <button class="btn btn-success" (click)="trainModel()">Train model</button>
 </div>

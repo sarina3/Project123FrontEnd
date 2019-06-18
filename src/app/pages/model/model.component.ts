@@ -24,20 +24,23 @@ export class ModelComponent implements OnInit {
       name: 'Relu'
     }
   ];
+  useCrossValidation = false;
 
   constructor(
-    private _modelService: ModelService
+    private modelService: ModelService
   ) { }
 
   ngOnInit() {
   }
 
-  activationFunctionChange(event: any) {
-    this.activationFunction = event + 1;
+  useCrossValidationChange() {
+    this.useCrossValidation = !this.useCrossValidation;
   }
 
   trainModel() {
-    this._modelService.trainModel(this.activationFunction)
+    console.log(this.activationFunction);
+    console.log(this.useCrossValidation);
+    this.modelService.trainModel(this.activationFunction)
       .subscribe(response => console.log(response)
     );
   }
