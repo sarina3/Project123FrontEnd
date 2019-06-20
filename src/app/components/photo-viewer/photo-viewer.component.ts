@@ -1,5 +1,6 @@
 import { Component, OnInit, Renderer2, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { ImagesService } from 'src/app/services/images.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-photo-viewer',
@@ -27,7 +28,16 @@ export class PhotoViewerComponent implements AfterViewInit,OnInit {
 
   ngOnInit(){
     this.imagesService.getImage().subscribe(
-      (response)=> console.log(response),
+      (response:Blob)=>{
+        const reader = new FileReader();
+        reader.readAsDataURL(response);
+        reader.onload = () =>{
+          let tmp = { src: `${reader.result}` };
+          this.photos = [ tmp, ...this.photos];
+          console.log(reader.result);
+        }
+
+      },
       (error) => console.log(error)
     );
   }

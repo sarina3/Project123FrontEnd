@@ -6,7 +6,7 @@ export const environment = {
   production: false
 };
 
-export const BaseUrl = 'localhost:8000/';
+export const BaseUrl = 'http://127.0.0.1:8000/';
 
 /*
  * For easier debugging in development mode, you can import the following file
