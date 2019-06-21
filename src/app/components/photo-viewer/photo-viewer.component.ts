@@ -28,14 +28,20 @@ export class PhotoViewerComponent implements AfterViewInit,OnInit {
 
   ngOnInit(){
     this.imagesService.getImage().subscribe(
-      (response:Blob)=>{
-        const reader = new FileReader();
-        reader.readAsDataURL(response);
-        reader.onload = () =>{
-          let tmp = { src: `${reader.result}` };
-          this.photos = [ tmp, ...this.photos];
-          console.log(reader.result);
-        }
+      (response)=>{
+        console.log(response);
+        this.photos = [];
+        response.data.forEach(element => {
+          this.photos = [...this.photos,{src: 'data:image/jpg;base64,'+ element }]
+        });
+        this.selectedPhoto = this.photos[0];
+        // const reader = new FileReader();
+        // reader.readAsDataURL(response);
+        // reader.onload = () =>{
+        //   let tmp = { src: `${reader.result}` };
+        //   this.photos = [ tmp, ...this.photos];
+        //   console.log(reader.result);
+        // }
 
       },
       (error) => console.log(error)

@@ -11,7 +11,7 @@ export class ImagesService {
 
   constructor(private http: HttpClient) { }
 
-  getImage(): Observable<Blob> {
-    return this.http.get(BaseUrl+'loadImage',{ responseType: 'blob'});
+  getImage(): Observable<any> {
+    return this.http.get(BaseUrl+'loadImage',{ responseType: 'json'});
   }
 }
