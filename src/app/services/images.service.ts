@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { BaseUrl } from 'src/environments/environment';
 import { Observable } from 'rxjs';
+import { ImageMetadata } from '../model/image-metadata.model';
+import { FormGroup, FormArray, FormControl } from '@angular/forms';
 
 
 @Injectable({
@@ -11,7 +13,14 @@ export class ImagesService {
 
   constructor(private http: HttpClient) { }
 
-  getImage(): Observable<any> {
-    return this.http.get(BaseUrl+'loadImage',{ responseType: 'json'});
+  getImages(metadata: ImageMetadata): Observable<any> {
+    
+    const form = new FormGroup({
+      'lastIndex': new FormControl(metadata.lastIndex),
+      'count': new FormControl(metadata.count),
+      'all': new FormControl(metadata.all)
+    });
+    const json = JSON.parse(JSON.stringify(metadata));
+    return this.http.post(BaseUrl+'loadImages',json);
   }
 }

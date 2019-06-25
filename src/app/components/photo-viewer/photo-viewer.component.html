@@ -1,12 +1,12 @@
 <div class="holder">
   <div class="photo">
     <img [src]="selectedPhoto.src" alt="image">
-    <div class="left-arrow">
+    <div class="left-arrow" *ngIf="leftArrowEnabled">
       <button type="button" class="nav-arrow" (click)="prev()">
         <span class="fas fa-angle-left"></span>
       </button>
     </div>
-    <div class="right-arrow">
+    <div class="right-arrow" *ngIf="rightArrowEnabled">
       <button class="nav-arrow" type="button" (click)="next()">
         <span class="fas fa-angle-right"></span>
       </button>
