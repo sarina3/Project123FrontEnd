@@ -1,0 +1,75 @@
+@import '../../../styles.scss';
+
+input {
+    outline:0;
+    border:0;
+    &:focus{
+        outline:0;
+    }
+}
+
+.hint{
+    display: none;
+    width: inherit;
+    max-height: 200px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 1;
+    position: relative;
+    background-color: $white; 
+    background-size: 100%;
+    padding:0;
+
+    ul{
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        background: transparent;
+        text-align: center;
+        vertical-align: middle;
+        list-style-type: none;
+
+        li{
+            text-decoration: none;
+            text-align: center;
+            vertical-align: middle;
+            width: inherit;
+            cursor: pointer;
+        }
+
+        li:hover{
+            background-color: $light-gray;  
+        }
+    }
+}
+
+.wrap{
+    width: 220px;
+    height: 40px;
+    vertical-align: middle;
+    text-align: center;
+
+    & > input{
+        width: 180px;
+    }
+}
+.my-glyph{
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+.show{
+    display: block !important;
+}
+button {
+    background: transparent;
+    width: auto;
+    height: inherit;
+    border: 0;
+    margin: 0;
+    text-align: center;
+    vertical-align: middle;
+    color: $white-half;
+    &:focus{
+        outline:0;
+    }
+}

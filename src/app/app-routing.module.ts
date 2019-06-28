@@ -9,6 +9,7 @@ import { PredictComponent } from './pages/predict/predict.component';
 const routes: Routes = [
   { path: 'dataset/data', component: DataComponent},
   { path: 'dataset/show', component: PhotoViewerComponent},
+  { path: 'predict', component: PredictComponent},
   { path: 'data', component: DataComponent },
   { path: 'model', component: ModelComponent },
   { path: 'about', component: AboutComponent },

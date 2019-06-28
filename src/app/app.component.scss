@@ -1,4 +1,10 @@
+@import '../styles.scss';
+
+
 
 .container{
     padding-top:20px;
+    height: calc(100% - 100px);
+    margin-top: 10px;
+    background-color: $black;
 }

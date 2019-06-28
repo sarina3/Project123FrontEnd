@@ -1,0 +1,8 @@
+<div class="wrap" #holder>
+  <input type="text" [(ngModel)]=title (click)="open()" (keyup)="filter()" #input><button type="button"  (click)="toggle()"><span class="fas fa-angle-down my-glyph" #arrow></span></button>
+  <div class="hint" #collapse>
+    <ul>
+      <li (click)="choose(i)" *ngFor="let tmp of dataToShow; let i = index">{{tmp.title}}</li>
+    </ul>
+  </div>
+</div>

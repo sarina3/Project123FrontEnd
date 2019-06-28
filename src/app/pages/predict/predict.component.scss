@@ -1,0 +1,23 @@
+@import '../../../styles.scss';
+
+.row {
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    color: $white-half;
+}
+
+.filepicker{
+    text-align: center;
+    vertical-align: middle;
+    width: 100%;
+    margin-top: 20px;
+} 
+
+img{
+    margin-top: 20px;
+    max-width: 100%;
+    margin: 0 auto;
+}

@@ -1,15 +1,22 @@
 <div class="page">
   <h1>Predict</h1>
 
-  <app-ack-webcam (imageDone)="onImageCreate($event)"></app-ack-webcam>
-  
-  <div class="container">
+  <app-select [data]="data" [selected]="data[1]" (selectedValue)="onSelect($event)"></app-select>
+  <div *ngIf="selectedOption === 1 else takePhoto">
+    <app-ack-webcam (imageDone)="onImageCreate($event)"></app-ack-webcam>
+    
     <div class="row">
       <div *ngIf="image" class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
         <img [src]="image" [attr.width]="320" [attr.height]="240">
       </div>
     </div>
   </div>
-  
+  <ng-template #takePhoto>
+    <div class="filepicker">
+      <input type="file" accept="image/*" (change)="onFilePick($event)">
+      <img [src]="image" *ngIf="image" alt="preview">  
+    </div>
+  </ng-template>
+
   <button *ngIf="image" class="btn btn-success" (click)="predict()">Predict</button>
 </div>
