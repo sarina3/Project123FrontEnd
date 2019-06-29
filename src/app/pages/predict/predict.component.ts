@@ -41,7 +41,7 @@ export class PredictComponent implements OnInit {
   onFilePick(event){
     const reader = new FileReader();
     reader.onloadend = () => {
-      this.image = reader.result;
+      this.image = (<string> reader.result);
     }
     console.log(event)
     reader.readAsDataURL(event.target.files[0])

@@ -1,16 +1,36 @@
 <div class="page">
   <h1>Model</h1>
-  <div>
-    <label>Activation function &nbsp;</label>
-    <select [(ngModel)]="activationFunction">
-      <option *ngFor="let activationFunction of activationFunctions" [ngValue]="activationFunction.id">
-        {{ activationFunction.name }}
-      </option>
-    </select>
-  </div>
-  <div>
-    <label>Use cross validation &nbsp;</label>
-    <input type="checkbox" (change)="useCrossValidationChange()">
-  </div>
-  <button class="btn btn-success" (click)="trainModel()">Train model</button>
+  
+  <form [formGroup]="trainingForm" (ngSubmit)="trainModel()">
+    <div class="my-form-control">
+      <label>Activation function  &nbsp;</label>
+      <app-select 
+        [data]="activationFunctions"
+        [selected]="activationFunctions[0]"
+        (selectedValue)="onActivationFunctionPick($event)">
+      </app-select>
+    </div>
+    <div class="my-form-control">
+      <label>Use cross validation &nbsp;</label>
+      <input type="checkbox" formControlName="useCrossValidation">
+    </div>
+    <div class="my-form-control">
+      <label for="dataset">Training Dataset &nbsp;</label>
+      <app-select
+      id="dataset" 
+      [data]="activationFunctions"
+      [selected]="activationFunctions[0]"
+      (selectedValue)="onDatasetPick($event)">
+      </app-select>
+    </div>
+    <div class="my-form-control">
+      <label>Model &nbsp;</label>
+      <app-select 
+      [data]="activationFunctions"
+      [selected]="activationFunctions[0]"
+      (selectedValue)="onModelPick($event)">
+      </app-select>    
+    </div>
+    <button class="btn btn-success" type="submit">Train model</button>
+  </form>
 </div>

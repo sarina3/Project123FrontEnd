@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { FormGroup } from '@angular/forms';
+import { BaseUrl } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,14 +15,12 @@ export class ModelService {
   };
 
   constructor(
-    private _http: HttpClient
+    private http: HttpClient
   ) { }
 
-  trainModel(activationFunction: number): Observable<any> {
-    const url = '/train';
-    return this._http
-      .post(url, activationFunction, this.myHttpOptions)
-      .pipe(
-        map(res => console.log(res)));
+  trainModel(form: FormGroup): Observable<any> {
+    const url = 'train';
+    return this.http
+      .post(BaseUrl + url, form.value);
   } 
 }

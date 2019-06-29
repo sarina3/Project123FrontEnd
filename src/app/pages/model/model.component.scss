@@ -1,0 +1,19 @@
+
+.my-form-control {
+    align-items: center;
+    display: flex;
+
+    & > label{
+        vertical-align: middle;
+        order: 1;
+        width: 160px;
+    }
+    & > app-select{
+        order: 2;
+    }
+    & > input[type="checkbox"]{
+        width:33px;
+        height: 20px;
+        order: 2;
+    }
+}

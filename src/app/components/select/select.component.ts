@@ -81,8 +81,6 @@ export class SelectComponent implements OnInit {
 
   @HostListener('document:click', ['$event'])
   clickout(event){
-    console.log(event)
-
     if (!this.wrapper.nativeElement.contains(event.target) && this.opened){
       this.close();
     }
