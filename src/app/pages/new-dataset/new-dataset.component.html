@@ -1,0 +1,31 @@
+<div class="dataset-wrapper">
+  <h1>Create new dataset</h1>
+  <form [formGroup]="datasetForm" >
+    <div class="form-group">
+      <label for="name">Dataset Name:</label>
+      <input type="text" name="name" id="name" formControlName="name">
+    </div>
+    <div class="form-group">
+      <label for="metadata">Metadata file:</label>
+      <input
+        type="file"
+        name="metadata"
+        id="metadata"
+        accept=".csv"
+        (change)="onMetadataChange($event)"
+      >
+    </div>
+    <div class="form-group">
+      <label for="images">Images:</label>
+      <input
+        type="file"
+        name="images"
+        id="images"
+        accept="image/*"
+        multiple
+        (change)="onImagesChange($event)"  
+      >
+    </div>
+    <button type="button" (click)="onSubmit()" class="btn btn-success">Create dataset</button>
+  </form>
+</div>

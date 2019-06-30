@@ -14,6 +14,7 @@ import { PredictComponent } from './pages/predict/predict.component';
 import { AckWebcamComponent } from './components/ack-webcam/ack-webcam.component';
 import { HttpClientModule } from '@angular/common/http';
 import { WebCamModule } from 'ack-angular-webcam';
+import { NewDatasetComponent } from './pages/new-dataset/new-dataset.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { WebCamModule } from 'ack-angular-webcam';
     PredictComponent,
     AckWebcamComponent,
     SelectComponent,
+    NewDatasetComponent,
   ],
   imports: [
     BrowserModule,

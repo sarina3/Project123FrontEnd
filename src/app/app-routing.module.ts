@@ -5,9 +5,10 @@ import { DataComponent } from './pages/data/data.component';
 import { ModelComponent } from './pages/model/model.component';
 import { AboutComponent } from './pages/about/about.component';
 import { PredictComponent } from './pages/predict/predict.component';
+import { NewDatasetComponent } from './pages/new-dataset/new-dataset.component';
 
 const routes: Routes = [
-  { path: 'dataset/data', component: DataComponent},
+  { path: 'dataset/new', component: NewDatasetComponent},
   { path: 'dataset/show', component: PhotoViewerComponent},
   { path: 'predict', component: PredictComponent},
   { path: 'data', component: DataComponent },
