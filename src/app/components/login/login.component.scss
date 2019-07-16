@@ -1,0 +1,12 @@
+.holder{
+  display: flex;
+  align-content: center;
+
+  input{
+    margin-left: 10px;
+
+    &:focus{
+      outline: 0;
+    }
+  }
+}

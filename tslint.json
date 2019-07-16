@@ -57,8 +57,9 @@
     "object-literal-sort-keys": false,
     "ordered-imports": false,
     "quotemark": [
-      true,
-      "single"
+      false,
+      "single",
+      "double"
     ],
     "trailing-comma": false,
     "no-output-on-prefix": true,
