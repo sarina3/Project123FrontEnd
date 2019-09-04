@@ -16,6 +16,8 @@ import { HttpClientModule } from "@angular/common/http";
 import { WebCamModule } from "ack-angular-webcam";
 import { NewDatasetComponent } from "./pages/new-dataset/new-dataset.component";
 import { LoginComponent } from "./components/login/login.component";
+import { CardsComponent } from "./components/cards/cards.component";
+import { MatCardModule } from "@angular/material/";
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { LoginComponent } from "./components/login/login.component";
     AckWebcamComponent,
     SelectComponent,
     NewDatasetComponent,
-    LoginComponent
+    LoginComponent,
+    CardsComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +40,8 @@ import { LoginComponent } from "./components/login/login.component";
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    WebCamModule
+    WebCamModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
