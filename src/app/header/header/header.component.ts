@@ -8,7 +8,7 @@ import { LoginComponent } from "src/app/components/login/login.component";
 })
 export class HeaderComponent implements OnInit {
   loginOpened = false;
-  @ViewChild(LoginComponent) loginComponent: LoginComponent;
+  @ViewChild(LoginComponent, { static: false }) loginComponent: LoginComponent;
   constructor() {}
 
   ngOnInit() {}

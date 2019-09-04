@@ -31,7 +31,7 @@ export class PhotoViewerComponent implements AfterViewInit, OnInit {
   indexGlobal = 0;
 
   metadata: ImageMetadata = { lastIndex: 0, all: 0, count: 10 };
-  @ViewChild("presentation") presentation: ElementRef;
+  @ViewChild("presentation", { static: true }) presentation: ElementRef;
   constructor(
     private renderer: Renderer2,
     private imagesService: ImagesService

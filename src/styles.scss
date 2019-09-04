@@ -4,6 +4,8 @@ $white-half: rgba(#ffffff, 0.5);
 $white: white;
 $light-gray: #b9b3b3;
 $black: #343a40;
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
 
 body{
     width: 100vw !important;

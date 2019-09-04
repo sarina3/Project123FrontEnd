@@ -7,10 +7,10 @@ import { SelectData } from './select.model';
   styleUrls: ['./select.component.scss']
 })
 export class SelectComponent implements OnInit {
-  @ViewChild('collapse') collapseDiv:ElementRef;
-  @ViewChild('arrow') arrow:ElementRef;
-  @ViewChild('input') input:ElementRef;
-  @ViewChild('holder') wrapper:ElementRef;
+  @ViewChild('collapse', { static: true }) collapseDiv:ElementRef;
+  @ViewChild('arrow', { static: true }) arrow:ElementRef;
+  @ViewChild('input', { static: true }) input:ElementRef;
+  @ViewChild('holder', { static: true }) wrapper:ElementRef;
   dataToShow:SelectData[];
   @Input()
   data:SelectData[];

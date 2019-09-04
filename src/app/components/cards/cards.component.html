@@ -1,9 +1,16 @@
-<div class="cards-wrapper">
-  <div class="left">
-    <mat-card>
-      <mat-card-header></mat-card-header>
-    </mat-card>
-  </div>
-  <div class="right"></div>
+<div class="page">
+  <div class="cards-wrapper">
+    <div class="left">
+      <mat-card *ngFor="let model of models">
+        <mat-card-header>
+          <mat-card-title>{{model.header}}</mat-card-title>
+          <div class="w-100 accuracy">
+            <h1>{{model.accuracy}}</h1>
+          </div>
+        </mat-card-header>
+      </mat-card>
+    </div>
+    <div class="right"></div>
 
+  </div>
 </div>
