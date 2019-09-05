@@ -1,4 +1,5 @@
 import { BrowserModule } from "@angular/platform-browser";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgModule } from "@angular/core";
 
@@ -17,7 +18,7 @@ import { WebCamModule } from "ack-angular-webcam";
 import { NewDatasetComponent } from "./pages/new-dataset/new-dataset.component";
 import { LoginComponent } from "./components/login/login.component";
 import { CardsComponent } from "./components/cards/cards.component";
-import { MatCardModule } from "@angular/material/";
+import { MatCardModule, MatTooltipModule } from "@angular/material/";
 
 @NgModule({
   declarations: [
@@ -36,12 +37,14 @@ import { MatCardModule } from "@angular/material/";
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     WebCamModule,
-    MatCardModule
+    MatCardModule,
+    MatTooltipModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

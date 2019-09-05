@@ -3,12 +3,17 @@ export class Architecture {
     trainPercentage?: number;
     testPercentage?: number;
     accuracy?: number;
-    inputSizeY?: number;
-    inputSizeX?: number;
-    model?: string;
+    networkType?: string;
     trainDatasetName?: string;
     testDatasetName?: string;
     numberOfLayers?: number;
+    layers:LayerInfo[];
+}
+
+export class LayerInfo{
     kernelSizeX?: number;
     kernelSizeY?: number;
+    inputSizeY?: number;
+    inputSizeX?: number;
+    number?:number;
 }

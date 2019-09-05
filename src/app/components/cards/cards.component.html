@@ -11,24 +11,76 @@
   </div>
   <div class="right p-3">
     <div *ngIf="selectedObj" class="content">
-      <span class="image-with-label">Input image dimension:
-        <div class="image">
-          <span class="x">{{selectedObj.inputSizeX}}</span>
-          <div class="bottom">
-            <span class="y">{{selectedObj.inputSizeY}}</span>
-            <div class="rectangle"></div>
+      <div class="model-info">
+        <h4>Model Info</h4>
+        <span>Train accuracy: {{selectedObj.trainPercentage}}%</span>
+        <span>Test accuracy: {{selectedObj.testPercentage}}%</span>
+        <span>Global accuracy: {{selectedObj.accuracy}}%</span>
+        <span>Network type: {{selectedObj.networkType}}</span>
+        <span>Number of layers: {{selectedObj.numberOfLayers}}</span>
+        <span>Train dataset name: {{selectedObj.trainDatasetName}}</span>
+        <span>Test dataset name: {{selectedObj.testDatasetName}}</span>
+      </div>
+      <div class="layer-info" >
+        <div class="info">
+          <h4>Layer Info</h4>
+          <div *ngIf="selectedLayer > -1">
+            <span>Layer Number: {{selectedLayerObj.number}}</span>
+            <span class="image-with-label">Input image dimension:
+              <div class="image">
+                <span class="x">{{selectedLayerObj.inputSizeX}}</span>
+                <div class="bottom">
+                  <span class="y">{{selectedLayerObj.inputSizeY}}</span>
+                  <div class="rectangle">
+                      <div class="rec-row">
+                        <div class="rec-col"></div>
+                        <div class="rec-col"></div>
+                      </div>
+                      <div class="rec-row">
+                        <div class="rec-col"></div>
+                        <div class="rec-col"></div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </span>
+            <span class="image-with-label">kernel dimension:
+              <div class="image">
+                <span class="x">{{selectedLayerObj.kernelSizeX}}</span>
+                <div class="bottom">
+                  <span class="y">{{selectedLayerObj.kernelSizeY}}</span>
+                  <div class="rectangle">
+                    <div class="rec-row">
+                      <div class="rec-col"></div>
+                      <div class="rec-col"></div>
+                    </div>
+                    <div class="rec-row">
+                      <div class="rec-col"></div>
+                      <div class="rec-col"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </span>
           </div>
         </div>
-      </span>
-      <span class="image-with-label">kernel dimension:
-          <div class="image">
-            <span class="x">{{selectedObj.inputSizeX}}</span>
-            <div class="bottom">
-              <span class="y">{{selectedObj.inputSizeY}}</span>
-              <div class="rectangle"></div>
-            </div>
+        <div class="layer-selector">
+          <h4>Layer Selection</h4>
+          <div class="selection-row p-3">
+            <div 
+              *ngFor="let layer of selectedObj.layers; let i = index"
+              [ngStyle]="getStyle(i)"
+              class="layer"
+              [ngClass]="{selected: selectedLayer === i}"
+              (click)="selectLayer(i)"
+              #tooltip="matTooltip"
+              [matTooltip]="getText(i)"
+              (mouseenter)="tooltip.show()"
+              (mouseleave)="tooltip.hide()"
+              ></div>
           </div>
-        </span>
+        </div>
+      </div>
     </div>
   </div>
 </div>
