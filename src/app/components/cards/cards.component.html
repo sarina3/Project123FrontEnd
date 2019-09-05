@@ -1,16 +1,34 @@
-<div class="page">
-  <div class="cards-wrapper">
-    <div class="left">
-      <mat-card *ngFor="let model of models">
-        <mat-card-header>
-          <mat-card-title>{{model.header}}</mat-card-title>
-          <div class="w-100 accuracy">
-            <h1>{{model.accuracy}}</h1>
+<div class="cards-wrapper">
+  <div class="left">
+    <mat-card *ngFor="let model of models; let i = index" [ngClass]="{'selected': selected === i}" (click)="select(i)">
+      <mat-card-header class="header">
+        <mat-card-title>{{model.header}}</mat-card-title>
+        <div>
+          <h1>{{model.accuracy}}%</h1>
+        </div>
+      </mat-card-header>
+    </mat-card>
+  </div>
+  <div class="right p-3">
+    <div *ngIf="selectedObj" class="content">
+      <span class="image-with-label">Input image dimension:
+        <div class="image">
+          <span class="x">{{selectedObj.inputSizeX}}</span>
+          <div class="bottom">
+            <span class="y">{{selectedObj.inputSizeY}}</span>
+            <div class="rectangle"></div>
           </div>
-        </mat-card-header>
-      </mat-card>
+        </div>
+      </span>
+      <span class="image-with-label">kernel dimension:
+          <div class="image">
+            <span class="x">{{selectedObj.inputSizeX}}</span>
+            <div class="bottom">
+              <span class="y">{{selectedObj.inputSizeY}}</span>
+              <div class="rectangle"></div>
+            </div>
+          </div>
+        </span>
     </div>
-    <div class="right"></div>
-
   </div>
 </div>

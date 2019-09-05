@@ -7,9 +7,7 @@ import {
   AfterViewInit
 } from "@angular/core";
 import { ImagesService } from "src/app/services/images.service";
-import { map } from "rxjs/operators";
 import { ImageMetadata } from "src/app/model/image-metadata.model";
-import { element } from "@angular/core/src/render3";
 
 @Component({
   selector: "app-photo-viewer",
