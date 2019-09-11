@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Architecture, LayerInfo } from '../../model/architecture.model';
 import { TouchSequence } from 'selenium-webdriver';
+import { ModelService } from 'src/app/services/model/model.service';
 
 @Component({
   selector: 'app-cards',
@@ -110,9 +111,12 @@ export class CardsComponent implements OnInit {
       ]
     },
   ];
-  constructor() { }
+  constructor(private modelServ: ModelService) { }
 
   ngOnInit() {
+    this.modelServ.getModels().subscribe(data => {
+      console.log(JSON.parse(data));
+    });
   }
 
   select(index){

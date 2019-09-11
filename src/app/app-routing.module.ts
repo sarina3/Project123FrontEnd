@@ -7,6 +7,7 @@ import { AboutComponent } from './pages/about/about.component';
 import { PredictComponent } from './pages/predict/predict.component';
 import { NewDatasetComponent } from './pages/new-dataset/new-dataset.component';
 import { CardsComponent } from './components/cards/cards.component';
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
   { path: 'dataset/new', component: NewDatasetComponent},
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'model', component: ModelComponent },
   { path: 'about', component: AboutComponent },
   { path: 'testing-session', component: PredictComponent },
-  { path: 'my-models', component: CardsComponent}
+  { path: 'my-models', component: CardsComponent},
+  { path: 'login', component: LoginComponent}
 ];
 
 @NgModule({

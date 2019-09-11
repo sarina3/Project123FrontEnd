@@ -22,5 +22,9 @@ export class ModelService {
     const url = 'train';
     return this.http
       .post(BaseUrl + url, form.value);
-  } 
+  }
+
+  getModels(){
+    return this.http.get(`${BaseUrl}models`,{ responseType: 'text'});
+  }
 }

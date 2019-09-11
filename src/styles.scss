@@ -3,6 +3,7 @@
 $white-half: rgba(#ffffff, 0.5);
 $white: white;
 $light-gray: #b9b3b3;
+$gray: rgba(242, 241, 239, 1);
 $black: #343a40;
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 
@@ -14,6 +15,7 @@ body{
     min-width:  100vw !important;
     max-height: 100vh !important;
     max-width:  100vw !important;
+    background-color: $gray !important;
     overflow-x: auto;
     overflow-y: auto;
 }

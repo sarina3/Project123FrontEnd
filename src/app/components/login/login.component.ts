@@ -7,6 +7,7 @@ import {
   HostListener
 } from "@angular/core";
 import { FormGroup, Validators, FormControl } from "@angular/forms";
+import { Router } from '@angular/router';
 
 @Component({
   selector: "app-login",
@@ -18,17 +19,15 @@ export class LoginComponent implements OnInit {
     username: new FormControl("", Validators.required),
     pass: new FormControl("", Validators.required)
   });
-  @Output()
-  close = new EventEmitter<null>();
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService,private router:Router) {}
 
   ngOnInit() {}
 
   submitForm() {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.value);
-      this.close.emit();
+      this.router.navigate(['/']);
     }
   }
 }

@@ -154,9 +154,20 @@
                     }
                 }
             }
+            .bottom{
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: center;
+                
+                & > * {
+                    outline: 0;
+                    margin-right: 10px;
+
+                    &:last-child {
+                        margin: 0;                    }
+                }
+            }
         }
        
     }
-
-    
 }

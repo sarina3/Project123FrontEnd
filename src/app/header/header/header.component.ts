@@ -1,5 +1,6 @@
 import { Component, OnInit, HostListener, ViewChild } from "@angular/core";
 import { LoginComponent } from "src/app/components/login/login.component";
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: "app-header",
@@ -9,9 +10,11 @@ import { LoginComponent } from "src/app/components/login/login.component";
 export class HeaderComponent implements OnInit {
   loginOpened = false;
   @ViewChild(LoginComponent, { static: false }) loginComponent: LoginComponent;
-  constructor() {}
+  constructor(private auth: AuthService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.auth.isLoggedIn())
+  }
 
   openLogin() {
     this.loginOpened = true;

@@ -43,6 +43,7 @@
         <div class="dropdown-menu" aria-labelledby="model-dropdown">
           <p routerLink="/model" routerLinkActive="active" class="dropdown-item">Show model</p>
           <p href="#" class="dropdown-item">Show model parameters</p>
+          <p routerLink="/my-models" routerLinkActive="active" class="dropdown-item" *ngIf="auth.isLoggedIn()">Show all models</p>
         </div>
       </li>
       <li class="nav-item">
@@ -50,10 +51,19 @@
       </li>
     </ul>
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item" *ngIf="!loginOpened">
-        <p class="nav-link" id="login" (click)="openLogin()">Prihlasenie</p>
-      </li>
-      <app-login *ngIf="loginOpened" (close)="closeLogin()" ></app-login>
+      <div *ngIf="!auth.isLoggedIn() else loggedIn">
+        <li class="nav-item">
+          <p class="nav-link" id="login" routerLink="/login" routerLinkActive="active">Log in</p>
+        </li>
+      </div>
+      <ng-template #loggedIn>
+          <li class="nav-item">
+            <p class="nav-link" id="username">{{auth.username}}</p>
+          </li>
+          <li class="nav-item" >
+            <p class="nav-link" id="logout" (click)="auth.logout()">Log out</p>
+          </li>
+      </ng-template>
     </ul>
   </div>
 </nav>

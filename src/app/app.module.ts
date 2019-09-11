@@ -13,12 +13,13 @@ import { DataComponent } from "./pages/data/data.component";
 import { ModelComponent } from "./pages/model/model.component";
 import { PredictComponent } from "./pages/predict/predict.component";
 import { AckWebcamComponent } from "./components/ack-webcam/ack-webcam.component";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { WebCamModule } from "ack-angular-webcam";
 import { NewDatasetComponent } from "./pages/new-dataset/new-dataset.component";
 import { LoginComponent } from "./components/login/login.component";
 import { CardsComponent } from "./components/cards/cards.component";
-import { MatCardModule, MatTooltipModule } from "@angular/material/";
+import { MatCardModule, MatTooltipModule, MatButtonModule, MatInputModule } from "@angular/material/";
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -44,9 +45,13 @@ import { MatCardModule, MatTooltipModule } from "@angular/material/";
     HttpClientModule,
     WebCamModule,
     MatCardModule,
+    MatButtonModule,
     MatTooltipModule,
+    MatInputModule,
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
