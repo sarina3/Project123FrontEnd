@@ -1,0 +1,24 @@
+<div class="holder">
+    <div class="window">
+        <h2>{{title}}</h2>
+        <form [formGroup]="form">
+            <mat-form-field>
+                <input type="text" matInput formControlName="model" [placeholder]="modelPlaceholder" [matAutocomplete]="model">
+            </mat-form-field>
+            <mat-autocomplete #model="matAutocomplete" >
+                <mat-option *ngFor="let option of modelFilter" [value]="option">
+                    {{ option }}
+                </mat-option>
+            </mat-autocomplete>
+            <mat-form-field>
+                <input type="text" matInput formControlName="dataset" [placeholder]="datasetPlaceholder" [matAutocomplete]="dataset">
+            </mat-form-field>
+            <mat-autocomplete #dataset="matAutocomplete">
+                <mat-option *ngFor="let option of datasetFilter" [value]="option">
+                    {{ option }}
+                </mat-option>
+            </mat-autocomplete>
+            <button mat-stroked-button (click)="submitForm()">Submit</button>
+        </form>
+    </div>
+</div>

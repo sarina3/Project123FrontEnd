@@ -1,0 +1,157 @@
+@import '../../../styles.scss';
+
+.builder-wrapper{
+    display: flex;
+    flex-flow: column wrap;
+    flex: 1;
+
+    mat-horizontal-stepper{
+        width: 100%;
+        height: 100%;
+    }
+
+    .first-step-layout{
+        padding-top: 6px;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: center;
+
+        .first-step-content{
+            padding: 1rem;
+            width: 300px;
+            height: 400px;
+            display: flex;
+            flex-flow: column wrap;
+            background-color: $white;
+
+            form{
+                display: flex;
+                flex-flow: column wrap;
+                flex: 1;
+                justify-content: space-around;
+
+                & > *{
+                    display: flex;
+                    flex-flow: column wrap;
+                }
+            }
+        }
+    }
+
+    .second-step-layout{
+        display: flex;
+        padding-top:6px;
+        flex-flow: column nowrap;
+
+        .second-step-content{
+            display: flex;
+            flex-flow: row wrap;
+            flex: 1;
+            
+            .left{
+                display: flex;
+                flex-flow: column wrap;
+                flex: 1 0 150px;
+                background-color: $white;
+
+                mat-select{
+                    width: 0;
+                }
+
+                .card{
+                    display: flex;
+                    flex-flow: row wrap;
+
+                    &:hover{
+                        background-color: $very-light-gray;
+                    }
+                    
+                   
+                    & > div:first-child{
+                        flex: 1;
+                    }
+
+                    p {
+                        display: flex;
+                        justify-content: space-between;
+                        margin: 0;
+                    }
+
+                    .active{
+                        display: flex;
+                        flex-flow: column wrap;
+                        justify-content: center;
+                        flex: 0;
+                        color: rgba($color: #000000, $alpha: 0.5);
+                        border-left: 1px solid $light-gray
+                    }
+                }
+
+                
+                
+            }
+
+            .right{
+                display: flex;
+                flex-flow: column wrap;
+                flex: 20;
+                margin-left: 6px;
+
+                .top {
+                    display: flex;
+                    flex-flow: column wrap;
+                    justify-content: space-around;
+                    flex: 1;
+                    background-color: $white;
+
+                    form{
+                        display: flex;
+                        flex-flow: row wrap;
+                        justify-content: space-around;
+                        flex: 1;
+                    }
+                }
+
+                .bottom{
+                    display: flex;
+                    flex-flow: column wrap;
+                    justify-content: center;
+                    flex: 0 0 60px;
+                    margin-top: 6px;
+                    background-color: $white;
+                }
+            }
+
+        }
+
+        .third-step-content{
+            display: flex;
+            flex-flow: column wrap;
+            justify-content: space-around;
+            align-self: center;
+            justify-self: center;
+            width: 300px;
+            height: 400px;
+            background-color: $white;
+
+            h4{
+                text-align: center;
+            }
+        }
+        
+    }
+
+    .btns-wrapper{
+        display: flex;
+        // flex-flow: row wrap;
+        // align-items: flex-end;
+        // justify-self: flex-end;
+        flex-direction: row-reverse !important;
+        justify-items: flex-end !important;
+        button{
+            width: 80px;
+            justify-self: flex-end !important;
+        }
+    }
+}

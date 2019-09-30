@@ -1,19 +1,137 @@
+@import '../../../styles.scss';
 
-.my-form-control {
-    align-items: center;
+.model-wrapper{
     display: flex;
+    flex-flow: column wrap;
+    flex: 1;
+    background-color: $white;
 
-    & > label{
-        vertical-align: middle;
-        order: 1;
-        width: 160px;
-    }
-    & > app-select{
-        order: 2;
-    }
-    & > input[type="checkbox"]{
-        width:33px;
-        height: 20px;
-        order: 2;
+    .content{
+        display: flex;
+        flex-flow: column wrap;
+        align-content: flex-start;
+        flex: 1;
+
+        .model-info{
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-between;
+
+            & > * {
+                display: inline-block;
+                min-width: 50%;
+            }
+
+            :nth-child(1){
+                width: 100%;
+            }
+        }
+
+        .layer-info{
+            display: flex;
+            flex-flow: row wrap;
+            flex: 1;
+            justify-content: flex-start;
+
+            .layer-selector{
+                display: flex;
+                flex-flow: column wrap;
+                flex: 1 1 auto;
+
+                .selection-row{
+                    position: relative;
+                    margin-top: 20px;
+                    width: 100%;
+                    height: 50%;
+
+                    .layer:hover{
+                        background-color: rgba(255, 255, 255, 1) !important;
+                        border: 1px solid black;
+                    }
+                    
+                    .selected{
+                        border: 1px solid black;
+                    }
+                }
+            }
+
+            .info{
+                display: flex;
+                flex-flow: column wrap;
+                flex: 1 1 auto;
+
+                .image-with-label{
+                    display: flex;
+                    align-items: center;
+
+                    .image{
+                        margin-left: 10px;  
+                        display: flex;
+                        justify-content: flex-end;
+                        flex-flow: row wrap;
+                        flex: 0 0 80px;
+            
+                        .x {
+                            display: flex;
+                            flex: 0 0 50px;
+                            flex-flow: row wrap;
+                            justify-content: center;
+                        }
+                        .bottom{
+                            display: flex;
+                            flex-flow: row wrap;
+                            flex: 0 0 100%;
+                            .y {
+                                display: flex;
+                                flex: 1;
+                                align-items:center; 
+                            }
+            
+                            .rectangle{
+                                width:50px;
+                                height: 40px;
+                                border: 1px solid black;
+                                display: flex;
+                                flex-flow: column wrap;
+                                flex-grow: 0;
+            
+                                .rec-row:nth-child(1){
+                                    border-bottom: 1px solid black;
+                                }
+            
+                                .rec-row{
+                                    display: flex;
+                                    flex-flow: row wrap;
+                                    flex: 1 0 50%;
+            
+                                    .rec-col:nth-child(1){
+                                        border-right: 1px solid black;
+                                    }
+            
+                                    .rec-col{
+                                        display: flex;
+                                        flex-flow: row wrap;
+                                        flex: 1 0 50%;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .bottom{
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: center;
+            
+            & > * {
+                outline: 0;
+                margin-right: 10px;
+
+                &:last-child {
+                    margin: 0;                    }
+            }
+        }
     }
 }

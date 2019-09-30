@@ -8,10 +8,13 @@
         <p routerLink="/predict" routerLinkActive="active" class="nav-link">Predict</p>
       </li>
       <li class="nav-item">
-        <p routerLink="/model" routerLinkActive="active" class="nav-link">Training session</p>
+        <p routerLink="/training-session" routerLinkActive="active" class="nav-link">Training session</p>
       </li>
       <li class="nav-item">
         <p routerLink="/testing-session" routerLinkActive="active" class="nav-link">Testing session</p>
+      </li>
+      <li class="nav-item">
+          <p routerLink="/model" routerLinkActive="active" class="nav-link">Show active model</p>
       </li>
       <li class="nav-item dropdown">
         <p
@@ -29,23 +32,12 @@
           <p routerLink="/dataset/new" routerLinkActive="active" class="dropdown-item">New dataset</p>
         </div>
       </li>
-      <li class="nav-item dropdown">
-        <p
-          href="#"
-          class="nav-link dropdown-toggle"
-          id="model-dropdown"
-          role="button"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false">
-          Model
-      </p>
-        <div class="dropdown-menu" aria-labelledby="model-dropdown">
-          <p routerLink="/model" routerLinkActive="active" class="dropdown-item">Show model</p>
-          <p href="#" class="dropdown-item">Show model parameters</p>
-          <p routerLink="/my-models" routerLinkActive="active" class="dropdown-item" *ngIf="auth.isLoggedIn()">Show all models</p>
-        </div>
+      <li class="nav-item"  *ngIf="auth.isLoggedIn()">
+        <p routerLink="/my-models" routerLinkActive="active" class="nav-link">Show my models</p>
       </li>
+      <li class="nav-item"  *ngIf="auth.isLoggedIn()">
+          <p routerLink="/new-model" routerLinkActive="active" class="nav-link">Create model</p>
+        </li>
       <li class="nav-item">
         <p routerLink="/about" routerLinkActive="active" class="nav-link">About</p>
       </li>

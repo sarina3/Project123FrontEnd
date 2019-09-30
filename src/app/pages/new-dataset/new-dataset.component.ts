@@ -19,6 +19,9 @@ export class NewDatasetComponent implements OnInit {
   constructor(private imageService: ImagesService) { }
 
   ngOnInit() {
+    this.imageService.getDatasets().subscribe(
+      data => console.log(data)
+    );
   }
 
   onMetadataChange(event){

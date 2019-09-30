@@ -1,0 +1,180 @@
+<div class="builder-wrapper">
+    <mat-horizontal-stepper #stepper>
+        <ng-template matStepperIcon="completed">
+                <i class="material-icons" style="color:green">check_circle</i>
+            </ng-template>
+        <mat-step label="Pick network type" [stepControl]="modelForm">
+                <div class="first-step-layout stepper-step-height">
+                    <div class="first-step-content">
+                        <form [formGroup]="modelForm">
+                            <h3>Choose network type</h3>
+                            <div>
+                                <mat-form-field>
+                                    <input type="text" placeholder="Model name" matInput formControlName="modelName">
+                                </mat-form-field>
+                                <mat-form-field>
+                                    <mat-label>Network type</mat-label>
+                                    <mat-select formControlName="type">
+                                        <mat-option *ngFor="let type of networkTypes" [value]="type.id" >
+                                            {{type.title}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="btns-wrapper">
+                                <button mat-stroked-button matStepperNext>Next</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+        </mat-step>
+        <mat-step label="Layers configuration" [stepControl]="activeLayerForm">
+            <div class="second-step-layout stepper-step-height">
+                <div class="second-step-content">
+                    <div class="left">
+                        <div *ngFor="let card of layers;let i = index" class="card" (click)="activate(i)">    
+                            <ng-container *ngTemplateOutlet="LayerCard; context: {id: i, form: card}"></ng-container>
+                        </div>
+                        <button
+                            mat-stroked-button
+                            class="outline-0"
+                            (click)="select.open()">
+                            <i class="material-icons center">add_circle_outline</i>
+                            <mat-select
+                            #select
+                            class="layerClassPicker">
+                                <mat-option disabled class="option-header">Choose class</mat-option>
+                                <mat-option *ngFor="let class of classNames" (click)="createLayer(class.id);select.close()">
+                                        {{class.name}}
+                                </mat-option>
+                            </mat-select>
+                        </button>
+                    </div>
+                    <div class="right">
+                        
+                        <div class="top">
+                            <form [formGroup]="activeLayerForm" *ngIf="activeLayerForm">
+                                <div *ngFor="let prop of getProperties(); let i = index">
+                                    <ng-container *ngTemplateOutlet="getTemplate(prop); context: {prop: prop, index: i}"></ng-container>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="bottom">
+                            <div class="btns-wrapper">
+                                <button mat-stroked-button matStepperNext (click)="getInvalid()" class="mr-1" >Next</button>
+                                <button mat-stroked-button matStepperPrevious class="mr-1" >Back</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-step>
+        <mat-step label="Validation">
+            <div class="second-step-layout stepper-step-height">
+                <div class="third-step-content" *ngIf="!areInvalid() else thirdWithInvalid">
+                    <h4>Everything is valid you can continue</h4>
+                    <div class="btns-wrapper">
+                            <button mat-stroked-button matStepperNext class="mr-1" >Next</button>
+                            <button mat-stroked-button matStepperPrevious class="mr-1" >Back</button>
+                    </div>
+                </div>
+            </div>
+            <ng-template #thirdWithInvalid>
+                    <div class="second-step-content">
+                        <div class="left">
+                            <div *ngFor="let card of invalidLayers;let i = index" class="card" (click)="activate(i);checkValid(i)">    
+                                <ng-container *ngTemplateOutlet="LayerCard; context: {id: card.index, form: card.item}"></ng-container>
+                            </div>
+                            <button
+                                mat-stroked-button
+                                class="outline-0"
+                                (click)="select.open()">
+                                <i class="material-icons center">add_circle_outline</i>
+                                <mat-select
+                                #select
+                                class="layerClassPicker">
+                                    <mat-option disabled class="option-header">Choose class</mat-option>
+                                    <mat-option *ngFor="let class of classNames" (click)="createLayer(class.id);select.close()">
+                                            {{class.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </button>
+                        </div>
+                        <div class="right">
+                            
+                            <div class="top">
+                                <form [formGroup]="activeLayerForm" *ngIf="activeLayerForm">
+                                    <div *ngFor="let prop of getProperties(); let i = index">
+                                        <ng-container *ngTemplateOutlet="getTemplate(prop); context: {prop: prop, index: i}"></ng-container>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="bottom">
+                                <div class="btns-wrapper">
+                                    <button mat-stroked-button matStepperNext class="mr-1" >Next</button>
+                                    <button mat-stroked-button matStepperPrevious class="mr-1" >Back</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+        </mat-step>
+    </mat-horizontal-stepper>
+</div>
+
+<ng-template #LayerCard let-id="id" let-form="form">
+    <div>
+        <p>
+            <span>#{{id +1}}</span>
+            <i class="material-icons" >close</i>        
+        </p>
+        <p>
+            <span>{{getClass(form)}}</span>
+            <span>
+                <i class="material-icons" style="color:green" *ngIf="isValid(id) else error">check_circle</i>
+                <ng-template #error>
+                    <i class="material-icons" style="color:red">error</i>
+                </ng-template>
+            </span>
+        </p>
+    </div>
+    <div class="active" *ngIf="isActive(id)">
+        <i class="material-icons" >keyboard_arrow_right</i>
+    </div>
+</ng-template>
+
+<ng-template #input  let-prop="prop" let-index="index">
+    <mat-form-field class="example-full-width">
+        <input matInput [placeholder]="prop.name" [formControl]="getFormControl(prop.id,index)"
+                [errorStateMatcher]="matcher">
+        <mat-hint>{{getHint}}</mat-hint>
+        <!-- <mat-error *ngIf="!activeLayerForm.valid">
+            Error
+        </mat-error> -->
+    </mat-form-field>
+</ng-template>
+
+<ng-template #singleSelect let-prop="prop"  let-index="index">
+    <mat-form-field>
+        <mat-label>{{prop.name}}</mat-label>
+        <mat-select [formControl]="getFormControl(prop.id,index)">
+            <mat-option *ngFor="let opt of prop.possibleValues" [value]="opt.id">
+            {{opt.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</ng-template>
+
+<ng-template #multiSelect let-prop="prop" let-index="index">
+    <mat-form-field>
+        <mat-label>{{prop.name}}</mat-label>
+        <mat-select [formControl]="getFormControl(prop.id,index)" multiple>
+            <mat-option *ngFor="let opt of prop.possibleValues" [value]="opt.id">
+                {{opt.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</ng-template>
+
+
+

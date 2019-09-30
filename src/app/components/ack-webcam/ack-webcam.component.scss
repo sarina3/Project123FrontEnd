@@ -1,38 +1,14 @@
-.container {
-    margin-top: 50px;
-}
+.ack-webcam-wrapper{
+    display: flex;
+    flex-flow: column wrap;
+    flex: 1;
+    justify-self: stretch;
+    align-self: stretch;
 
-.row {
-    text-align: center;
-}
-
-.ack-webcam {
-    margin-bottom: 15px;
-}
-
-.btn {
-    width: 100%;
-}
-
-#file-input {
-    width: .1px;
-    height: .1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1;
-}
-
-#file-input-label {
-    margin-bottom: 0px;
-    cursor: pointer;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: white;
-    font-size: 1rem;
-    line-height: 1.0;
-}
-
-.camera, .image {
-    margin-top: 10px;
+    .camera-wrapper{
+        display: flex;
+        flex-flow: row wrap;
+        flex: 1;
+        justify-content: space-around;
+    }
 }

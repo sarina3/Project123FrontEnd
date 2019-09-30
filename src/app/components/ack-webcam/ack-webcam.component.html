@@ -1,26 +1,10 @@
-<div class="ack-webcam">
-  <div class="container">
-    <div class="row">
-      <div class="camera col-sm-12 col-md-12 col-lg-6 col-xl-6">
-        <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-            <!-- [(ref)]   = "webcam" -->
-          <ack-webcam
-            [options] = "options"
-            (success) = "onCamSuccess($event)"
-            (catch)   = "onCamError($event)">
-          </ack-webcam>
-        </div>
-        <div class="inline col-sm-4 col-md-4 col-lg-4 col-xl-4">
-          <button (click)="getImage()" class="btn btn-primary">Photo</button>
-        </div>
-        <div class="inline col-sm-4 col-md-4 col-lg-4 col-xl-4">
-          <button class="btn btn-primary" (click)="fileInput.click()">Upload</button>
-          <input hidden type="file" accept="image/*" (change)="uploadImage($event)" #fileInput>
-        </div>
-      </div>
-      <div class="image col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
-        <img *ngIf="image" [src]="image" [attr.width]="320" [attr.height]="240">
-      </div>
-    </div>
+<div class="ack-webcam-wrapper">
+  <div class="camera-wrapper">
+    <ack-webcam
+      [options] = "options"
+      (success) = "onCamSuccess($event)"
+      (catch)   = "onCamError($event)">
+    </ack-webcam>
+    <img *ngIf="image" [src]="image" [attr.width]="320" [attr.height]="240">
   </div>
 </div>

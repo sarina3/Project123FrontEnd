@@ -1,5 +1,42 @@
-.form-group{
-    & > label{
-        width: 150px;
+@import '../../../styles.scss';
+
+.holder{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    
+    .window{
+      width: 400px;
+      height: 500px;
+      display: flex;
+      flex-flow: column wrap;
+      align-self: center;
+      justify-content: space-around;
+      align-items: center;
+      background-color: $white;
+  
+      form {
+        display: flex;
+        flex-flow: column wrap;
+        
+        .form-group{
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #metadata{
+            width: 220px;
+        }
+
+        #images{
+            width: 220px;
+        }
+
+        button{
+          outline: 0;
+        }
+      }
     }
-}
+  }
+  

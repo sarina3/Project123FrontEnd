@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { BaseUrl } from 'src/environments/environment';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -16,11 +17,9 @@ export class PredictService {
     private _http: HttpClient
   ) { }
 
-  predict(image: string): Observable<any> {
+  predict(image: FormGroup): Observable<any> {
     const url = 'predict';
-    let json = { photo: image};
-    json = JSON.parse(JSON.stringify(json));
     return this._http
-      .post(BaseUrl + url, json, this.myHttpOptions);
+      .post(BaseUrl + url, image.value, this.myHttpOptions);
   }
 }

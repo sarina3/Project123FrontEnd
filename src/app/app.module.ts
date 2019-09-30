@@ -18,8 +18,12 @@ import { WebCamModule } from "ack-angular-webcam";
 import { NewDatasetComponent } from "./pages/new-dataset/new-dataset.component";
 import { LoginComponent } from "./components/login/login.component";
 import { CardsComponent } from "./components/cards/cards.component";
-import { MatCardModule, MatTooltipModule, MatButtonModule, MatInputModule } from "@angular/material/";
+import { MatCardModule, MatTooltipModule, MatButtonModule, MatInputModule, MatTabsModule, MatAutocomplete, MatAutocompleteModule, MatSelectModule, MatStepperModule, MatIconModule } from "@angular/material/";
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { TrainComponent } from './pages/train/train.component';
+import { TestComponent } from './pages/test/test.component';
+import { TrainTestFormComponent } from './components/train-test-form/train-test-form.component';
+import { ModelBuilderComponent } from './components/model-builder/model-builder.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +38,11 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     SelectComponent,
     NewDatasetComponent,
     LoginComponent,
-    CardsComponent
+    CardsComponent,
+    TrainComponent,
+    TestComponent,
+    TrainTestFormComponent,
+    ModelBuilderComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +56,11 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     MatButtonModule,
     MatTooltipModule,
     MatInputModule,
+    MatTabsModule,
+    MatSelectModule,
+    MatStepperModule,
+    MatAutocompleteModule,
+    MatIconModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}

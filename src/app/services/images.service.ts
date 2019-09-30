@@ -4,11 +4,13 @@ import { BaseUrl } from "src/environments/environment";
 import { Observable, forkJoin } from "rxjs";
 import { ImageMetadata } from "../model/image-metadata.model";
 import { FormGroup, FormArray, FormControl } from "@angular/forms";
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: "root"
 })
 export class ImagesService {
+  
   constructor(private http: HttpClient) {}
 
   getImages(metadata: ImageMetadata): Observable<any> {
@@ -50,5 +52,10 @@ export class ImagesService {
         }
       );
     });
+  }
+
+
+  getDatasets() {
+    return this.http.get(`${BaseUrl}datasets`)
   }
 }

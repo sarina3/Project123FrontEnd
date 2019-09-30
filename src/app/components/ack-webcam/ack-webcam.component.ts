@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 
 import { WebCamComponent } from 'ack-angular-webcam';
 
@@ -9,7 +9,7 @@ import { WebCamComponent } from 'ack-angular-webcam';
 })
 export class AckWebcamComponent implements OnInit {
 
-  webcam: WebCamComponent;
+  @ViewChild(WebCamComponent,{static:false}) webcam: WebCamComponent;
   options = null;
   image: string = null;
 
@@ -27,18 +27,6 @@ export class AckWebcamComponent implements OnInit {
       this.emitParent(this.image);
     })
     .catch(e => console.error(e));
-  }
-
-  uploadImage(fileInput: any) {
-    if (fileInput.target.files && fileInput.target.files[0]) {
-      const reader = new FileReader();
-      const thisClass = this;
-      reader.onloadend = function (e) {
-        thisClass.image = reader.result as string;
-        thisClass.emitParent(thisClass.image.split(',')[1]);
-      };
-      reader.readAsDataURL(fileInput.target.files[0]);
-    }
   }
 
   emitParent(base64Image: string) {

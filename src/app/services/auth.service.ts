@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment.prod';
 export class AuthService {
   token = '';
   username = '';
-  loggedIn = false;
+  loggedIn = true; //true only on development should be false
   constructor(private http: HttpClient) {}
 
   login(formData: { username: string; pass: string }) {

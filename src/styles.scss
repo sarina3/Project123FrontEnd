@@ -3,9 +3,11 @@
 $white-half: rgba(#ffffff, 0.5);
 $white: white;
 $light-gray: #b9b3b3;
+$very-light-gray: #eee;
 $gray: rgba(242, 241, 239, 1);
 $black: #343a40;
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+
 
 
 body{
@@ -18,4 +20,64 @@ body{
     background-color: $gray !important;
     overflow-x: auto;
     overflow-y: auto;
+
+
+    .override{
+        display: flex;
+        padding-top:20px;
+        height: calc(100% - 100px);
+        margin-top: 10px;
+        background-color: $gray;
+
+        & > *:not(router-outlet){
+            display: flex;
+            flex-flow: column wrap;
+            flex: 1;
+            justify-self: stretch;
+            align-self: stretch;
+        }
+    }
+
+    .mat-horizontal-content-container{
+        background-color: $gray !important;
+        margin-top: 6px !important;
+        padding: 0;
+    }
+
+    .stepper-step-height{
+        height: calc(100vh - 195px);
+    }
+
+    .layerClassPicker div.mat-select-arrow-wrapper{
+        display: none;
+        width: 0;
+        height: 0;
+    }
+
+    .layerClassPicker .mat-select{
+        display: inline;
+    }
+
+    .outline-0{
+        outline: 0;
+
+        &:focus-within{
+            outline: 0;
+        }
+    }
+
+    .center{
+        margin: 0 auto;
+    }
+
+    .center-flex{
+        justify-self: center;
+        align-self: center;
+    }
+
+    .option-header{
+        color: black !important;
+        font-size: 1.1rem;
+        font-weight: bold;
+    }
 }

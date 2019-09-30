@@ -1,23 +1,57 @@
 @import '../../../styles.scss';
 
-.row {
-    text-align: center;
-}
+.page{
+    display: flex;
+    flex-flow: column wrap;
+    flex: 1;
 
-h1 {
-    text-align: center;
-    color: $white-half;
-}
+    h1{
+        display: flex;
+        flex-flow: column wrap;
+        justify-content: center;
+        align-items: center;
+        background-color: $white;
 
-.filepicker{
-    text-align: center;
-    vertical-align: middle;
-    width: 100%;
-    margin-top: 20px;
-} 
+    }
 
-img{
-    margin-top: 20px;
-    max-width: 100%;
-    margin: 0 auto;
+    mat-tab-group {
+        background-color: $white;
+    }
+    
+    .camera{
+        display: flex;
+        flex-flow: column wrap;
+        flex: 1 1 500px;
+        height: 500px;
+        justify-content: space-around;
+
+    }
+    
+
+    .btn-wrapper{
+        display: flex;
+        flex-flow: row;
+        justify-content: center;
+    }
+
+    .filepicker{
+        display: flex;
+        flex-flow: column wrap;
+        height: 500px;
+        justify-content: space-around;
+        .filepicker-wrapper{
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-around;
+            img{
+                max-height: 300px;
+            }
+        }
+    } 
+
+    img{
+        margin-top: 20px;
+        max-width: 100%;
+        margin: 0 auto;
+    }
 }

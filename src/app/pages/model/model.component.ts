@@ -9,50 +9,82 @@ import { SelectData } from 'src/app/components/select/select.model';
   templateUrl: './model.component.html',
   styleUrls: ['./model.component.scss']
 })
-export class ModelComponent implements OnInit {
+export class ModelComponent {
+  model = {
+    header: 'model1',
+    accuracy: 76,
+    trainPercentage: 84,
+    testPercentage: 76,
+    networkType: 'CNN',
+    trainDatasetName: 'iHaVeNoIdEa__train_10000',
+    testDatasetName: 'iHaVeNoIdEa__train_10000',
+    numberOfLayers: 5,
+    layers: 
+    [
+      {
+        kernelSizeX: 5,
+        kernelSizeY: 5,
+        inputSizeY: 64,
+        inputSizeX: 64,
+        number:1,
+      },
+      {
+        kernelSizeX: 5,
+        kernelSizeY: 5,
+        inputSizeY: 64,
+        inputSizeX: 64,
+        number:2,
+      },
+      {
+        kernelSizeX: 5,
+        kernelSizeY: 5,
+        inputSizeY: 64,
+        inputSizeX: 64,
+        number:3,
+      },
+      {
+        kernelSizeX: 5,
+        kernelSizeY: 5,
+        inputSizeY: 64,
+        inputSizeX: 64,
+        number:4,
+      },
+      {
+        kernelSizeX: 5,
+        kernelSizeY: 5,
+        inputSizeY: 64,
+        inputSizeX: 64,
+        number:5,
+      }
+    ]
+  };
 
-  activationFunctions = [
-    {
-      id: 1,
-      title: 'Sigmoid'
-    },
-    {
-      id: 2,
-      title: 'Tanh'
-    },
-    {
-      id: 3,
-      title: 'Relu'
+  selectedLayerObj; 
+  selectedLayer = -1;
+
+  selectLayer(index){
+    this.selectedLayer = index;
+    this.selectedLayerObj = this.model.layers[index];
+    console.log(this.selectedLayerObj);
+  }
+
+  getStyle(index){
+    const width = 100 - ( index * (90 / this.model.numberOfLayers));
+    const height = 100 - ( index * (90 / this.model.numberOfLayers));
+    const blue = 150 - ( index * (100 / this.model.numberOfLayers));
+    return {
+      'position': 'absolute',
+      'bottom': '0',
+      'left': '0',
+      'width': `${width}%`,
+      'height': `${height}%`,
+      'background-color': `rgba( ${blue}, ${blue}, ${blue}, .5 )`,
+      'z-index':`${index+10}`
     }
-  ];
-
-  trainingForm = new FormGroup({
-    activationFunction : new FormControl(1),
-    useCrossValidation : new FormControl(false),
-    useDataset: new FormControl(),
-    useModel: new FormControl()
-  });
-
-  constructor(
-    private modelService: ModelService
-  ) { }
-
-  ngOnInit() {
   }
 
-  onModelPick(model:SelectData){
-    this.trainingForm.get('useModel').setValue(model.title);
-  }
-  onDatasetPick(dataset:SelectData){
-    this.trainingForm.get('useDataset').setValue(dataset.title);
-  }
-  onActivationFunctionPick(activationFunction: SelectData){
-    this.trainingForm.get('activationFunction').setValue(activationFunction.title);
+  getText(index){
+    return `layer ${index +1}`;
   }
 
-  trainModel() {
-    this.modelService.trainModel(this.trainingForm).subscribe(
-      (response) => console.log(response)
-    );
-  }
 }

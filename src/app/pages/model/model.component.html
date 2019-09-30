@@ -1,36 +1,74 @@
-<div class="page">
-  <h1>Model</h1>
-  
-  <form [formGroup]="trainingForm" (ngSubmit)="trainModel()">
-    <div class="my-form-control">
-      <label>Activation function  &nbsp;</label>
-      <app-select 
-        [data]="activationFunctions"
-        [selected]="activationFunctions[0]"
-        (selectedValue)="onActivationFunctionPick($event)">
-      </app-select>
+<div class="model-wrapper p-3">
+  <div class="content">
+    <div class="model-info">
+      <h4>Model Info</h4>
+      <span>Train accuracy: {{model.trainPercentage}}%</span>
+      <span>Test accuracy: {{model.testPercentage}}%</span>
+      <span>Global accuracy: {{model.accuracy}}%</span>
+      <span>Network type: {{model.networkType}}</span>
+      <span>Number of layers: {{model.numberOfLayers}}</span>
+      <span>Train dataset name: {{model.trainDatasetName}}</span>
+      <span>Test dataset name: {{model.testDatasetName}}</span>
     </div>
-    <div class="my-form-control">
-      <label>Use cross validation &nbsp;</label>
-      <input type="checkbox" formControlName="useCrossValidation">
+    <div class="layer-info" >
+      <div class="info">
+        <h4>Layer Info</h4>
+        <div *ngIf="selectedLayer > -1">
+          <span>Layer Number: {{selectedLayerObj.number}}</span>
+          <span class="image-with-label">Input image dimension:
+            <div class="image">
+              <span class="x">{{selectedLayerObj.inputSizeX}}</span>
+              <div class="bottom">
+                <span class="y">{{selectedLayerObj.inputSizeY}}</span>
+                <div class="rectangle">
+                    <div class="rec-row">
+                      <div class="rec-col"></div>
+                      <div class="rec-col"></div>
+                    </div>
+                    <div class="rec-row">
+                      <div class="rec-col"></div>
+                      <div class="rec-col"></div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </span>
+          <span class="image-with-label">kernel dimension:
+            <div class="image">
+              <span class="x">{{selectedLayerObj.kernelSizeX}}</span>
+              <div class="bottom">
+                <span class="y">{{selectedLayerObj.kernelSizeY}}</span>
+                <div class="rectangle">
+                  <div class="rec-row">
+                    <div class="rec-col"></div>
+                    <div class="rec-col"></div>
+                  </div>
+                  <div class="rec-row">
+                    <div class="rec-col"></div>
+                    <div class="rec-col"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </span>
+        </div>
+      </div>
+      <div class="layer-selector">
+        <h4>Layer Selection</h4>
+        <div class="selection-row p-3">
+          <div 
+            *ngFor="let layer of model.layers; let i = index"
+            [ngStyle]="getStyle(i)"
+            class="layer"
+            [ngClass]="{selected: selectedLayer === i}"
+            (click)="selectLayer(i)"
+            #tooltip="matTooltip"
+            [matTooltip]="getText(i)"
+            (mouseenter)="tooltip.show()"
+            (mouseleave)="tooltip.hide()"
+            ></div>
+        </div>
+      </div>
     </div>
-    <div class="my-form-control">
-      <label for="dataset">Training Dataset &nbsp;</label>
-      <app-select
-      id="dataset" 
-      [data]="activationFunctions"
-      [selected]="activationFunctions[0]"
-      (selectedValue)="onDatasetPick($event)">
-      </app-select>
-    </div>
-    <div class="my-form-control">
-      <label>Model &nbsp;</label>
-      <app-select 
-      [data]="activationFunctions"
-      [selected]="activationFunctions[0]"
-      (selectedValue)="onModelPick($event)">
-      </app-select>    
-    </div>
-    <button class="btn btn-success" type="submit">Train model</button>
-  </form>
+  </div>
 </div>
