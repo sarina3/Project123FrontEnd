@@ -29,6 +29,12 @@ export class ModelService {
   }
 
   builderGetData(){
-    return this.http.get(`${BaseUrl}modelBuilder`);
+    return this.http.get(`${BaseUrl}builder`);
+  }
+
+  buildModel(json){
+    return this.http.post(`${BaseUrl}builder`, json).subscribe(
+      () => {}
+    );
   }
 }

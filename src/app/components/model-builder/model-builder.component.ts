@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy, ViewChild, TemplateRef, OnChanges } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { WindowConfigService } from '../../services/window-config.service';
 import { ModelService } from '../../services/model/model.service';
 import { ErrorStateMatcher, MatSelect } from '@angular/material';
@@ -34,8 +34,8 @@ export class ModelBuilderComponent implements OnInit, OnDestroy, OnChanges {
   matcher = new ErrorStateMatcher();
 
   modelForm = new FormGroup({
-    type: new FormControl('cnn'),
-    modelName: new FormControl(),
+    type: new FormControl(null,[Validators.required]),
+    modelName: new FormControl(null,[Validators.required]),
 
   });
 
@@ -50,8 +50,9 @@ export class ModelBuilderComponent implements OnInit, OnDestroy, OnChanges {
   get classNames(){
     if(this.config){
       const tmp = this.modelForm.get('type');
-      // if(tmp.dirty){
-      return this.config[tmp.value].classNames;
+      if(tmp.value !== null){
+        return this.config[tmp.value].classNames;
+      }
     }
     return [];
   }
@@ -60,7 +61,7 @@ export class ModelBuilderComponent implements OnInit, OnDestroy, OnChanges {
   constructor(private windowConfig:WindowConfigService, private modelService: ModelService, private changeDetector: ChangeDetectorRef) { }
 
   ngOnChanges(){
-    console.log('change');
+    // console.log('change');
   }
 
   ngOnInit() {
@@ -68,7 +69,7 @@ export class ModelBuilderComponent implements OnInit, OnDestroy, OnChanges {
     this.modelService.builderGetData().subscribe(
       data => {
         this.config = data
-        console.log(data);
+        // console.log(data);
        
           this.changeDetector.detectChanges();
       }
@@ -97,7 +98,20 @@ export class ModelBuilderComponent implements OnInit, OnDestroy, OnChanges {
     tmpForm.addControl('class', new FormControl(id));
     const tmp = this.config[this.modelForm.get('type').value][`${id}Parameters`];
     tmp.forEach(element => {
-      tmpForm.addControl(element.id,new FormControl(null,[Validators.required]));
+      if (typeof element.expectedValue === 'object'){
+        if (element[0] === '{}'){
+          tmpForm.addControl(element.id,new FormControl(null,[Validators.required]));
+
+        } else {
+          tmpForm.addControl(element.id,new FormControl(null,[Validators.required, this.arrayValidator(element.expectedValue)]));
+        }
+      } else { 
+        if (element === '{}'){
+          tmpForm.addControl(element.id,new FormControl(null,[Validators.required]));
+        } else {
+          tmpForm.addControl(element.id,new FormControl(null,[Validators.required, this.validator(element.expectedValue)]));
+        }
+      }
     });
     this.layers.push(tmpForm);
     this.activate(this.layers.length - 1);
@@ -113,21 +127,66 @@ export class ModelBuilderComponent implements OnInit, OnDestroy, OnChanges {
 
   }
 
+  arrayValidator(pattern:Array<string>) : ValidatorFn {
+    return (c:AbstractControl): {[key:string]: boolean} | null => {
+      if(c.value === null){
+        return {'dimension does not fit the expected dimension': false};
+      }
+      const tmp = c.value.split(',');
+      console.log(tmp)
+      if( tmp.length !== pattern.length) {
+        return {'dimension does not fit the expected dimension': false};
+      }
+      let ok = true;
+      tmp.forEach((element,index) => {
+        if (pattern[index] === 'number') {
+          const _pattern = new RegExp('[0-9]+');
+          if(_pattern.test(element) === false){
+            ok = false;
+          }
+        } else {
+          if (typeof element !== pattern[index]) {
+            ok = false;
+          }
+        }
+      });
+      if(ok){
+        return null;
+      }else{
+        return {'types does not match': true};
+      }
+    }
+  }
+
+  validator(pattern: string): ValidatorFn{
+    return (c: AbstractControl): {[key: string]: boolean} | null => {
+      console.log(c.value);
+      if ( pattern === 'number') {
+        const numPattern = new RegExp('[0-9]+');
+        if (numPattern.test(c.value)) {
+          return null;
+        } else {
+          return { "element types doesn't match": true};
+        }
+      } else {
+        return null;
+      }
+    };
+  }
+
   getProperties(){
-    if(this.activeLayerForm){
+    if (this.activeLayerForm) {
       const classId = this.activeLayerForm.get('class').value;
       return this.config[this.modelForm.get('type').value][`${classId}Parameters`];
     }
     return [];
   }
-  
+
   getTemplate(prop){
-    console.log(prop);
     if(typeof prop.expectedValue === 'object'){
       if(prop.expectedValue[0] === '{}'){
         return this.multiSelect;
-      }
-      else{
+      }else{
         return this.input;
       }
     }else{
@@ -140,7 +199,6 @@ export class ModelBuilderComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   isValid(index:number){
-    console.log(index);
     return this.layers[index].valid;
   }
 
@@ -154,18 +212,54 @@ export class ModelBuilderComponent implements OnInit, OnDestroy, OnChanges {
       if(!item.valid){
         this.invalidLayers.push({index: index, item: item});
       }
-    })
-    this.activate(this.invalidLayers[0].index);
+    });
+    if (this.invalidLayers.length > 0) {
+      this.activate(this.invalidLayers[0].index);
+    }
     this.changeDetector.detectChanges();
   }
 
   areInvalid(){
     return this.invalidLayers.length > 0;
   }
-  
+
   checkValid(_index:number){
     if(this.layers[this.invalidLayers[_index].index].valid){
       this.invalidLayers.splice(_index,1);
+    }
+  }
+  getHint(prop){
+    return prop.expectedValue;
+  }
+
+  getError(prop){
+    let err = '';
+    const errsObj = this.activeLayerForm.get(prop.id).errors;
+    if(errsObj){
+      Object.keys(errsObj).forEach((elem) => {
+        err = elem;
+      });
+    }
+    return err;
+  }
+
+  // tslint:disable-next-line: adjacent-overload-signatures
+  isValidAll(){
+    let valid = true;
+    valid = this.modelForm.valid ? valid : false;
+    this.layers.forEach(elem => {
+      valid = elem.valid ? valid: false;
+    })
+    return valid;
+  }
+
+  submit(){
+    if(this.isValidAll()){
+      let tmp = {...this.modelForm.value, layers:[]};
+      this.layers.forEach(el => {
+        tmp.layers.push(el.value);
+      });
+      this.modelService.buildModel(tmp);
     }
   }
 }

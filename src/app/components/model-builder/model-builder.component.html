@@ -22,7 +22,7 @@
                                 </mat-form-field>
                             </div>
                             <div class="btns-wrapper">
-                                <button mat-stroked-button matStepperNext>Next</button>
+                                <button mat-stroked-button matStepperNext [disabled]="!modelForm.valid  ">Next</button>
                             </div>
                         </form>
                     </div>
@@ -74,7 +74,7 @@
                 <div class="third-step-content" *ngIf="!areInvalid() else thirdWithInvalid">
                     <h4>Everything is valid you can continue</h4>
                     <div class="btns-wrapper">
-                            <button mat-stroked-button matStepperNext class="mr-1" >Next</button>
+                            <button mat-stroked-button (click)="submit()" class="mr-1" >Submit</button>
                             <button mat-stroked-button matStepperPrevious class="mr-1" >Back</button>
                     </div>
                 </div>
@@ -111,7 +111,7 @@
                             </div>
                             <div class="bottom">
                                 <div class="btns-wrapper">
-                                    <button mat-stroked-button matStepperNext class="mr-1" >Next</button>
+                                    <button mat-stroked-button matStepperNext (click)="submit()" [disabled]="!isValidAll()" class="mr-1" >Submit</button>
                                     <button mat-stroked-button matStepperPrevious class="mr-1" >Back</button>
                                 </div>
                             </div>
@@ -147,10 +147,10 @@
     <mat-form-field class="example-full-width">
         <input matInput [placeholder]="prop.name" [formControl]="getFormControl(prop.id,index)"
                 [errorStateMatcher]="matcher">
-        <mat-hint>{{getHint}}</mat-hint>
-        <!-- <mat-error *ngIf="!activeLayerForm.valid">
-            Error
-        </mat-error> -->
+        <mat-hint>{{prop.expectedValue}}</mat-hint>
+        <mat-error *ngIf="!activeLayerForm.valid">
+            {{getError(prop)}}
+        </mat-error>
     </mat-form-field>
 </ng-template>
 
