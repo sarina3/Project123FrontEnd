@@ -5,7 +5,7 @@ import { NgModule } from "@angular/core";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { HeaderComponent } from "./header/header/header.component";
+import { HeaderComponent } from "./components/header/header/header.component";
 import { PhotoViewerComponent } from "./components/photo-viewer/photo-viewer.component";
 import { SelectComponent } from "./components/select/select.component";
 import { AboutComponent } from "./pages/about/about.component";
