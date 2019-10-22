@@ -13,45 +13,76 @@
         background-color: $white;
 
     }
-
-    mat-tab-group {
-        background-color: $white;
-    }
     
-    .camera{
+    .predict-content-wrapper {
         display: flex;
-        flex-flow: column wrap;
-        flex: 1 1 500px;
-        height: 500px;
-        justify-content: space-around;
+        flex-flow: row wrap;
+        flex: 1;
+        justify-self: stretch;
+        justify-content: flex-start;
 
-    }
-    
+        mat-tab-group {
+            padding: 10px;
+            background-color: $white;
+            width: 70%
+        }
 
-    .btn-wrapper{
-        display: flex;
-        flex-flow: row;
-        justify-content: center;
-    }
+        .selected {
+            background-color: gray !important;
+        }
 
-    .filepicker{
-        display: flex;
-        flex-flow: column wrap;
-        height: 500px;
-        justify-content: space-around;
-        .filepicker-wrapper{
+        .network-picker {
+            margin-right: 6px;
             display: flex;
-            flex-flow: row wrap;
-            justify-content: space-around;
-            img{
-                max-height: 300px;
+            flex-flow: column nowrap;
+            overflow-y: auto;
+            flex: 1;
+            justify-content: center; 
+            
+            .network-option-wrapper {
+                display: flex;
+                flex-flow: column wrap;
             }
         }
-    } 
+    
 
-    img{
-        margin-top: 20px;
-        max-width: 100%;
-        margin: 0 auto;
+        
+        
+        .camera{
+            display: flex;
+            flex-flow: column wrap;
+            flex: 1 1 500px;
+            height: 500px;
+            justify-content: space-around;
+
+        }
+        
+
+        .btn-wrapper{
+            display: flex;
+            flex-flow: row;
+            justify-content: center;
+        }
+
+        .filepicker{
+            display: flex;
+            flex-flow: column wrap;
+            height: 500px;
+            justify-content: space-around;
+            .filepicker-wrapper{
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: space-around;
+                img{
+                    max-height: 300px;
+                }
+            }
+        } 
+
+        img{
+            margin-top: 20px;
+            max-width: 100%;
+            margin: 0 auto;
+        }
     }
 }
