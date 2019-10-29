@@ -39,6 +39,12 @@ export class ModelBuilderComponent implements OnInit, OnDestroy, OnChanges {
     // optimizer: new FormControl(null,[Validators.required]);
   });
 
+  optimizerForm = new FormGroup({
+    loss: new FormControl(null, Validators.required),
+    optimizer: new FormControl(null, Validators.required),
+    metrics: new FormControl(null, Validators.required)
+  });
+
   activeLayerIndex;
 
   layers = [];
@@ -57,6 +63,8 @@ export class ModelBuilderComponent implements OnInit, OnDestroy, OnChanges {
     return [];
   }
 
+  
+
 
   constructor(private windowConfig:WindowConfigService, private modelService: ModelService, private changeDetector: ChangeDetectorRef) { }
 
@@ -69,9 +77,8 @@ export class ModelBuilderComponent implements OnInit, OnDestroy, OnChanges {
     this.modelService.builderGetData().subscribe(
       data => {
         this.config = data
-        // console.log(data);
-       
-          this.changeDetector.detectChanges();
+        console.log(data);
+        this.changeDetector.detectChanges();
       }
     );
   }
@@ -182,6 +189,17 @@ export class ModelBuilderComponent implements OnInit, OnDestroy, OnChanges {
     return [];
   }
 
+  getOptimizer(param: string) {
+    console.log(param);
+    if (this.config) {
+      const type = this.modelForm.get('type').value;
+      if (type) {
+        return this.config[type].optimizer[param];
+      }
+    }
+    return [];
+  }
+
   getTemplate(prop){
     if(typeof prop.expectedValue === 'object'){
       if(prop.expectedValue[0] === '{}'){
@@ -253,9 +271,10 @@ export class ModelBuilderComponent implements OnInit, OnDestroy, OnChanges {
     return valid;
   }
 
+  
   submit(){
     if (this.isValidAll()) {
-      let tmp = {...this.modelForm.value, layers:[]};
+      let tmp = {...this.modelForm.value, ...this.optimizerForm.value ,  layers:[]};
       this.layers.forEach(el => {
         tmp.layers.push(el.value);
       });

@@ -28,6 +28,44 @@
                     </div>
                 </div>
         </mat-step>
+        <mat-step label="Choose Optimizer" [stepControl]="optimizerForm">
+            <div class="first-step-layout stepper-step-height">
+                <div class="first-step-content">
+                    <form [formGroup]="modelForm">
+                        <h3>Choose Optimizer</h3>
+                        <div>
+                            <mat-form-field>
+                                <mat-label>Loss: </mat-label>
+                                <mat-select formControlName="loss">
+                                    <mat-option *ngFor="let type of getOptimizer('loss')" [value]="type.id" >
+                                        {{type.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Optimizer: </mat-label>
+                                <mat-select formControlName="optimizer">
+                                    <mat-option *ngFor="let type of getOptimizer('name')" [value]="type.id" >
+                                        {{type.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <mat-label>Metrics: </mat-label>
+                                <mat-select formControlName="metrics">
+                                    <mat-option *ngFor="let type of getOptimizer('metrics')" [value]="type.id" >
+                                        {{type.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="btns-wrapper">
+                            <button mat-stroked-button matStepperNext [disabled]="!modelForm.valid  ">Next</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+    </mat-step>
         <mat-step label="Layers configuration" [stepControl]="activeLayerForm">
             <div class="second-step-layout stepper-step-height">
                 <div class="second-step-content">
