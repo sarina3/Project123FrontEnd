@@ -36,7 +36,7 @@ export class ModelBuilderComponent implements OnInit, OnDestroy, OnChanges {
   modelForm = new FormGroup({
     type: new FormControl(null,[Validators.required]),
     modelName: new FormControl(null,[Validators.required]),
-
+    // optimizer: new FormControl(null,[Validators.required]);
   });
 
   activeLayerIndex;
@@ -254,7 +254,7 @@ export class ModelBuilderComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   submit(){
-    if(this.isValidAll()){
+    if (this.isValidAll()) {
       let tmp = {...this.modelForm.value, layers:[]};
       this.layers.forEach(el => {
         tmp.layers.push(el.value);

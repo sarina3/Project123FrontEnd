@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Architecture, LayerInfo } from '../../model/architecture.model';
-import { TouchSequence } from 'selenium-webdriver';
 import { ModelService } from 'src/app/services/model/model.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-cards',
@@ -114,8 +114,14 @@ export class CardsComponent implements OnInit {
   constructor(private modelServ: ModelService) { }
 
   ngOnInit() {
-    this.modelServ.getModels().subscribe(data => {
-      console.log(JSON.parse(data));
+    this.modelServ.getModels().subscribe((data: any) => {
+      this.models = data.models.map(x => {
+        return {
+          header: x.model_header.Name,
+          accuracy: +x.model_header.Accuracy*100,
+          layers: []};
+        }
+     );
     });
   }
 

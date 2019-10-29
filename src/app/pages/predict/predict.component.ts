@@ -4,6 +4,7 @@ import { SelectData } from 'src/app/components/select/select.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AckWebcamComponent } from '../../components/ack-webcam/ack-webcam.component';
 import { WindowConfigService } from 'src/app/services/window-config.service';
+import { ModelService } from 'src/app/services/model/model.service';
 
 @Component({
   selector: 'app-predict',
@@ -13,7 +14,9 @@ import { WindowConfigService } from 'src/app/services/window-config.service';
 export class PredictComponent implements OnInit, OnDestroy {
   @ViewChild(AckWebcamComponent, {static:false}) camera: AckWebcamComponent;
   form = new FormGroup({
-    photo: new FormControl(null,Validators.required)
+    model: new FormControl(null,Validators.required),
+    photo: new FormControl(null,Validators.required),
+    photoDescription: new FormControl(false)
   })
 
   image ;
@@ -23,6 +26,15 @@ export class PredictComponent implements OnInit, OnDestroy {
   models = [
     {header: 'Convolutional neural network'},
     {header: 'Multi layer perceptron'},
+    {header: 'Genetic algorithm'},
+    {header: 'Convolutional neural network'},
+    {header: 'Multi layer perceptron'},
+    {header: 'Genetic algorithm'},
+    {header: 'Convolutional neural network'},
+    {header: 'Multi layer perceptron'},
+    {header: 'Genetic algorithm'},
+    {header: 'Convolutional neural network'},
+    {header: 'Multi layer perceptron'},
     {header: 'Genetic algorithm'}
   ];
   
@@ -30,7 +42,8 @@ export class PredictComponent implements OnInit, OnDestroy {
 
   constructor(
     private predictService: PredictService,
-    private windowConfig: WindowConfigService
+    private windowConfig: WindowConfigService,
+    private modelService: ModelService
   ) { }
 
   ngOnDestroy() {
@@ -40,10 +53,23 @@ export class PredictComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    console.log(this.form.valid)
+    console.log(this.form.valid);
     if (!this.windowConfig.isFullScreen) {
       this.windowConfig.resize();
     }
+    this.modelService.getModels().subscribe(
+      (data: any) => {
+        console.log(data);
+        this.models = data.models.map(
+          x => {
+            return {
+              header: x.model_header.Name,
+              id: x.model_header.ModelId
+            };
+          }
+        )
+      }
+    );
   }
 
   onImageCreate(base64Image: any) {
@@ -79,5 +105,10 @@ export class PredictComponent implements OnInit, OnDestroy {
 
   select(index:number) {
     this.selected = index;
+    this.form.get('model').setValue(this.models[index].id);
+  }
+
+  canShowResults() {
+   return false;
   }
 }

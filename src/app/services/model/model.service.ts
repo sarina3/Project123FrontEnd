@@ -25,7 +25,7 @@ export class ModelService {
   }
 
   getModels(){
-    return this.http.get(`${BaseUrl}models`,{ responseType: 'text'});
+    return this.http.get(`${BaseUrl}models`);
   }
 
   builderGetData(){
@@ -37,4 +37,6 @@ export class ModelService {
       () => {}
     );
   }
+
+
 }

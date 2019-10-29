@@ -2,8 +2,8 @@
 
 .page{
     display: flex;
-    flex-flow: column wrap;
-    flex: 1;
+    max-height: 100%;
+    max-width: 100%;
 
     h1{
         display: flex;
@@ -24,25 +24,42 @@
         mat-tab-group {
             padding: 10px;
             background-color: $white;
-            width: 70%
+            width: 25%;
+            margin-right: 6px;
         }
 
         .selected {
-            background-color: gray !important;
+            // background-color: gray !important;
+            color: rgba($color: #000000, $alpha: 1.0);
+            border: 1px solid rgba($color: #000000, $alpha: 1.0);
         }
 
         .network-picker {
             margin-right: 6px;
             display: flex;
-            flex-flow: column nowrap;
-            overflow-y: auto;
-            flex: 1;
-            justify-content: center; 
+            overflow-y: auto !important;
+            flex-flow: column nowrap !important;
+            flex: 0 1 25%;
+            justify-content: flex-start;
+            background-color: white;
+            padding: 10px;
+            align-content: flex-start;
+            text-align: center;
+            max-height: 100%;
             
             .network-option-wrapper {
                 display: flex;
                 flex-flow: column wrap;
+
+                .card {
+                    margin-top: 10px
+                }
             }
+        }
+
+        .results-wrapper {
+            display: flex;
+            flex: 1;
         }
     
 
