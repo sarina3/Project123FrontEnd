@@ -1,24 +1,17 @@
 <div class="holder">
-    <div class="window">
+    <div class="network-picker">
         <h2>{{title}}</h2>
-        <form [formGroup]="form">
-            <mat-form-field>
-                <input type="text" matInput formControlName="model" [placeholder]="modelPlaceholder" [matAutocomplete]="model">
-            </mat-form-field>
-            <mat-autocomplete #model="matAutocomplete" >
-                <mat-option *ngFor="let option of modelFilter" [value]="option">
-                    {{ option }}
-                </mat-option>
-            </mat-autocomplete>
-            <mat-form-field>
-                <input type="text" matInput formControlName="dataset" [placeholder]="datasetPlaceholder" [matAutocomplete]="dataset">
-            </mat-form-field>
-            <mat-autocomplete #dataset="matAutocomplete">
-                <mat-option *ngFor="let option of datasetFilter" [value]="option">
-                    {{ option }}
-                </mat-option>
-            </mat-autocomplete>
-            <button mat-stroked-button (click)="submitForm()">Submit</button>
-        </form>
+        <div class="network-option-wrapper">
+            <form [formGroup]="form">
+                <mat-card *ngFor="let model of models; let i = index" [ngClass]="{'selected': selected === i}" class="card" (click)="select(i)">
+                    <mat-card-header class="header">
+                        <mat-card-title>{{model.header}}</mat-card-title>
+                    </mat-card-header>
+                </mat-card>
+            </form>
+        </div>
+    </div>
+    <div class="train-data">
+        <button mat-stroked-button (click)="trainModel()" class="train-btn" >Train</button>
     </div>
 </div>

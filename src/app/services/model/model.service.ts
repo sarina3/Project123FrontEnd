@@ -38,5 +38,9 @@ export class ModelService {
     );
   }
 
+  getTrainData(form: FormGroup) {
+    return this.http.post(`${BaseUrl}training-session`, form.value);
+  }
+
 
 }

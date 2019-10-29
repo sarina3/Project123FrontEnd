@@ -9,16 +9,20 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class TrainTestFormComponent implements OnInit {
   @Input()
   title = "";
+
   @Input()
-  modelPlaceholder = "";
+  models = [];
+
   @Input()
-  datasetPlaceholder = "";
+  dataToShow = "";
+  
   @Output()
   formSubmited = new EventEmitter<FormGroup>();
 
+  selected = -1;
+
   form = new FormGroup({
-    model: new FormControl(),
-    dataset: new FormControl()
+    modelId: new FormControl(null)
   });
 
   datasetFilter = [];
@@ -31,6 +35,13 @@ export class TrainTestFormComponent implements OnInit {
 
   submitFrom(){
     this.formSubmited.emit(this.form);
+  }
+
+  select(index:number){
+    this.selected = index;
+    this.form.get('modelId').setValue(this.models[index].id);
+    this.submitFrom();
+
   }
 
 }
