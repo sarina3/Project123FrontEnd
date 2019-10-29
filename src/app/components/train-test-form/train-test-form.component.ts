@@ -36,6 +36,19 @@ export class TrainTestFormComponent implements OnInit {
     if (this.route.snapshot.url[0].path.includes('train')) {
       this.pageTrain = true;
     }
+    this.modelService.getModels().subscribe(
+      (data: any) => {
+        this.models = data.models.map(
+          x => {
+            return {
+              header: x.model_header.Name,
+              id: x.model_header.ModelId,
+              type: x.model_header.ModelType
+            };
+          }
+        );
+      }
+    );
   }
 
   submitFrom(){
@@ -45,17 +58,31 @@ export class TrainTestFormComponent implements OnInit {
   select(index:number){
     this.selected = index;
     this.form.get('modelId').setValue(this.models[index].id);
-    this.modelService.getTrainData(this.form).subscribe(
-      (data: any) => {
-        this.dataToShow = data;
-      }
-    );
+    if (this.pageTrain) {
+      this.modelService.getTrainData(this.form).subscribe(
+        (data: any) => {
+          this.dataToShow = data;
+        }
+      );
+    } else {
+      this.modelService.getTestData(this.form).subscribe(
+        (data: any) => {
+          this.dataToShow = data;
+        }
+      );
+    }
   }
 
   trainModel() {
-    this.modelService.trainModel(this.form).subscribe(
-      data => {console.log('train successfull')}
-    )
+    if (this.pageTrain) {
+      this.modelService.trainModel(this.form).subscribe(
+        data => {console.log('train successfull')}
+      );
+    } else {
+      this.modelService.testModel(this.form).subscribe(
+        data => {console.log('test successfull')}
+      );
+    }
   }
 
 }

@@ -24,6 +24,12 @@ export class ModelService {
       .post(BaseUrl + url, form.value);
   }
 
+  testModel(form: FormGroup): Observable<any> {
+    const url = 'test';
+    return this.http
+      .post(BaseUrl + url, form.value);
+  }
+
   getModels(){
     return this.http.get(`${BaseUrl}models`);
   }
@@ -40,6 +46,10 @@ export class ModelService {
 
   getTrainData(form: FormGroup) {
     return this.http.post(`${BaseUrl}training-session`, form.value);
+  }
+
+  getTestData(form: FormGroup) {
+    return this.http.post(`${BaseUrl}testing-session`, form.value);
   }
 
 
