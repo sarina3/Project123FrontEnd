@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { ModelService } from 'src/app/services/model/model.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-train-test-form',
@@ -13,7 +15,6 @@ export class TrainTestFormComponent implements OnInit {
   @Input()
   models = [];
 
-  @Input()
   dataToShow = "";
   
   @Output()
@@ -27,10 +28,14 @@ export class TrainTestFormComponent implements OnInit {
 
   datasetFilter = [];
   modelFilter = [];
+  pageTrain = false;
 
-  constructor() { }
+  constructor(private modelService: ModelService, private route:ActivatedRoute) { }
 
   ngOnInit() {
+    if (this.route.snapshot.url[0].path.includes('train')) {
+      this.pageTrain = true;
+    }
   }
 
   submitFrom(){
@@ -40,8 +45,17 @@ export class TrainTestFormComponent implements OnInit {
   select(index:number){
     this.selected = index;
     this.form.get('modelId').setValue(this.models[index].id);
-    this.submitFrom();
+    this.modelService.getTrainData(this.form).subscribe(
+      (data: any) => {
+        this.dataToShow = data;
+      }
+    );
+  }
 
+  trainModel() {
+    this.modelService.trainModel(this.form).subscribe(
+      data => {console.log('train successfull')}
+    )
   }
 
 }
