@@ -23,20 +23,7 @@ export class PredictComponent implements OnInit, OnDestroy {
   selectedOption: number;
   file;
 
-  models = [
-    {header: 'Convolutional neural network'},
-    {header: 'Multi layer perceptron'},
-    {header: 'Genetic algorithm'},
-    {header: 'Convolutional neural network'},
-    {header: 'Multi layer perceptron'},
-    {header: 'Genetic algorithm'},
-    {header: 'Convolutional neural network'},
-    {header: 'Multi layer perceptron'},
-    {header: 'Genetic algorithm'},
-    {header: 'Convolutional neural network'},
-    {header: 'Multi layer perceptron'},
-    {header: 'Genetic algorithm'}
-  ];
+  models = [];
   
   selected = 0;
 
