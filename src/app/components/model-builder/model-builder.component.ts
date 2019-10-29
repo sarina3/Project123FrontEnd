@@ -281,4 +281,17 @@ export class ModelBuilderComponent implements OnInit, OnDestroy, OnChanges {
       this.modelService.buildModel(tmp);
     }
   }
+
+  close(index){
+    this.layers.splice(index,1);
+    if(index === this.activeLayerIndex){
+      const newIndex = index - 1;
+      if (this.layers.length > 0) {
+        newIndex >= 0 ?  this.activate(newIndex) : this.activate(0);
+      } else {
+        this.activeLayerForm = null;
+        this.changeDetector.detectChanges();
+      }
+    }
+  }
 }
