@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ModelService } from 'src/app/services/model/model.service';
 import { ActivatedRoute } from '@angular/router';
+import { WindowConfigService } from 'src/app/services/window-config.service';
 
 @Component({
   selector: 'app-train-test-form',
@@ -30,7 +31,7 @@ export class TrainTestFormComponent implements OnInit {
   modelFilter = [];
   pageTrain = false;
 
-  constructor(private modelService: ModelService, private route:ActivatedRoute) { }
+  constructor(private modelService: ModelService, private route:ActivatedRoute, private window: WindowConfigService) { }
 
   ngOnInit() {
     if (this.route.snapshot.url[0].path.includes('train')) {
@@ -47,8 +48,12 @@ export class TrainTestFormComponent implements OnInit {
             };
           }
         );
+        this.select(0);
       }
     );
+    if(!this.window.isFullScreen){
+      this.window.resize();
+    }
   }
 
   submitFrom(){
@@ -75,6 +80,7 @@ export class TrainTestFormComponent implements OnInit {
 
   trainModel() {
     if (this.pageTrain) {
+      console.log(this.form.value)
       this.modelService.trainModel(this.form).subscribe(
         data => {console.log('train successfull')}
       );

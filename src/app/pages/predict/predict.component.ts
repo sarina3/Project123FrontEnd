@@ -54,7 +54,8 @@ export class PredictComponent implements OnInit, OnDestroy {
               id: x.model_header.ModelId
             };
           }
-        )
+        );
+        this.select(0);
       }
     );
   }
