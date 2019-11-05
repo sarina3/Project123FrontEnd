@@ -50,7 +50,8 @@ export class TrainTestFormComponent implements OnInit {
           }
         );
         if (id) {
-          const index = this.models.find( x => x.id === +id);
+          console.log(this.models);
+          const index = this.models.findIndex( x => x.id === +id);
           this.select(index !== -1 ? index : 0);
         } else {
           this.select(0);

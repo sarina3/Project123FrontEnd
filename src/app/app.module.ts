@@ -62,7 +62,7 @@ import { GoogleChartsModule } from 'angular-google-charts';
     MatStepperModule,
     MatAutocompleteModule,
     MatIconModule,
-    GoogleChartsModule
+    GoogleChartsModule.forRoot()
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
