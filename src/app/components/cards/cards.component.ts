@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Architecture, LayerInfo } from '../../model/architecture.model';
 import { ModelService } from 'src/app/services/model/model.service';
 import { map } from 'rxjs/operators';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cards',
@@ -17,6 +19,7 @@ export class CardsComponent implements OnInit {
   models:Array<Architecture> = [
     {
       header: 'model1',
+      id: 1,
       accuracy: 76,
       trainPercentage: 84,
       testPercentage: 76,
@@ -65,6 +68,7 @@ export class CardsComponent implements OnInit {
     },
     {
       header: 'model1',
+      id: 2,
       accuracy: 76,
       trainPercentage: 84,
       testPercentage: 76,
@@ -111,13 +115,15 @@ export class CardsComponent implements OnInit {
       ]
     },
   ];
-  constructor(private modelServ: ModelService) { }
+  constructor(private modelServ: ModelService, private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.modelServ.getModels().subscribe((data: any) => {
+      console.log(data);
       this.models = data.models.map(x => {
         return {
           header: x.model_header.Name,
+          id: x.model_header.ModelId,
           accuracy: +x.model_header.Accuracy*100,
           layers: []};
         }
@@ -154,5 +160,15 @@ export class CardsComponent implements OnInit {
 
   getText(index){
     return `layer ${index +1}`;
+  }
+
+
+  loggedUser(){
+    return this.auth.isLoggedIn();
+  }
+
+  goToPage(route: string) {
+    localStorage.setItem('choosedModel', '' + this.selectedObj.id);
+    this.router.navigate([route]);
   }
 }

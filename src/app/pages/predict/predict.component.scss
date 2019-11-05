@@ -2,6 +2,9 @@
 
 .page{
     display: flex;
+    justify-self: stretch;
+    align-self: stretch;
+    flex: 1;
     max-height: 100%;
     max-width: 100%;
 
@@ -19,6 +22,7 @@
         flex-flow: row wrap;
         flex: 1;
         justify-self: stretch;
+        height: 100%;
         justify-content: flex-start;
 
         mat-tab-group {

@@ -24,6 +24,7 @@ import { TrainComponent } from './pages/train/train.component';
 import { TestComponent } from './pages/test/test.component';
 import { TrainTestFormComponent } from './components/train-test-form/train-test-form.component';
 import { ModelBuilderComponent } from './components/model-builder/model-builder.component';
+import { GoogleChartsModule } from 'angular-google-charts';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import { ModelBuilderComponent } from './components/model-builder/model-builder.
     MatSelectModule,
     MatStepperModule,
     MatAutocompleteModule,
-    MatIconModule
+    MatIconModule,
+    GoogleChartsModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}

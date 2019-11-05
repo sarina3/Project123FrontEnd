@@ -30,7 +30,7 @@ export class ModelService {
       .post(BaseUrl + url, form.value);
   }
 
-  getModels(){
+  getModels() {
     return this.http.get(`${BaseUrl}models`);
   }
 

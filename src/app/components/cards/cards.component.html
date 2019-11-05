@@ -81,11 +81,18 @@
           </div>
         </div>
       </div>
-      <div class="bottom">
+      <div class="bottom" *ngIf="loggedUser() else notLogged">
         <button mat-stroked-button>Train model</button>
         <button mat-stroked-button>Test model</button>
         <button mat-stroked-button>Set as default</button>
       </div>
+      <ng-template #notLogged>
+        <div>
+          <button mat-stroked-button (click)="goToPage('/training-session')">Show Train model</button>
+          <button mat-stroked-button (click)="goToPage('/testing-session')">Show Test model</button>
+          <button mat-stroked-button (click)="goToPage('/predict')">Predict</button>
+        </div>
+      </ng-template>
     </div>
   </div>
 </div>

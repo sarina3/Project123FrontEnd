@@ -37,6 +37,7 @@ export class TrainTestFormComponent implements OnInit {
     if (this.route.snapshot.url[0].path.includes('train')) {
       this.pageTrain = true;
     }
+    const id = localStorage.getItem('choosedModel');
     this.modelService.getModels().subscribe(
       (data: any) => {
         this.models = data.models.map(
@@ -48,7 +49,12 @@ export class TrainTestFormComponent implements OnInit {
             };
           }
         );
-        this.select(0);
+        if (id) {
+          const index = this.models.find( x => x.id === +id);
+          this.select(index !== -1 ? index : 0);
+        } else {
+          this.select(0);
+        }
       }
     );
     if(!this.window.isFullScreen){
@@ -66,12 +72,14 @@ export class TrainTestFormComponent implements OnInit {
     if (this.pageTrain) {
       this.modelService.getTrainData(this.form).subscribe(
         (data: any) => {
+          console.log(data);
           this.dataToShow = data;
         }
       );
     } else {
       this.modelService.getTestData(this.form).subscribe(
         (data: any) => {
+          console.log(data);
           this.dataToShow = data;
         }
       );
@@ -91,4 +99,7 @@ export class TrainTestFormComponent implements OnInit {
     }
   }
 
+  getData() {
+    return this.dataToShow ? [...this.dataToShow['accuracy'], ...this.dataToShow['val_accuracy']] : [];
+  }
 }

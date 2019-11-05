@@ -1,5 +1,6 @@
 export class Architecture {
     header?: string;
+    id: number;
     trainPercentage?: number;
     testPercentage?: number;
     accuracy?: number;

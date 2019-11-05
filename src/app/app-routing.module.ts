@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'dataset/show', component: PhotoViewerComponent},
   { path: 'predict', component: PredictComponent},
   { path: 'data', component: DataComponent },
-  { path: 'model', component: ModelComponent },
+  { path: 'model', component: CardsComponent },
   { path: 'about', component: AboutComponent },
   { path: 'testing-session', component: TestComponent },
   { path: 'training-session', component: TrainComponent },
