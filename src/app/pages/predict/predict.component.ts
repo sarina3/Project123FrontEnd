@@ -12,26 +12,35 @@ import { ModelService } from 'src/app/services/model/model.service';
   styleUrls: ['./predict.component.scss']
 })
 export class PredictComponent implements OnInit, OnDestroy {
-  @ViewChild(AckWebcamComponent, {static:false}) camera: AckWebcamComponent;
+  @ViewChild(AckWebcamComponent, {static: false}) camera: AckWebcamComponent;
   form = new FormGroup({
-    model: new FormControl(null,Validators.required),
-    photo: new FormControl(null,Validators.required),
+    model: new FormControl(null, Validators.required),
+    photo: new FormControl(null, Validators.required),
     photoDescription: new FormControl(false)
   })
 
-  image ;
+  image;
   selectedOption: number;
   file;
 
   models = [];
-  
+
   selected = 0;
+
+  predictionResult:any;
+  showResult = false;
+
+  get canShowResult() {
+    console.log('change emitted')
+    return this.showResult;
+  }
 
   constructor(
     private predictService: PredictService,
     private windowConfig: WindowConfigService,
     private modelService: ModelService
-  ) { }
+  ) {
+  }
 
   ngOnDestroy() {
     if (!this.windowConfig.isFullScreen) {
@@ -62,23 +71,28 @@ export class PredictComponent implements OnInit, OnDestroy {
 
   onImageCreate(base64Image: any) {
     this.form.get('photo').setValue(base64Image);
+    this.image = base64Image;
   }
 
   predict() {
     this.predictService.predict(this.form)
-      .subscribe(response => console.log(response)
-    );
+      .subscribe(response => {
+          console.log(response);
+          this.predictionResult = response;
+          this.showResult = true;
+        }
+      );
   }
 
-  onSelect(event: SelectData){
+  onSelect(event: SelectData) {
     this.selectedOption = event.id;
   }
 
-  takePhoto(){
+  takePhoto() {
     this.camera.getImage();
   }
 
-  onFilePick(event){
+  onFilePick(event) {
     const reader = new FileReader();
     reader.onload = () => {
       // console.log(reader.result)
@@ -86,17 +100,24 @@ export class PredictComponent implements OnInit, OnDestroy {
       console.log(this.image);
       this.form.get('photo').setValue(this.image);
 
-    }
-    console.log(event)
+    };
+    console.log(event);
     reader.readAsDataURL(event.target.files[0])
   }
 
-  select(index:number) {
+  select(index: number) {
     this.selected = index;
     this.form.get('model').setValue(this.models[index].id);
   }
 
-  canShowResults() {
-   return false;
+  getResults() {
+    return [
+      'Classification class',
+      'Classification result'
+    ];
+  }
+
+  getMetadata() {
+    return Object.keys(this.predictionResult.data.metadata);
   }
 }

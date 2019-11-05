@@ -61,9 +61,38 @@
             }
         }
 
-        .results-wrapper {
+        .result-wrapper {
             display: flex;
             flex: 1;
+            justify-self: stretch;
+            align-self: stretch;
+
+            .results {
+                display: flex;
+                flex: 1;
+                background-color: white;
+                flex-direction: column;
+
+
+                .warning {
+                    display: flex;
+                    flex-flow: column wrap;
+
+                    h2 {
+                        color: red;
+                    }
+                }
+
+                .image {
+                    display: flex;
+                    flex-flow: row wrap;
+                    justify-content: space-around;
+                    align-items: center;
+                    img {
+                      max-height: 300px;
+                    }
+                }
+            }
         }
     
 
@@ -73,7 +102,6 @@
             display: flex;
             flex-flow: column wrap;
             flex: 1 1 500px;
-            height: 500px;
             justify-content: space-around;
 
         }
@@ -98,12 +126,7 @@
                     max-height: 300px;
                 }
             }
-        } 
-
-        img{
-            margin-top: 20px;
-            max-width: 100%;
-            margin: 0 auto;
         }
     }
+
 }

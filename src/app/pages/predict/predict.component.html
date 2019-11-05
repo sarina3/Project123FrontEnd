@@ -21,20 +21,33 @@
         </div>
       </mat-tab>
       <mat-tab label="Load Photo">
-          <div class="filepicker">
-            <div class="filepicker-wrapper">
-            <input type="file" accept="image/*" (change)="onFilePick($event)">
-            <img *ngIf="image" [src]="image" alt="preview">
-          </div>  
-          <div class="btn-wrapper">
-              <button mat-stroked-button [disabled]="!this.form.valid" (click)="predict()">Submit</button>
-          </div>
+        <div class="filepicker">
+          <div class="filepicker-wrapper">
+          <input type="file" accept="image/*" (change)="onFilePick($event)">
+          <img *ngIf="image" [src]="image" alt="preview">
         </div>
+        <div class="btn-wrapper">
+            <button mat-stroked-button [disabled]="!this.form.valid" (click)="predict()">Submit</button>
+        </div>
+      </div>
       </mat-tab>
     </mat-tab-group>
     <div class="result-wrapper">
-      <div class="results" *ngIf="canShowResults()">
-
+      <div class="results" *ngIf="canShowResult">
+        <div class="warning">
+          <h2>{{predictionResult.data.prediction_info}}</h2>
+        </div>
+        <div class="image">
+          <div  class="left">
+            <h3 *ngFor="let col of getResults()">{{col}}:&nbsp;{{predictionResult.data[col]}}</h3>
+          </div>
+          <img [src]="image">
+        </div>
+        <div>
+          <span *ngFor="let item of getMetadata()">
+            {{item}}:&nbsp;{{predictionResult.data.metadata[item]}}
+          </span>
+        </div>
       </div>
     </div>
   </div>
