@@ -3,6 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { ModelService } from 'src/app/services/model/model.service';
 import { ActivatedRoute } from '@angular/router';
 import { WindowConfigService } from 'src/app/services/window-config.service';
+import { GoogleChartComponent } from 'angular-google-charts';
 
 @Component({
   selector: 'app-train-test-form',
@@ -16,7 +17,7 @@ export class TrainTestFormComponent implements OnInit {
   @Input()
   models = [];
 
-  dataToShow = "";
+  dataToShow: {dataset_info: any, train_history: any, model_info: any};
   
   @Output()
   formSubmited = new EventEmitter<FormGroup>();
@@ -30,6 +31,30 @@ export class TrainTestFormComponent implements OnInit {
   datasetFilter = [];
   modelFilter = [];
   pageTrain = false;
+  columnNames1 = ["epoch", "train", "test"];
+  columnNames2 = ["epoch", "train", "test"];
+  options1 = {
+    hAxis: {
+      title: 'Epoch'
+    },
+    vAxis:{
+      title: 'Accuracy'
+    },
+    pointSize: 5
+  };
+  options2 = {
+    hAxis: {
+      title: 'Epoch'
+    },
+    vAxis:{
+      title: 'Loss'
+    },
+    pointSize: 5
+  };
+  showCharts = false;
+  chartData1 = null;
+  chartData2 = null;
+
 
   constructor(private modelService: ModelService, private route:ActivatedRoute, private window: WindowConfigService) { }
 
@@ -75,6 +100,21 @@ export class TrainTestFormComponent implements OnInit {
         (data: any) => {
           console.log(data);
           this.dataToShow = data;
+          const acc = [];
+          this.dataToShow.train_history.accuracy.forEach((x, i) => {
+              const accTmp = [ i, x, this.dataToShow.train_history.val_accuracy[i]];
+              acc.push(accTmp);
+            }
+          );
+          const loss = [];
+          this.dataToShow.train_history.loss.forEach((x, i) => {
+              const lossTmp = [ i, x, this.dataToShow.train_history.val_loss[i]];
+              loss.push(lossTmp);
+            }
+          );
+          this.chartData1 = acc;
+          this.chartData2 = loss;
+          this.showCharts = true;
         }
       );
     } else {
@@ -82,6 +122,7 @@ export class TrainTestFormComponent implements OnInit {
         (data: any) => {
           console.log(data);
           this.dataToShow = data;
+          this.showCharts = true;
         }
       );
     }
@@ -100,7 +141,9 @@ export class TrainTestFormComponent implements OnInit {
     }
   }
 
-  getData() {
-    return this.dataToShow ? [...this.dataToShow['accuracy'], ...this.dataToShow['val_accuracy']] : [];
+  getKeys(of: string){
+    return Object.keys(this.dataToShow.model_info[of]);
   }
+
+
 }

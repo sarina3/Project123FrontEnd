@@ -13,42 +13,45 @@
     <div *ngIf="selectedObj" class="content">
       <div class="model-info">
         <h4>Model Info</h4>
-        <span>Train accuracy: {{selectedObj.trainPercentage}}%</span>
-        <span>Test accuracy: {{selectedObj.testPercentage}}%</span>
-        <span>Global accuracy: {{selectedObj.accuracy}}%</span>
-        <span>Network type: {{selectedObj.networkType}}</span>
-        <span>Number of layers: {{selectedObj.numberOfLayers}}</span>
-        <span>Train dataset name: {{selectedObj.trainDatasetName}}</span>
-        <span>Test dataset name: {{selectedObj.testDatasetName}}</span>
+        <span>Accuracy: {{selectedObj.model_header.Accuracy}}%</span>
+        <span>Name: {{selectedObj.model_header.Name}}</span>
+        <span>Type: {{selectedObj.model_header.ModelType}}</span>
+        <span>Optimizer: {{selectedObj.layers.optimizer}}</span>
+        <span>Metrics: {{selectedObj.layers.metrics}}</span>
+        <span>Loss: {{selectedObj.layers.loss}}</span>
+        <span>Dataset name: {{selectedObj.data_header.DatasetUsed}}</span>
+        <span>Photo count: {{selectedObj.data_header.CountPhoto}}</span>
+        <span>Photo size: {{selectedObj.data_header.PhotoSize}}</span>
+        <span>Dataset description: {{selectedObj.data_header.DatasetDesc}}</span>
       </div>
       <div class="layer-info" >
         <div class="info">
           <h4>Layer Info</h4>
-          <div *ngIf="selectedLayer > -1">
-            <span>Layer Number: {{selectedLayerObj.number}}</span>
-            <span class="image-with-label">Input image dimension:
-              <div class="image">
-                <span class="x">{{selectedLayerObj.inputSizeX}}</span>
-                <div class="bottom">
-                  <span class="y">{{selectedLayerObj.inputSizeY}}</span>
-                  <div class="rectangle">
-                      <div class="rec-row">
-                        <div class="rec-col"></div>
-                        <div class="rec-col"></div>
-                      </div>
-                      <div class="rec-row">
-                        <div class="rec-col"></div>
-                        <div class="rec-col"></div>
-                      </div>
-                  </div>
-                </div>
-              </div>
-            </span>
+          <div *ngIf="selectedLayer > -1" class="info-content">
+            <span>Layer Number: {{selectedLayer + 1}}</span>
+<!--            <span class="image-with-label">Input image dimension:-->
+<!--              <div class="image">-->
+<!--                <span class="x">{{selectedLayerObj.inputSizeX}}</span>-->
+<!--                <div class="bottom">-->
+<!--                  <span class="y">{{selectedLayerObj.inputSizeY}}</span>-->
+<!--                  <div class="rectangle">-->
+<!--                      <div class="rec-row">-->
+<!--                        <div class="rec-col"></div>-->
+<!--                        <div class="rec-col"></div>-->
+<!--                      </div>-->
+<!--                      <div class="rec-row">-->
+<!--                        <div class="rec-col"></div>-->
+<!--                        <div class="rec-col"></div>-->
+<!--                      </div>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </span>-->
             <span class="image-with-label">kernel dimension:
               <div class="image">
-                <span class="x">{{selectedLayerObj.kernelSizeX}}</span>
+                <span class="x">{{getKernelSize()[0]}}</span>
                 <div class="bottom">
-                  <span class="y">{{selectedLayerObj.kernelSizeY}}</span>
+                  <span class="y">{{getKernelSize()[1]}}</span>
                   <div class="rectangle">
                     <div class="rec-row">
                       <div class="rec-col"></div>
@@ -62,13 +65,18 @@
                 </div>
               </div>
             </span>
+            <span>Padding: {{this.selectedLayerObj?.PADDING}}</span>
+            <span>Activation function: {{this.selectedLayerObj?.ACTIVATION}}</span>
+            <span>Neuron count: {{this.selectedLayerObj?.NEURON_COUNT}}</span>
+            <span>Name: {{this.selectedLayerObj?.Name}}</span>
+            <span>Class: {{this.selectedLayerObj?.class}}</span>
           </div>
         </div>
         <div class="layer-selector">
           <h4>Layer Selection</h4>
           <div class="selection-row p-3">
             <div 
-              *ngFor="let layer of selectedObj.layers; let i = index"
+              *ngFor="let layer of selectedObj.layers.layers; let i = index"
               [ngStyle]="getStyle(i)"
               class="layer"
               [ngClass]="{selected: selectedLayer === i}"
@@ -82,12 +90,13 @@
         </div>
       </div>
       <div class="bottom" *ngIf="loggedUser() else notLogged">
-        <button mat-stroked-button>Train model</button>
-        <button mat-stroked-button>Test model</button>
-        <button mat-stroked-button>Set as default</button>
+        <button mat-stroked-button (click)="goToPage('/training-session')">Train model</button>
+        <button mat-stroked-button (click)="goToPage('/testing-session')">Test model</button>
+        <button mat-stroked-button (click)="goToPage('/predict')">Predict</button>
+        <button mat-stroked-button >Set as Default</button>
       </div>
       <ng-template #notLogged>
-        <div>
+        <div class="bottom">
           <button mat-stroked-button (click)="goToPage('/training-session')">Show Train model</button>
           <button mat-stroked-button (click)="goToPage('/testing-session')">Show Test model</button>
           <button mat-stroked-button (click)="goToPage('/predict')">Predict</button>

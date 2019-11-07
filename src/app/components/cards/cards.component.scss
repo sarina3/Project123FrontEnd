@@ -94,6 +94,11 @@
                     flex-flow: column wrap;
                     flex: 1 1 auto;
 
+                    .info-content{
+                      display: flex;
+                      flex-flow: column wrap;
+                    }
+
                     .image-with-label{
                         display: flex;
                         align-items: center;

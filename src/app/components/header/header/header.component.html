@@ -13,9 +13,14 @@
       <li class="nav-item">
         <p routerLink="/testing-session" routerLinkActive="active" class="nav-link">Testing session</p>
       </li>
-      <li class="nav-item">
-          <p routerLink="/model" routerLinkActive="active" class="nav-link">Show static models</p>
+      <li class="nav-item"  *ngIf="auth.isLoggedIn() else staticModels">
+        <p routerLink="/my-models" routerLinkActive="active" class="nav-link">Show my models</p>
       </li>
+      <ng-template #staticModels>
+        <li class="nav-item">
+            <p routerLink="/model" routerLinkActive="active" class="nav-link">Show static models</p>
+        </li>
+      </ng-template>
       <li class="nav-item dropdown">
         <p
           href="#"
@@ -31,9 +36,6 @@
           <p routerLink="/dataset/show" routerLinkActive="active" class="dropdown-item">Dataset preview</p>
           <p routerLink="/dataset/new" routerLinkActive="active" class="dropdown-item">New dataset</p>
         </div>
-      </li>
-      <li class="nav-item"  *ngIf="auth.isLoggedIn()">
-        <p routerLink="/my-models" routerLinkActive="active" class="nav-link">Show my models</p>
       </li>
       <li class="nav-item"  *ngIf="auth.isLoggedIn()">
           <p routerLink="/new-model" routerLinkActive="active" class="nav-link">Create model</p>

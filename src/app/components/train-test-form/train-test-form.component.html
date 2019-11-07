@@ -11,7 +11,90 @@
             </form>
         </div>
     </div>
-    <div class="train-data">
+    <div class="train-data" *ngIf="pageTrain else test">
+        <div class="charts">
+            <google-chart
+              *ngIf="showCharts"
+              [title]="'accuracy train vs test'"
+              [type]="'LineChart'"
+              [data]="chartData1"
+              [firstRowIsData]="true"
+              [columnNames]="columnNames1"
+              [options]="options1"
+              [dynamicResize]="true"
+            >
+            </google-chart>
+            <google-chart
+              *ngIf="showCharts"
+              [title]="'loss train vs test'"
+              [type]="'LineChart'"
+              [data]="chartData2"
+              [firstRowIsData]="true"
+              [columnNames]="columnNames2"
+              [options]="options2"
+              [dynamicResize]="true"
+            >
+            </google-chart>
+        </div>
+      <div class="train-content" *ngIf="showCharts">
+        <div class="left">
+          <h4>Dataset Information</h4>
+          <span *ngFor="let item of getKeys('data_header')">
+            {{item}}:&nbsp;{{dataToShow.model_info.data_header[item]}}
+          </span>
+        </div>
+        <div class="right">
+          <h4>Model Information</h4>
+          <span *ngFor="let item of getKeys('model_header')">
+            {{item}}:&nbsp;{{dataToShow.model_info.model_header[item]}}
+          </span>
+        </div>
+      </div>
         <button mat-stroked-button (click)="trainModel()" class="train-btn" >Train</button>
     </div>
 </div>
+
+
+<ng-template #test>
+  <div class="test-data">
+    <div class="test-content" *ngIf="showCharts">
+      <div class="left">
+        <h4>Dataset Information</h4>
+        <span *ngFor="let item of getKeys('data_header')">
+            {{item}}:&nbsp;{{dataToShow.model_info.data_header[item]}}
+          </span>
+      </div>
+      <div class="right">
+        <h4>Model Information</h4>
+        <span *ngFor="let item of getKeys('model_header')">
+            {{item}}:&nbsp;{{dataToShow.model_info.model_header[item]}}
+          </span>
+      </div>
+    </div>
+
+    <div class="images">
+      <div class="image-wrapper">
+        <div class="image">
+          <img src="https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
+        </div>
+        <div class="predict-result">
+          <h2>75%</h2>
+        </div>
+        <div class="metadata">
+          <span>
+            <span class="bold">Age:&nbsp;</span>
+            <span>26</span>
+          </span>
+          <span>
+            <span class="bold">Gender:&nbsp;</span>
+              <span>Male</span>
+          </span>
+          <span>
+            <span class="bold">Classified as:&nbsp;</span>
+              <span>Beningn</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

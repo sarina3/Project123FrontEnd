@@ -13,9 +13,10 @@ import { Router } from '@angular/router';
 export class CardsComponent implements OnInit {
 
   selected = -1;
-  selectedObj:Architecture;
-  selectedLayerObj: LayerInfo;
+  selectedObj: any;
+  selectedLayerObj: any;
   selectedLayer: -1;
+  modelData = [];
   models:Array<Architecture> = [
     {
       header: 'model1',
@@ -120,6 +121,7 @@ export class CardsComponent implements OnInit {
   ngOnInit() {
     this.modelServ.getModels().subscribe((data: any) => {
       console.log(data);
+      this.modelData = data.models;
       this.models = data.models.map(x => {
         return {
           header: x.model_header.Name,
@@ -131,22 +133,22 @@ export class CardsComponent implements OnInit {
     });
   }
 
-  select(index){
+  select(index) {
     this.selected = index;
-    this.selectedObj = this.models[index];
+    this.selectedObj = this.modelData[index];
     this.selectedLayer = -1;
   }
 
   selectLayer(index){
     this.selectedLayer = index;
-    this.selectedLayerObj = this.selectedObj.layers[index];
+    this.selectedLayerObj = this.selectedObj.layers.layers[index];
     console.log(this.selectedLayerObj);
   }
 
   getStyle(index){
-    const width = 100 - ( index * (90 / this.selectedObj.numberOfLayers));
-    const height = 100 - ( index * (90 / this.selectedObj.numberOfLayers));
-    const blue = 150 - ( index * (100 / this.selectedObj.numberOfLayers));
+    const width = 100 - ( index * (90 / this.selectedObj.layers.layers.length));
+    const height = 100 - ( index * (90 / this.selectedObj.layers.layers.length));
+    const blue = 150 - ( index * (100 / this.selectedObj.layers.layers.length));
     return {
       'position': 'absolute',
       'bottom': '0',
@@ -170,5 +172,13 @@ export class CardsComponent implements OnInit {
   goToPage(route: string) {
     localStorage.setItem('choosedModel', '' + this.selectedObj.id);
     this.router.navigate([route]);
+  }
+
+  getKernelSize() {
+    if (this.selectedLayerObj.KERNEL_SIZE) {
+      return this.selectedLayerObj.KERNEL_SIZE.split(',');
+    } else {
+      return '';
+    }
   }
 }

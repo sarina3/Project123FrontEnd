@@ -17,7 +17,7 @@ export class PredictComponent implements OnInit, OnDestroy {
     model: new FormControl(null, Validators.required),
     photo: new FormControl(null, Validators.required),
     photoDescription: new FormControl(false)
-  })
+  });
 
   image;
   selectedOption: number;
@@ -118,6 +118,6 @@ export class PredictComponent implements OnInit, OnDestroy {
   }
 
   getMetadata() {
-    return Object.keys(this.predictionResult.data.metadata);
+    return Object.keys(this.predictionResult.metadata);
   }
 }

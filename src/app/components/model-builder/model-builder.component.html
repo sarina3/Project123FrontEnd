@@ -3,7 +3,7 @@
         <ng-template matStepperIcon="completed">
                 <i class="material-icons" style="color:green">check_circle</i>
             </ng-template>
-        <mat-step label="Pick network type" [stepControl]="modelForm">
+        <mat-step label="Pick network type">
                 <div class="first-step-layout stepper-step-height">
                     <div class="first-step-content">
                         <form [formGroup]="modelForm">
@@ -28,10 +28,10 @@
                     </div>
                 </div>
         </mat-step>
-        <mat-step label="Choose Optimizer" [stepControl]="optimizerForm">
+        <mat-step label="Choose Optimizer">
             <div class="first-step-layout stepper-step-height">
                 <div class="first-step-content">
-                    <form [formGroup]="modelForm">
+                    <form [formGroup]="optimizerForm">
                         <h3>Choose Optimizer</h3>
                         <div>
                             <mat-form-field>
@@ -66,7 +66,7 @@
                 </div>
             </div>
     </mat-step>
-        <mat-step label="Layers configuration" [stepControl]="activeLayerForm">
+        <mat-step label="Layers configuration">
             <div class="second-step-layout stepper-step-height">
                 <div class="second-step-content">
                     <div class="left">

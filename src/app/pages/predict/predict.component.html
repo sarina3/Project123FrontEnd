@@ -35,17 +35,17 @@
     <div class="result-wrapper">
       <div class="results" *ngIf="canShowResult">
         <div class="warning">
-          <h2>{{predictionResult.data.prediction_info}}</h2>
+          <h2>{{predictionResult.prediction_info}}</h2>
         </div>
         <div class="image">
           <div  class="left">
-            <h3 *ngFor="let col of getResults()">{{col}}:&nbsp;{{predictionResult.data[col]}}</h3>
+            <h3 *ngFor="let col of getResults()">{{col}}:&nbsp;{{predictionResult[col]}}</h3>
           </div>
           <img [src]="image">
         </div>
         <div>
           <span *ngFor="let item of getMetadata()">
-            {{item}}:&nbsp;{{predictionResult.data.metadata[item]}}
+            {{item}}:&nbsp;{{predictionResult.metadata[item]}}
           </span>
         </div>
       </div>
