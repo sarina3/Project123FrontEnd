@@ -60,15 +60,20 @@
     <div class="test-content" *ngIf="showCharts">
       <div class="left">
         <h4>Dataset Information</h4>
-        <span *ngFor="let item of getKeys('data_header')">
-            {{item}}:&nbsp;{{dataToShow.model_info.data_header[item]}}
+        <span *ngFor="let item of getTestKeys('dataset_header',false)">
+            {{item}}:&nbsp;{{testDataToShow.testing_session.dataset_header[item]}}
           </span>
       </div>
       <div class="right">
         <h4>Model Information</h4>
-        <span *ngFor="let item of getKeys('model_header')">
-            {{item}}:&nbsp;{{dataToShow.model_info.model_header[item]}}
+        <h5>Training results</h5>
+          <span *ngFor="let item of getTestKeys('training',true)">
+            {{item}}:&nbsp;{{testDataToShow.testing_session.model_header.training[item]}}
           </span>
+        <h5>Testing results</h5>
+          <span *ngFor="let item of getTestKeys('testing',true)">
+            {{item}}:&nbsp;{{testDataToShow.testing_session.model_header.testing[item]*100}}
+           %</span>
       </div>
     </div>
 
@@ -96,5 +101,6 @@
         </div>
       </div>
     </div>
+    <button mat-stroked-button (click)="trainModel()" class="train-btn" >Test</button>
   </div>
 </ng-template>

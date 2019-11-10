@@ -37,24 +37,24 @@
                             <mat-form-field>
                                 <mat-label>Loss: </mat-label>
                                 <mat-select formControlName="loss">
-                                    <mat-option *ngFor="let type of getOptimizer('loss')" [value]="type.id" >
-                                        {{type.name}}
+                                    <mat-option *ngFor="let type of getOptimizer('loss')" [value]="type.name[0]" >
+                                        {{type.name[1]}}
                                     </mat-option>
                                 </mat-select>
                             </mat-form-field>
                             <mat-form-field>
                                 <mat-label>Optimizer: </mat-label>
                                 <mat-select formControlName="optimizer">
-                                    <mat-option *ngFor="let type of getOptimizer('name')" [value]="type.id" >
-                                        {{type.name}}
+                                    <mat-option *ngFor="let type of getOptimizer('name')" [value]="type.name[0]" >
+                                        {{type.name[1]}}
                                     </mat-option>
                                 </mat-select>
                             </mat-form-field>
                             <mat-form-field>
                                 <mat-label>Metrics: </mat-label>
                                 <mat-select formControlName="metrics">
-                                    <mat-option *ngFor="let type of getOptimizer('metrics')" [value]="type.id" >
-                                        {{type.name}}
+                                    <mat-option *ngFor="let type of getOptimizer('metrics')" [value]="type.name[0]" >
+                                        {{type.name[1]}}
                                     </mat-option>
                                 </mat-select>
                             </mat-form-field>
@@ -70,7 +70,7 @@
             <div class="second-step-layout stepper-step-height">
                 <div class="second-step-content">
                     <div class="left">
-                        <div *ngFor="let card of layers;let i = index" class="card" (click)="activate(i)">    
+                        <div *ngFor="let card of layers;let i = index" class="card" (click)="activate(i)">
                             <ng-container *ngTemplateOutlet="LayerCard; context: {id: i, form: card}"></ng-container>
                         </div>
                         <button
@@ -89,7 +89,7 @@
                         </button>
                     </div>
                     <div class="right">
-                        
+
                         <div class="top">
                             <form [formGroup]="activeLayerForm" *ngIf="activeLayerForm">
                                 <div *ngFor="let prop of getProperties(); let i = index">
@@ -120,7 +120,7 @@
             <ng-template #thirdWithInvalid>
                     <div class="second-step-content">
                         <div class="left">
-                            <div *ngFor="let card of invalidLayers;let i = index" class="card" (click)="activate(i);checkValid(i)">    
+                            <div *ngFor="let card of invalidLayers;let i = index" class="card" (click)="activate(i);checkValid(i)">
                                 <ng-container *ngTemplateOutlet="LayerCard; context: {id: card.index, form: card.item}"></ng-container>
                             </div>
                             <button
@@ -139,7 +139,7 @@
                             </button>
                         </div>
                         <div class="right">
-                            
+
                             <div class="top">
                                 <form [formGroup]="activeLayerForm" *ngIf="activeLayerForm">
                                     <div *ngFor="let prop of getProperties(); let i = index">
@@ -164,7 +164,7 @@
     <div>
         <p>
             <span>#{{id +1}}</span>
-            <i class="material-icons close-btn" (click)="close(id)" >close</i>        
+            <i class="material-icons close-btn" (click)="close(id)" >close</i>
         </p>
         <p>
             <span>{{getClass(form)}}</span>
