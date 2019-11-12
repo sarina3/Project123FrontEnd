@@ -19,6 +19,7 @@
     background-color:$dark-blue-header !important;
     font-size: 1.4rem;
 
+
     h2 {
       font-size: 4rem !important;
     }
@@ -27,6 +28,10 @@
       display: flex;
       flex-flow: column wrap;
 
+      input[type=text] {
+        background: rgba(0,0,255,0.5);
+
+      }
       button{
         outline: 0;
       }

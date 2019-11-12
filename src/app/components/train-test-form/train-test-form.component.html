@@ -1,6 +1,6 @@
 <div class="holder">
   <div class="network-picker">
-    <h2>{{title}}</h2>
+    <h2 class="w-100 text-center header-models">{{title}}</h2>
     <div class="network-option-wrapper">
       <form [formGroup]="form">
         <mat-card *ngFor="let model of models; let i = index" [ngClass]="{'selected': selected === i}" class="card"
@@ -26,6 +26,20 @@
       </div>
     </ng-container>
     <ng-template #content>
+      <div class="train-content" *ngIf="showCharts">
+        <div class="left">
+          <h4>Dataset Information</h4>
+          <span *ngFor="let item of getKeys('data_header')">
+                      {{item}}:&nbsp;{{dataToShow.model_info.data_header[item]}}
+                    </span>
+        </div>
+        <div class="right">
+          <h4>Model Information</h4>
+          <span *ngFor="let item of getKeys('model_header')">
+                    {{item}}:&nbsp;{{dataToShow.model_info.model_header[item]}}
+                  </span>
+        </div>
+      </div>
       <div class="charts">
         <google-chart
           *ngIf="showCharts"
@@ -49,20 +63,6 @@
           [dynamicResize]="true"
         >
         </google-chart>
-      </div>
-      <div class="train-content" *ngIf="showCharts">
-        <div class="left">
-          <h4>Dataset Information</h4>
-          <span *ngFor="let item of getKeys('data_header')">
-                      {{item}}:&nbsp;{{dataToShow.model_info.data_header[item]}}
-                    </span>
-        </div>
-        <div class="right">
-          <h4>Model Information</h4>
-          <span *ngFor="let item of getKeys('model_header')">
-                    {{item}}:&nbsp;{{dataToShow.model_info.model_header[item]}}
-                  </span>
-        </div>
       </div>
       <button mat-stroked-button (click)="trainModel()" class="train-btn">Train</button>
     </ng-template>

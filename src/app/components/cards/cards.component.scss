@@ -18,9 +18,13 @@
         background-color: $dark-blue-header;
         border: 2px solid $orange-border;
         border-radius: 20px;
-        
+        margin-right: 5px;
         & > *{
             margin-top: 5px;
+        }
+
+        & > *:not(:first-child) {
+          margin: 0 1rem;
         }
 
         .header-models {
@@ -82,7 +86,7 @@
         margin-left: 5px;
 
         .content{
-            color: $content-font-color;
+            color: $white;
             display: flex;
             flex-flow: column wrap;
             align-content: flex-start;
