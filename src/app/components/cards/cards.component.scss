@@ -7,27 +7,67 @@
     flex-flow: row wrap;
     align-items: flex-start;
     padding-bottom: 1rem;
+
+
+
     .left {
         display: flex;
         flex-flow: column wrap;
-        flex-basis: 40%;
+        flex-basis: 25%;
+        align-self: stretch !important;
+        background-color: $dark-blue-header;
+        border: 2px solid $orange-border;
+        border-radius: 20px;
         
         & > *{
             margin-top: 5px;
-
-            &:hover{
-                background-color: $light-gray;
-            }
         }
+
+        .header-models {
+           border-radius: 20px;
+           background-color: $orange-header;
+           padding: 0;
+           margin-top: -2px;
+         }
 
         .header {
             display: flex;
-            justify-content: space-around;
+            .card-content {
+                display: flex;
+                flex: 1;
+                .left {
+                    display: flex;
+                    flex-flow: column wrap;
+                    align-content: center;
+                    justify-content: center;
+                    border: 0;
+                    flex: 1;
+                }
 
+                .middle {
+                    display: flex;
+                    flex-flow: column wrap;
+                    align-content: center;
+                    justify-content: center;
+                    flex: 3;
+                }
+
+                .right {
+                    display: flex;
+                    flex-flow: column wrap;
+                    align-content: center;
+                    justify-content: center;
+                    background-color: $dark-blue-header;
+                    border: 0;
+                    flex: 1;
+                }
+            }
         }
-        
+
         .selected {
-            background-color: gray !important;
+            border: 2px solid $orange-border;
+            border-radius: 20px;
+            color: $white;
         }
     }
 
@@ -36,14 +76,22 @@
         flex-flow: column wrap;
         flex: 1 1 0;
         align-self: stretch;
-        background-color: $white;
+        background-color: rgba($dark-blue-header,0.55);
+        border: 2px solid $orange-border;
+        border-radius: 20px;
         margin-left: 5px;
 
         .content{
+            color: $content-font-color;
             display: flex;
             flex-flow: column wrap;
             align-content: flex-start;
             flex: 1;
+
+            h4 {
+              font-family: 'Cabin Sketch', cursive;
+              text-transform: uppercase;
+            }
 
             .model-info{
                 display: flex;

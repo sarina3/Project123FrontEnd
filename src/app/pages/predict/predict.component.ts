@@ -53,18 +53,26 @@ export class PredictComponent implements OnInit, OnDestroy {
     if (!this.windowConfig.isFullScreen) {
       this.windowConfig.resize();
     }
+    const id = localStorage.getItem('choosedModel');
     this.modelService.getModels().subscribe(
       (data: any) => {
         console.log(data);
         this.models = data.models.map(
           x => {
             return {
-              header: x.model_header.Name,
+              header: x.model_header,
+              accuracy: x.model_header.Accuracy * 100,
               id: x.model_header.ModelId
             };
           }
         );
-        this.select(0);
+        if (id) {
+            console.log(this.models);
+            const index = this.models.findIndex( x => x.id === +id);
+            this.select(index !== -1 ? index : 0);
+        } else {
+            this.select(0);
+        }
       }
     );
   }

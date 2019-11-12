@@ -124,7 +124,7 @@ export class CardsComponent implements OnInit {
       this.modelData = data.models;
       this.models = data.models.map(x => {
         return {
-          header: x.model_header.Name,
+          header: x.model_header,
           id: x.model_header.ModelId,
           accuracy: +x.model_header.Accuracy*100,
           layers: []};
@@ -136,10 +136,13 @@ export class CardsComponent implements OnInit {
   select(index) {
     this.selected = index;
     this.selectedObj = this.modelData[index];
+    const id = this.models[index].id;
+    console.log(id)
+    localStorage.setItem('choosedModel', `${id}`);
     this.selectedLayer = -1;
   }
 
-  selectLayer(index){
+  selectLayer(index) {
     this.selectedLayer = index;
     this.selectedLayerObj = this.selectedObj.layers.layers[index];
     console.log(this.selectedLayerObj);
@@ -170,7 +173,6 @@ export class CardsComponent implements OnInit {
   }
 
   goToPage(route: string) {
-    localStorage.setItem('choosedModel', '' + this.selectedObj.id);
     this.router.navigate([route]);
   }
 

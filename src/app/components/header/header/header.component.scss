@@ -1,23 +1,32 @@
 
 .dropdown-menu{
-    background-color: #343a40 !important;
+    background-color: #26243A !important;
 
     .dropdown-item{
-        color: rgba(255,255,255,0.5) !important;
-        background-color: #343a40 !important;
-
-        &:hover{
-            color: rgba(255,255,255,0.75) !important;
-            background-color: #343a40 !important;
-            cursor: pointer;
-        }
+        color: white !important;
+        background-color: #26243A !important;
+        cursor: pointer;
 
         &:active{
-            color: rgba(255,255,255,1) !important;
-            background-color: #343a40 !important;
+          border: 2px solid #A46934 !important;
+          border-radius: 20px;
         }
     }
 }
+
+.bg-dark {
+  background-color: #26243A !important;
+}
 .nav-link{
     cursor: pointer;
+    color: white !important;
+    outline: 0;
+    font-size: 1.3rem;
+    font-family: 'Cabin Sketch', cursive;
+    text-transform: uppercase;
+    margin: 0;
+}
+.active{
+  border: 2px solid #A46934 !important;
+  border-radius: 20px;
 }

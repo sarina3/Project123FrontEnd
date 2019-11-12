@@ -28,7 +28,7 @@ export class ModelBuilderComponent implements OnInit, OnDestroy, OnChanges {
   networkTypes = [
     {id: 'cnn', title: 'CNN'},
     {id: 'mlp', title: 'MLP'},
-    {id: 'gen', title: 'Geneticky algoritmus'}
+    {id: 'cnn', title: 'Geneticky algoritmus'}
   ];
 
   matcher = new ErrorStateMatcher();

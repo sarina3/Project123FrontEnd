@@ -1,10 +1,14 @@
 <div class="cards-wrapper">
   <div class="left">
+    <h2 class="w-100 text-center header-models">Models</h2>
     <mat-card *ngFor="let model of models; let i = index" [ngClass]="{'selected': selected === i}" (click)="select(i)">
       <mat-card-header class="header">
-        <mat-card-title>{{model.header}}</mat-card-title>
-        <div>
-          <h1>{{model.accuracy}}%</h1>
+        <div class="card-content">
+          <h3 class="left">{{model.header.ModelType}}</h3>
+          <div class="middle">
+            <h5>{{model.header.Name}}</h5>
+          </div>
+          <h1 class="right">{{model.accuracy}}%</h1>
         </div>
       </mat-card-header>
     </mat-card>
@@ -90,16 +94,16 @@
         </div>
       </div>
       <div class="bottom" *ngIf="loggedUser() else notLogged">
-        <button mat-stroked-button (click)="goToPage('/training-session')">Train model</button>
-        <button mat-stroked-button (click)="goToPage('/testing-session')">Test model</button>
-        <button mat-stroked-button (click)="goToPage('/predict')">Predict</button>
-        <button mat-stroked-button >Set as Default</button>
+        <button mat-raised-button (click)="goToPage('/training-session')">Train model</button>
+        <button mat-raised-button (click)="goToPage('/testing-session')">Test model</button>
+        <button mat-raised-button (click)="goToPage('/predict')">Predict</button>
+        <button mat-raised-button >Set as Default</button>
       </div>
       <ng-template #notLogged>
         <div class="bottom">
-          <button mat-stroked-button (click)="goToPage('/training-session')">Show Train model</button>
-          <button mat-stroked-button (click)="goToPage('/testing-session')">Show Test model</button>
-          <button mat-stroked-button (click)="goToPage('/predict')">Predict</button>
+          <button mat-raised-button (click)="goToPage('/training-session')">Show Train model</button>
+          <button mat-raised-button (click)="goToPage('/testing-session')">Show Test model</button>
+          <button mat-raised-button (click)="goToPage('/predict')">Predict</button>
         </div>
       </ng-template>
     </div>

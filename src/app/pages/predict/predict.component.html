@@ -2,10 +2,16 @@
   <div class="predict-content-wrapper">
     <div class="network-picker">
       <div class="network-option-wrapper">
-        <h3>Choose model</h3>
+        <h3>Models</h3>
         <mat-card *ngFor="let model of models; let i = index" [ngClass]="{'selected': selected === i}" class="card" (click)="select(i)">
           <mat-card-header class="header">
-            <mat-card-title>{{model.header}}</mat-card-title>
+            <div class="card-content">
+              <h3 class="left">{{model.header.ModelType}}</h3>
+              <div class="middle">
+                <h5>{{model.header.Name}}</h5>
+              </div>
+              <h1 class="right">{{model.accuracy}}%</h1>
+            </div>
           </mat-card-header>
         </mat-card>
       </div>

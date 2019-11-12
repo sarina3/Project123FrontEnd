@@ -6,6 +6,14 @@ $light-gray: #b9b3b3;
 $very-light-gray: #eee;
 $gray: rgba(242, 241, 239, 1);
 $black: #343a40;
+$dark-ocean-blue-surround: #262a6e;
+$orange-border: #A46934;
+$dark-blue-content: #2e5182;
+$dark-blue-cards: #0d2f94;
+$dark-blue-header: #26243A;
+$orange-header: #d47c2c;
+$content-color: #32367a;
+$content-font-color: #116b9f;
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 
 
@@ -17,17 +25,18 @@ body{
     min-width:  100vw !important;
     max-height: 100vh !important;
     max-width:  100vw !important;
-    background-color: $gray !important;
+    background-color: $dark-ocean-blue-surround !important;
     overflow-x: auto;
     overflow-y: auto;
 
 
-    .override{
+
+
+  .override{
         display: flex;
-        padding-top:20px;
         height: calc(100% - 100px);
-        margin-top: 10px;
-        background-color: $gray;
+        padding-top: 10px;
+        background-color: $dark-ocean-blue-surround;
 
         & > *:not(router-outlet){
             display: flex;
@@ -79,5 +88,21 @@ body{
         color: black !important;
         font-size: 1.1rem;
         font-weight: bold;
+    }
+
+    .mat-card {
+      color: $white !important;
+      background-color: $dark-blue-header !important;
+    }
+
+    h2{
+      color: $white;
+      font-family: 'Cabin Sketch', cursive !important;
+      font-size: 3rem;
+    }
+
+    .mat-raised-button{
+      background-color: $orange-header !important;
+      color: $white !important;
     }
 }

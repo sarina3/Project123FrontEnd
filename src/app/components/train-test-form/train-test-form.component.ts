@@ -55,6 +55,9 @@ export class TrainTestFormComponent implements OnInit {
   showCharts = false;
   chartData1 = null;
   chartData2 = null;
+  photos = [];
+  allPhotosRoutes = [];
+  errorMessage: string;
 
 
   constructor(private modelService: ModelService, private route: ActivatedRoute, private window: WindowConfigService) { }
@@ -63,18 +66,19 @@ export class TrainTestFormComponent implements OnInit {
     if (this.route.snapshot.url[0].path.includes('train')) {
       this.pageTrain = true;
     }
-    const id = localStorage.getItem('choosedModel');
     this.modelService.getModels().subscribe(
       (data: any) => {
         this.models = data.models.map(
           x => {
             return {
-              header: x.model_header.Name,
+              header: x.model_header,
+              accuracy: x.model_header.Accuracy * 100,
               id: x.model_header.ModelId,
               type: x.model_header.ModelType
             };
           }
         );
+        const id = localStorage.getItem('choosedModel');
         if (id) {
           console.log(this.models);
           const index = this.models.findIndex( x => x.id === +id);
@@ -95,11 +99,16 @@ export class TrainTestFormComponent implements OnInit {
 
   select(index: number) {
     this.selected = index;
+    this.errorMessage = null;
     this.form.get('modelId').setValue(this.models[index].id);
     if (this.pageTrain) {
       this.modelService.getTrainData(this.form).subscribe(
         (data: any) => {
           console.log(data);
+          if (data.message) {
+            this.errorMessage = data.message;
+            return;
+          }
           this.dataToShow = data;
           const acc = [];
           this.dataToShow.train_history.accuracy.forEach((x, i) => {
@@ -122,7 +131,13 @@ export class TrainTestFormComponent implements OnInit {
       this.modelService.getTestData(this.form).subscribe(
         (data: any) => {
           console.log(data);
+          if (data.message) {
+            this.errorMessage = data.message;
+            return;
+          }
           this.testDataToShow = data;
+          this.allPhotosRoutes = data.testing_session.tested_results;
+          this.photos = this.allPhotosRoutes.slice(0, 2);
           this.showCharts = true;
         }
       );
@@ -151,5 +166,9 @@ export class TrainTestFormComponent implements OnInit {
       return Object.keys(this.testDataToShow.testing_session.model_header[of]);
     }
     return Object.keys(this.testDataToShow.testing_session[of]);
+  }
+
+  openLiveTraining() {
+    console.log('live training clicked');
   }
 }

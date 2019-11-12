@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 })
 export class WindowConfigService {
   state = {
-    contentFullscreen: false
+    contentFullscreen: true
   };
   refresh = new Subject<void>();
 
