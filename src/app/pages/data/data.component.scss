@@ -1,0 +1,18 @@
+@import '../../../styles.scss';
+
+.holder{
+  background: $dark-blue-header !important;
+  .window {
+    border: 2px solid $orange-border !important;
+    border-radius: 20px !important;
+    h1 {
+      color: $white;
+      font-family: 'Cabin Sketch', cursive !important;
+      font-size: 3rem;
+    }
+  }
+}
+
+.modal-dialog {
+    max-width: 90%;
+}

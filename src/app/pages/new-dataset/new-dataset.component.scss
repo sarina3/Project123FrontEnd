@@ -5,21 +5,27 @@
     height: 100%;
     display: flex;
     justify-content: center;
-    
+
     .window{
-      width: 400px;
-      height: 500px;
+      width: 550px;
+      height: 600px;
       display: flex;
       flex-flow: column wrap;
       align-self: center;
       justify-content: space-around;
       align-items: center;
-      background-color: $white;
-  
+      border: 2px solid $orange-border !important;
+      border-radius: 20px !important;
+      background: $dark-blue-header;
+      h1 {
+        color: $white;
+        font-family: 'Cabin Sketch', cursive !important;
+        font-size: 3rem;
+      }
       form {
         display: flex;
         flex-flow: column wrap;
-        
+
         .form-group{
             display: flex;
             justify-content: space-between;
@@ -27,10 +33,12 @@
 
         #metadata{
             width: 220px;
+            color: $white;
         }
 
         #images{
             width: 220px;
+            color: $white;
         }
 
         button{
@@ -39,4 +47,3 @@
       }
     }
   }
-  
