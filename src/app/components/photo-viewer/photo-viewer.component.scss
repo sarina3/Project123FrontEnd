@@ -2,12 +2,16 @@
 
 .holder{
     width: 100%;
+    background: $dark-blue-header;
+  border-radius: 20px;
+  border: 2px solid $orange-border;
 }
 
 .photo{
     width: 100%;
     height: 500px;
-    background-color: $white;
+  border-radius: 20px;
+    background: $dark-blue-header;
     text-align: center;
     line-height: 499px;
     position: relative;
@@ -27,8 +31,6 @@ img{
     text-align: center;
     vertical-align: middle;
     z-index: 2;
-
-    
 }
 .right-arrow{
     position: absolute;
@@ -39,8 +41,6 @@ img{
     text-align: center;
     vertical-align: middle;
     z-index: 2;
-
-
 }
 .nav-arrow{
     width: 100%;
@@ -49,7 +49,7 @@ img{
     font-size: 3rem;
     border: 0;
     cursor: pointer;
-    color: rgba($color: #000, $alpha: 0.5);
+    color: $white !important;
 
     &:hover{
         color: rgba($color: #000, $alpha: 0.8);
@@ -63,23 +63,26 @@ img{
 .next-pictures{
     margin-top: 20px;
     width: 100%;
-    height: calc(100vh - 640px);
+    height: 360px;
     min-height: 100px;
-    background-color: $white;
+    background-color: $dark-blue-header;
+  border-radius: 20px;
+  border: 2px solid $orange-border;
 }
 
 .small-photo{
     width: 20%;
-    height: 100%;
+    height: 50%;
     float: left;
     text-align: center;
     & > img{
         max-width: 100%;
         max-height: 100%;
         margin: 0 auto !important;
+      border-radius: 20px;
     }
 }
 
 .active{
-    border: 3px solid red;
+    border: 3px solid $orange-border;
 }
