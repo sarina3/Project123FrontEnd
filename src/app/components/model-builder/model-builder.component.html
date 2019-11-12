@@ -3,7 +3,7 @@
         <ng-template matStepperIcon="completed">
                 <i class="material-icons" style="color:green">check_circle</i>
             </ng-template>
-        <mat-step label="Pick network type">
+        <mat-step class="lbl" label="Pick network type">
                 <div class="first-step-layout stepper-step-height">
                     <div class="first-step-content">
                         <form [formGroup]="modelForm">
@@ -22,7 +22,7 @@
                                 </mat-form-field>
                             </div>
                             <div class="btns-wrapper">
-                                <button mat-stroked-button matStepperNext [disabled]="!modelForm.valid  ">Next</button>
+                                <button mat-raised-button matStepperNext [disabled]="!modelForm.valid  ">Next</button>
                             </div>
                         </form>
                     </div>
@@ -60,7 +60,7 @@
                             </mat-form-field>
                         </div>
                         <div class="btns-wrapper">
-                            <button mat-stroked-button matStepperNext [disabled]="!modelForm.valid  ">Next</button>
+                            <button mat-raised-button matStepperNext [disabled]="!modelForm.valid  ">Next</button>
                         </div>
                     </form>
                 </div>
@@ -74,7 +74,7 @@
                             <ng-container *ngTemplateOutlet="LayerCard; context: {id: i, form: card}"></ng-container>
                         </div>
                         <button
-                            mat-stroked-button
+                            mat-raised-button
                             class="outline-0"
                             (click)="select.open()">
                             <i class="material-icons center">add_circle_outline</i>
@@ -99,8 +99,8 @@
                         </div>
                         <div class="bottom">
                             <div class="btns-wrapper">
-                                <button mat-stroked-button matStepperNext (click)="getInvalid()" class="mr-1" >Next</button>
-                                <button mat-stroked-button matStepperPrevious class="mr-1" >Back</button>
+                                <button mat-raised-button matStepperNext (click)="getInvalid()" class="mr-1" >Next</button>
+                                <button mat-raised-button matStepperPrevious class="mr-1" >Back</button>
                             </div>
                         </div>
                     </div>
@@ -112,8 +112,8 @@
                 <div class="third-step-content" *ngIf="!areInvalid() else thirdWithInvalid">
                     <h4>Everything is valid you can continue</h4>
                     <div class="btns-wrapper">
-                            <button mat-stroked-button (click)="submit()" class="mr-1" >Submit</button>
-                            <button mat-stroked-button matStepperPrevious class="mr-1" >Back</button>
+                            <button mat-raised-button (click)="submit()" class="mr-1" >Submit</button>
+                            <button mat-raised-button matStepperPrevious class="mr-1" >Back</button>
                     </div>
                 </div>
             </div>
@@ -124,7 +124,7 @@
                                 <ng-container *ngTemplateOutlet="LayerCard; context: {id: card.index, form: card.item}"></ng-container>
                             </div>
                             <button
-                                mat-stroked-button
+                                mat-raised-button
                                 class="outline-0"
                                 (click)="select.open()">
                                 <i class="material-icons center">add_circle_outline</i>
@@ -149,8 +149,8 @@
                             </div>
                             <div class="bottom">
                                 <div class="btns-wrapper">
-                                    <button mat-stroked-button matStepperNext (click)="submit()" [disabled]="!isValidAll()" class="mr-1" >Submit</button>
-                                    <button mat-stroked-button matStepperPrevious class="mr-1" >Back</button>
+                                    <button mat-raised-button matStepperNext (click)="submit()" [disabled]="!isValidAll()" class="mr-1" >Submit</button>
+                                    <button mat-raised-button matStepperPrevious class="mr-1" >Back</button>
                                 </div>
                             </div>
                         </div>
