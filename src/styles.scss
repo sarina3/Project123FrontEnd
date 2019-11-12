@@ -9,10 +9,10 @@ $black: #343a40;
 $dark-ocean-blue-surround: #262a6e;
 $orange-border: #A46934;
 $dark-blue-content: #2e5182;
-$dark-blue-cards: #0d2f94;
+$dark-blue-cards: #32367a; //0d2f94
 $dark-blue-header: #26243A;
 $orange-header: #d47c2c;
-$content-color: #32367a;
+$content-color: #0d2f94; //32367a
 $content-font-color: #116b9f;
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 
@@ -28,9 +28,6 @@ body{
     background-color: $dark-ocean-blue-surround !important;
     overflow-x: auto;
     overflow-y: auto;
-
-
-
 
   .override{
         display: flex;
@@ -105,4 +102,5 @@ body{
       background-color: $orange-header !important;
       color: $white !important;
     }
-}
+
+  }

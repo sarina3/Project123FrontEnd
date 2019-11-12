@@ -1,5 +1,15 @@
 @import '../../../styles.scss';
 
 .page{
-    background-color: $white;
+    background-color: $dark-blue-header;
+    border: 2px solid $orange-border;
+    border-radius: 20px;
+    height: 100% !important;
+    color: $white;
+
+    h1 {
+       color: $white;
+       font-family: 'Cabin Sketch', cursive !important;
+       font-size: 3rem;
+    }
 }

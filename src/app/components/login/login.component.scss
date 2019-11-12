@@ -5,16 +5,23 @@
   height: 100%;
   display: flex;
   justify-content: center;
-  
+
   .login{
-    width: 300px;
-    height: 500px;
+    width: 400px;
+    height: 600px;
     display: flex;
+    border-radius: 20px;
+    border: 2px solid $orange-border;
     flex-flow: column wrap;
     align-self: center;
     justify-content: space-around;
     align-items: center;
-    background-color: $white;
+    background-color:$dark-blue-header !important;
+    font-size: 1.4rem;
+
+    h2 {
+      font-size: 4rem !important;
+    }
 
     form {
       display: flex;
@@ -23,6 +30,7 @@
       button{
         outline: 0;
       }
+
     }
   }
 }
