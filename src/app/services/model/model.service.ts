@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { FormGroup } from '@angular/forms';
 import { BaseUrl } from 'src/environments/environment';
+import io from 'socket.io-client';
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +14,20 @@ export class ModelService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
+  socket: SocketIOClient.Socket;
+  subject = new Subject();
   constructor(
     private http: HttpClient
-  ) { }
+  ) {}
+
+  live() {
+    this.socket = io.connect(`${BaseUrl}socket`);
+    this.socket.on('message-resp', data => console.log(data));
+  }
+
+  send() {
+    this.socket.emit('message', {data: 'message'});
+  }
 
   trainModel(form: FormGroup): Observable<any> {
     const url = 'train';
@@ -34,11 +45,11 @@ export class ModelService {
     return this.http.get(`${BaseUrl}models`);
   }
 
-  builderGetData(){
+  builderGetData() {
     return this.http.get(`${BaseUrl}builder`);
   }
 
-  buildModel(json){
+  buildModel(json) {
     return this.http.post(`${BaseUrl}builder`, json).subscribe(
       () => {}
     );
