@@ -18,7 +18,8 @@ export class TrainTestFormComponent implements OnInit {
   models = [];
 
   dataToShow: {dataset_info: any, train_history: any, model_info: any};
-  
+  testDataToShow: {testing_session: any};
+
   @Output()
   formSubmited = new EventEmitter<FormGroup>();
 
@@ -37,7 +38,7 @@ export class TrainTestFormComponent implements OnInit {
     hAxis: {
       title: 'Epoch'
     },
-    vAxis:{
+    vAxis: {
       title: 'Accuracy'
     },
     pointSize: 5
@@ -46,7 +47,7 @@ export class TrainTestFormComponent implements OnInit {
     hAxis: {
       title: 'Epoch'
     },
-    vAxis:{
+    vAxis: {
       title: 'Loss'
     },
     pointSize: 5
@@ -56,7 +57,7 @@ export class TrainTestFormComponent implements OnInit {
   chartData2 = null;
 
 
-  constructor(private modelService: ModelService, private route:ActivatedRoute, private window: WindowConfigService) { }
+  constructor(private modelService: ModelService, private route: ActivatedRoute, private window: WindowConfigService) { }
 
   ngOnInit() {
     if (this.route.snapshot.url[0].path.includes('train')) {
@@ -83,16 +84,16 @@ export class TrainTestFormComponent implements OnInit {
         }
       }
     );
-    if(!this.window.isFullScreen){
+    if (!this.window.isFullScreen) {
       this.window.resize();
     }
   }
 
-  submitFrom(){
+  submitFrom() {
     this.formSubmited.emit(this.form);
   }
 
-  select(index:number){
+  select(index: number) {
     this.selected = index;
     this.form.get('modelId').setValue(this.models[index].id);
     if (this.pageTrain) {
@@ -121,7 +122,7 @@ export class TrainTestFormComponent implements OnInit {
       this.modelService.getTestData(this.form).subscribe(
         (data: any) => {
           console.log(data);
-          this.dataToShow = data;
+          this.testDataToShow = data;
           this.showCharts = true;
         }
       );
@@ -130,20 +131,25 @@ export class TrainTestFormComponent implements OnInit {
 
   trainModel() {
     if (this.pageTrain) {
-      console.log(this.form.value)
+      console.log(this.form.value);
       this.modelService.trainModel(this.form).subscribe(
-        data => {console.log('train successfull')}
+        data => {console.log('train successfull'); }
       );
     } else {
       this.modelService.testModel(this.form).subscribe(
-        data => {console.log('test successfull')}
+        data => {console.log('test successfull'); }
       );
     }
   }
 
-  getKeys(of: string){
+  getKeys(of: string) {
     return Object.keys(this.dataToShow.model_info[of]);
   }
 
-
+  getTestKeys(of: string, model: boolean) {
+    if (model) {
+      return Object.keys(this.testDataToShow.testing_session.model_header[of]);
+    }
+    return Object.keys(this.testDataToShow.testing_session[of]);
+  }
 }
