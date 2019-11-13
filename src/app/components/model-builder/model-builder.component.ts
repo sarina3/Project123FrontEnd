@@ -71,13 +71,17 @@ export class ModelBuilderComponent implements OnInit, OnDestroy, OnChanges {
     // console.log('change');
   }
 
+
+
   ngOnInit() {
     this.resizeWindow();
-    this.modelService.builderGetData().subscribe(
+  }
+
+  loadModelBuilderData() {
+      this.modelService.builderGetData(this.modelForm.get('type').value).subscribe(
       data => {
-        this.config = data;
-        console.log(data);
-        this.changeDetector.detectChanges();
+        this.config = data
+          this.changeDetector.detectChanges();
       }
     );
   }

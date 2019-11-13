@@ -45,8 +45,8 @@ export class ModelService {
     return this.http.get(`${BaseUrl}models`);
   }
 
-  builderGetData() {
-    return this.http.get(`${BaseUrl}builder`);
+  builderGetData(model){
+    return this.http.get(`${BaseUrl}builder?model=` + model);
   }
 
   buildModel(json) {
