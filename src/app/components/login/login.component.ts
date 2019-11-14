@@ -30,4 +30,11 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/']);
     }
   }
+
+  signUp() {
+    if (this.loginForm.valid) {
+      this.authService.signUp(this.loginForm.value);
+      this.router.navigate(['/']);
+    }
+  }
 }

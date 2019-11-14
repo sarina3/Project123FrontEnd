@@ -25,6 +25,19 @@ export class AuthService {
     );
   }
 
+  signUp(formData: { username: string; pass: string }) {
+    this.http.post(BaseUrl + "create-user", formData).subscribe(
+      (data:{identity: string, name: string}) => {
+        this.token = data.identity;
+        this.username = data.name;
+        this.loggedIn = true;
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
   isLoggedIn(){
     return this.loggedIn;
   }
