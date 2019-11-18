@@ -1,4 +1,4 @@
-<div class="page">
+<div class="predict-page">
   <div class="predict-content-wrapper">
     <div class="network-picker">
       <div class="network-option-wrapper">
@@ -16,24 +16,27 @@
         </mat-card>
       </div>
     </div>
-    <mat-tab-group dynamicHeight>
+    <mat-tab-group dynamicHeight class="project-theme" backgroundColor="primary" color="accent">
       <mat-tab label="Create Photo">  
         <div class="camera">
           <app-ack-webcam (imageDone)="onImageCreate($event)"></app-ack-webcam>
           <div class="btn-wrapper">
-            <button mat-stroked-button (click)="takePhoto()">Take Photo</button>
-            <button mat-stroked-button [disabled]="!this.form.valid" (click)="predict()">Submit</button>
+            <button mat-raised-button (click)="takePhoto()">Take Photo</button>
+            <button mat-raised-button [disabled]="!this.form.valid" (click)="predict()">Submit</button>
           </div>
         </div>
       </mat-tab>
       <mat-tab label="Load Photo">
         <div class="filepicker">
           <div class="filepicker-wrapper">
-          <input type="file" accept="image/*" (change)="onFilePick($event)">
+            <label for="filepicker">
+              <button mat-raised-button (click)="openFilePicker()">Select File</button>
+            </label>
+          <input #filepicker type="file" id="filepicker" accept="image/*" class="hide" (change)="onFilePick($event)">
           <img *ngIf="image" [src]="image" alt="preview">
         </div>
         <div class="btn-wrapper">
-            <button mat-stroked-button [disabled]="!this.form.valid" (click)="predict()">Submit</button>
+            <button mat-raised-button [disabled]="!this.form.valid" (click)="predict()">Submit</button>
         </div>
       </div>
       </mat-tab>

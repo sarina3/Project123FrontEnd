@@ -1,9 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ModelService } from 'src/app/services/model/model.service';
 import { ActivatedRoute } from '@angular/router';
 import { WindowConfigService } from 'src/app/services/window-config.service';
-import { GoogleChartComponent } from 'angular-google-charts';
 
 @Component({
   selector: 'app-train-test-form',
@@ -34,23 +33,41 @@ export class TrainTestFormComponent implements OnInit {
   pageTrain = false;
   columnNames1 = ["epoch", "train", "test"];
   columnNames2 = ["epoch", "train", "test"];
-  options1 = {
+
+  // https://developers.google.com/chart/interactive/docs/gallery/linechart
+  // tu su vsetky atributy ktore zere options
+  options = {
+    legend: {
+      textStyle: {color: 'white'}
+    },
     hAxis: {
-      title: 'Epoch'
+      title: 'Epoch',
+      titleTextStyle: {color: 'white'},
+      gridlines: {
+        color: 'white'
+      },
+      textStyle: {
+        color: 'white'
+      }
     },
     vAxis: {
-      title: 'Accuracy'
+      title: 'Loss',
+      titleTextStyle: {color: 'white'},
+      gridlines: {
+        color: 'white'
+      },
+      textStyle: {
+        color: 'white'
+      }
     },
-    pointSize: 5
-  };
-  options2 = {
-    hAxis: {
-      title: 'Epoch'
+    pointSize: 5,
+    tooltip: {
+      color: 'black',
     },
-    vAxis: {
-      title: 'Loss'
+    backgroundColor: {
+      fill: "#262755"
     },
-    pointSize: 5
+    titleTextStyle: {color: 'white'},
   };
   showCharts = false;
   chartData1 = null;

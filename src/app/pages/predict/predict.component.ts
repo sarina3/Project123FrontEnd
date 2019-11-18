@@ -1,7 +1,7 @@
-import { Component, OnInit, Inject, Injectable, ViewChild, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { PredictService } from '../../services/predict/predict.service';
 import { SelectData } from 'src/app/components/select/select.model';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AckWebcamComponent } from '../../components/ack-webcam/ack-webcam.component';
 import { WindowConfigService } from 'src/app/services/window-config.service';
 import { ModelService } from 'src/app/services/model/model.service';
@@ -9,10 +9,12 @@ import { ModelService } from 'src/app/services/model/model.service';
 @Component({
   selector: 'app-predict',
   templateUrl: './predict.component.html',
-  styleUrls: ['./predict.component.scss']
+  styleUrls: ['./predict.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class PredictComponent implements OnInit, OnDestroy {
   @ViewChild(AckWebcamComponent, {static: false}) camera: AckWebcamComponent;
+  @ViewChild('filepicker', {static: false}) picker: ElementRef;
   form = new FormGroup({
     model: new FormControl(null, Validators.required),
     photo: new FormControl(null, Validators.required),
@@ -27,11 +29,11 @@ export class PredictComponent implements OnInit, OnDestroy {
 
   selected = 0;
 
-  predictionResult:any;
+  predictionResult: any;
   showResult = false;
 
   get canShowResult() {
-    console.log('change emitted')
+    console.log('change emitted');
     return this.showResult;
   }
 
@@ -104,13 +106,13 @@ export class PredictComponent implements OnInit, OnDestroy {
     const reader = new FileReader();
     reader.onload = () => {
       // console.log(reader.result)
-      this.image = reader.result
+      this.image = reader.result;
       console.log(this.image);
       this.form.get('photo').setValue(this.image);
 
     };
     console.log(event);
-    reader.readAsDataURL(event.target.files[0])
+    reader.readAsDataURL(event.target.files[0]);
   }
 
   select(index: number) {
@@ -127,5 +129,10 @@ export class PredictComponent implements OnInit, OnDestroy {
 
   getMetadata() {
     return Object.keys(this.predictionResult.metadata);
+  }
+
+  openFilePicker() {
+    const el: HTMLElement = this.picker.nativeElement;
+    el.click();
   }
 }

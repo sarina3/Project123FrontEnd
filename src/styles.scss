@@ -107,22 +107,4 @@ body{
       box-shadow: none !important;
       cursor: pointer;
     }
-
-
-
-
-    rect {
-      fill: transparent;
-    }
-
-    g {
-      rect {
-        fill: rgba($white, 0.5);
-      }
-    }
-
-    text {
-      fill: white !important;
-      color: white !important;
-    }
 }
