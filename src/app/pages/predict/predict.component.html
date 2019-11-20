@@ -19,7 +19,7 @@
     <mat-tab-group dynamicHeight class="project-theme" backgroundColor="primary" color="accent">
       <mat-tab label="Create Photo">  
         <div class="camera">
-          <app-ack-webcam (imageDone)="onImageCreate($event)"></app-ack-webcam>
+          <app-ack-webcam [imageWidth]="imageWidth" [imageHeight]="imageHeight" (imageDone)="onImageCreate($event)"></app-ack-webcam>
           <div class="btn-wrapper">
             <button mat-raised-button (click)="takePhoto()">Take Photo</button>
             <button mat-raised-button [disabled]="!this.form.valid" (click)="predict()">Submit</button>
@@ -32,8 +32,21 @@
             <label for="filepicker">
               <button mat-raised-button (click)="openFilePicker()">Select File</button>
             </label>
-          <input #filepicker type="file" id="filepicker" accept="image/*" class="hide" (change)="onFilePick($event)">
-          <img *ngIf="image" [src]="image" alt="preview">
+            <input #filepicker type="file" id="filepicker" accept="image/*" class="hide" (change)="fileChangeEvent($event)">
+            <image-cropper class="image-cropper"
+              [imageChangedEvent]="imageChangedEvent"
+              [maintainAspectRatio]="true"
+              [aspectRatio]="imageWidth / imageHeight"
+              [resizeToWidth]="imageWidth"
+              format="png"
+              (imageCropped)="imageCropped($event)"
+              (imageLoaded)="imageLoaded()"
+              (cropperReady)="cropperReady()"
+              (loadImageFailed)="loadImageFailed()">
+            </image-cropper>
+            <div *ngIf="croppedImage" class="cropp">
+              <img [src]="croppedImage" />
+            </div>
         </div>
         <div class="btn-wrapper">
             <button mat-raised-button [disabled]="!this.form.valid" (click)="predict()">Submit</button>

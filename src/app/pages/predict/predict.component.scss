@@ -27,7 +27,7 @@
 
         mat-tab-group {
             padding: 10px;
-            width: 25%;
+            // width: 25%;
             margin-right: 6px;
             -webkit-border-radius: 25px !important;
             -moz-border-radius: 25px !important;
@@ -205,6 +205,13 @@
                 justify-content: space-around;
                 img{
                     max-height: 300px;
+                }
+                .image-cropper {
+                  width: 250px;
+                  height: 250px;
+                }
+                .cropp {
+                  justify-content: center;
                 }
             }
         }

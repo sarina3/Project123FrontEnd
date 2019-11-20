@@ -25,6 +25,7 @@ import { TestComponent } from './pages/test/test.component';
 import { TrainTestFormComponent } from './components/train-test-form/train-test-form.component';
 import { ModelBuilderComponent } from './components/model-builder/model-builder.component';
 import { GoogleChartsModule } from 'angular-google-charts';
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,8 @@ import { GoogleChartsModule } from 'angular-google-charts';
     MatStepperModule,
     MatAutocompleteModule,
     MatIconModule,
-    GoogleChartsModule.forRoot()
+    GoogleChartsModule.forRoot(),
+    ImageCropperModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}

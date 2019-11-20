@@ -10,5 +10,10 @@
         flex-flow: row wrap;
         flex: 1;
         justify-content: space-around;
+
+        .image-cropper {
+            width: 250px;
+            height: 250px;
+        }
     }
 }

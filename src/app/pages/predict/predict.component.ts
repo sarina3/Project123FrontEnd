@@ -5,6 +5,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AckWebcamComponent } from '../../components/ack-webcam/ack-webcam.component';
 import { WindowConfigService } from 'src/app/services/window-config.service';
 import { ModelService } from 'src/app/services/model/model.service';
+import { ImageCroppedEvent } from 'ngx-image-cropper';
 
 @Component({
   selector: 'app-predict',
@@ -31,6 +32,11 @@ export class PredictComponent implements OnInit, OnDestroy {
 
   predictionResult: any;
   showResult = false;
+
+  imageWidth: number = 64;
+  imageHeight: number = 64;
+  imageChangedEvent: any = '';
+  croppedImage: any = '';
 
   get canShowResult() {
     console.log('change emitted');
@@ -134,5 +140,13 @@ export class PredictComponent implements OnInit, OnDestroy {
   openFilePicker() {
     const el: HTMLElement = this.picker.nativeElement;
     el.click();
+  }
+
+  fileChangeEvent(event: any): void {
+    this.imageChangedEvent = event;
+  }
+  imageCropped(event: ImageCroppedEvent) {
+    this.croppedImage = event.base64;
+    this.form.get('photo').setValue(this.croppedImage);
   }
 }

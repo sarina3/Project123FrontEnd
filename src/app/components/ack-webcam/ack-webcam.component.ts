@@ -1,6 +1,7 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, Input } from '@angular/core';
 
 import { WebCamComponent } from 'ack-angular-webcam';
+import { ImageCroppedEvent } from 'ngx-image-cropper';
 
 @Component({
   selector: 'app-ack-webcam',
@@ -8,6 +9,10 @@ import { WebCamComponent } from 'ack-angular-webcam';
   styleUrls: ['./ack-webcam.component.scss']
 })
 export class AckWebcamComponent implements OnInit {
+
+  @Input() imageWidth: number = 64;
+  @Input() imageHeight: number = 64;
+  croppedImage: any = '';
 
   @ViewChild(WebCamComponent,{static:false}) webcam: WebCamComponent;
   options = null;
@@ -40,4 +45,9 @@ export class AckWebcamComponent implements OnInit {
   }
 
   onCamSuccess(event: any) {}
+
+  imageCropped(event: ImageCroppedEvent) {
+    this.croppedImage = event.base64;
+    this.emitParent(this.croppedImage);
+  }
 }
