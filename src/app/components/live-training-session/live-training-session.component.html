@@ -1,0 +1,45 @@
+
+<div class="live-wrapper">
+  <div class="chart">
+    <mat-tab-group
+      dynamicHeight
+      class="project-theme"
+      backgroundColor="primary"
+      color="accent"
+      [selectedIndex]="selectedIndex"
+      (selectedIndexChange)="selectObservationData($event)"
+    >
+      <mat-tab
+        *ngFor="let header of tabs"
+        [label]="capitalize(header)" >
+
+      </mat-tab>
+    </mat-tab-group>
+    <google-chart
+      *ngIf="chartData"
+      [title]="title"
+      [type]="'LineChart'"
+      [data]="chartData"
+      [firstRowIsData]="true"
+      [columnNames]="columnNames"
+      [options]="options"
+      [dynamicResize]="true"
+    >
+    </google-chart>
+  </div>
+  <div class="bottom">
+    <div class="epoch-wrapper">
+      <h2>Epoch: {{currentEpoch}}/{{maxEpoch}}</h2>
+    </div>
+    <div class="progress-bar">
+      <h2>{{getProgressValue()}}%&nbsp;complete</h2>
+      <mat-progress-bar
+        class="example-margin"
+        [color]="'primary'"
+        mode="buffer"
+        [value]="getProgressValue()"
+        [bufferValue]="0">
+      </mat-progress-bar>
+    </div>
+  </div>
+</div>

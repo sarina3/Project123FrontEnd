@@ -18,67 +18,66 @@
       </form>
     </div>
   </div>
-  <div class="train-data" *ngIf="pageTrain else test">
-    <ng-container *ngIf="errorMessage else content">
-      <div class="error">
-        <h1 style="color:red" >{{errorMessage}}</h1>
-        <button mat-stroked-button (click)="openLiveTraining()">Show live training</button>
-      </div>
-    </ng-container>
-    <ng-template #content>
-      <div class="train-content" *ngIf="showCharts">
-        <div class="left">
-          <h4>Dataset Information</h4>
-          <span *ngFor="let item of getKeys('data_header')">
-                      {{item}}:&nbsp;{{dataToShow.model_info.data_header[item]}}
-                    </span>
-        </div>
-        <div class="right">
-          <h4>Model Information</h4>
-          <span *ngFor="let item of getKeys('model_header')">
-                    {{item}}:&nbsp;{{dataToShow.model_info.model_header[item]}}
-                  </span>
-        </div>
-      </div>
-      <div class="charts">
-        <google-chart
-          *ngIf="showCharts"
-          [title]="'accuracy train vs test'"
-          [type]="'LineChart'"
-          [data]="chartData1"
-          [firstRowIsData]="true"
-          [columnNames]="columnNames1"
-          [options]="options"
-          [dynamicResize]="true"
-        >
-        </google-chart>
-        <google-chart
-          *ngIf="showCharts"
-          [title]="'loss train vs test'"
-          [type]="'LineChart'"
-          [data]="chartData2"
-          [firstRowIsData]="true"
-          [columnNames]="columnNames2"
-          [options]="options"
-          [dynamicResize]="true"
-        >
-        </google-chart>
-      </div>
-      <button mat-stroked-button (click)="trainModel()" class="train-btn">Train</button>
-    </ng-template>
-  </div>
+  <ng-container *ngTemplateOutlet="template">
+
+  </ng-container>
 </div>
 
+<ng-template #errormessage >
+  <div class="train-data">
+    <div class="error">
+      <h1 style="color:red" >{{errorMessage}}</h1>
+      <button mat-raised-button (click)="openLiveTraining()">Show live training</button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #train>
+  <div class="train-data">
+    <div class="train-content" *ngIf="showCharts">
+      <div class="left">
+        <h4>Dataset Information</h4>
+        <span *ngFor="let item of getKeys('data_header')">
+                    {{item}}:&nbsp;{{dataToShow.model_info.data_header[item]}}
+                  </span>
+      </div>
+      <div class="right">
+        <h4>Model Information</h4>
+        <span *ngFor="let item of getKeys('model_header')">
+                  {{item}}:&nbsp;{{dataToShow.model_info.model_header[item]}}
+                </span>
+      </div>
+    </div>
+    <div class="charts">
+      <google-chart
+        *ngIf="showCharts"
+        [title]="'accuracy train vs test'"
+        [type]="'LineChart'"
+        [data]="chartData1"
+        [firstRowIsData]="true"
+        [columnNames]="columnNames1"
+        [options]="options"
+        [dynamicResize]="true"
+      >
+      </google-chart>
+      <google-chart
+        *ngIf="showCharts"
+        [title]="'loss train vs test'"
+        [type]="'LineChart'"
+        [data]="chartData2"
+        [firstRowIsData]="true"
+        [columnNames]="columnNames2"
+        [options]="options"
+        [dynamicResize]="true"
+      >
+      </google-chart>
+    </div>
+    <button mat-raised-button (click)="trainModel()" class="train-btn">Train</button>
+  </div>
+</ng-template>
 
 <ng-template #test>
   <div class="test-data">
-    <ng-container *ngIf="errorMessage else content">
-      <div class="error">
-        <h1 style="color:red; align-self: center;" >{{errorMessage}}</h1>
-        <button mat-stroked-button (click)="openLiveTraining()">Show live training</button>
-      </div>
-    </ng-container>
-    <ng-template #content>
       <div class="test-content" *ngIf="showCharts">
         <div class="left">
           <h4>Dataset Information</h4>
@@ -129,7 +128,17 @@
           </div>
         </div>
       </div>
-      <button mat-stroked-button (click)="trainModel()" class="train-btn">Test</button>
-    </ng-template>
+      <button mat-raised-button (click)="trainModel()" class="train-btn">Test</button>
+  </div>
+</ng-template>
+
+
+<ng-template #live>
+  <div class="train-data">
+    <app-live-training-session
+    [modelId]="getModelId()"
+    (sessionEnd)="onSessionEnd()"
+    >
+    </app-live-training-session>
   </div>
 </ng-template>

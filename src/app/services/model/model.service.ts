@@ -10,24 +10,14 @@ import io from 'socket.io-client';
 })
 export class ModelService {
 
-  myHttpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
-
-  socket: SocketIOClient.Socket;
-  subject = new Subject();
   constructor(
     private http: HttpClient
   ) {}
 
   live() {
-    this.socket = io.connect(`${BaseUrl}socket`);
-    this.socket.on('message-resp', data => console.log(data));
+   return io.connect(`${BaseUrl}socket`);
   }
 
-  send() {
-    this.socket.emit('message', {data: 'message'});
-  }
 
   trainModel(form: FormGroup): Observable<any> {
     const url = 'train';
@@ -51,7 +41,8 @@ export class ModelService {
 
   buildModel(json) {
     return this.http.post(`${BaseUrl}builder`, json).subscribe(
-      () => {}
+      () => {
+      }
     );
   }
 

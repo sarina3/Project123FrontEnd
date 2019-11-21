@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ModelService } from 'src/app/services/model/model.service';
 import { ActivatedRoute } from '@angular/router';
@@ -10,6 +10,10 @@ import { WindowConfigService } from 'src/app/services/window-config.service';
   styleUrls: ['./train-test-form.component.scss']
 })
 export class TrainTestFormComponent implements OnInit {
+  @ViewChild('train', {static: true}) trainTemplate: TemplateRef<any>;
+  @ViewChild('test', {static: true}) testTemplate: TemplateRef<any>;
+  @ViewChild('errormessage', {static: true}) messageTemplate: TemplateRef<any>;
+  @ViewChild('live', {static: true}) liveTemplate: TemplateRef<any>;
   @Input()
   title = "";
 
@@ -27,6 +31,7 @@ export class TrainTestFormComponent implements OnInit {
   form = new FormGroup({
     modelId: new FormControl(null)
   });
+  live = false;
 
   datasetFilter = [];
   modelFilter = [];
@@ -76,8 +81,24 @@ export class TrainTestFormComponent implements OnInit {
   allPhotosRoutes = [];
   errorMessage: string;
 
+  get template() {
+    if (this.live) {
+      return this.liveTemplate;
+    } else if (this.errorMessage != null) {
+      return this.messageTemplate;
+    } else if (this.pageTrain) {
+      return this.trainTemplate;
+    } else {
+      return this.testTemplate;
+    }
+  }
 
-  constructor(private modelService: ModelService, private route: ActivatedRoute, private window: WindowConfigService) { }
+  constructor(
+    private modelService: ModelService,
+    private route: ActivatedRoute,
+    private window: WindowConfigService,
+    private cd: ChangeDetectorRef
+  ) { }
 
   ngOnInit() {
     if (this.route.snapshot.url[0].path.includes('train')) {
@@ -115,6 +136,7 @@ export class TrainTestFormComponent implements OnInit {
   }
 
   select(index: number) {
+    this.live = false;
     this.selected = index;
     this.errorMessage = null;
     this.form.get('modelId').setValue(this.models[index].id);
@@ -165,7 +187,10 @@ export class TrainTestFormComponent implements OnInit {
     if (this.pageTrain) {
       console.log(this.form.value);
       this.modelService.trainModel(this.form).subscribe(
-        data => {console.log('train successfull'); }
+        data => {
+          this.live = true;
+          console.log(this.getModelId());
+        }
       );
     } else {
       this.modelService.testModel(this.form).subscribe(
@@ -186,6 +211,18 @@ export class TrainTestFormComponent implements OnInit {
   }
 
   openLiveTraining() {
-    console.log('live training clicked');
+    console.log('live', this.live);
+    this.live = true;
+    console.log('live1', this.live);
+    this.cd.detectChanges();
+  }
+
+  getModelId() {
+    return '' + this.models[this.selected].id;
+    // return '5';
+  }
+
+  onSessionEnd() {
+    this.select(this.selected);
   }
 }
