@@ -16,7 +16,7 @@ import { ImageCroppedEvent } from 'ngx-image-cropper';
 export class PredictComponent implements OnInit, OnDestroy {
   @ViewChild(AckWebcamComponent, {static: false}) camera: AckWebcamComponent;
   @ViewChild('filepicker', {static: false}) picker: ElementRef;
-  form = new FormGroup({
+  predictForm = new FormGroup({
     model: new FormControl(null, Validators.required),
     photo: new FormControl(null, Validators.required),
     photoDescription: new FormControl(false)
@@ -38,8 +38,11 @@ export class PredictComponent implements OnInit, OnDestroy {
   imageChangedEvent: any = '';
   croppedImage: any = '';
 
+  step = 0;
+  selectedModel = null;
+
   get canShowResult() {
-    console.log('change emitted');
+    // console.log('change emitted');
     return this.showResult;
   }
 
@@ -57,41 +60,39 @@ export class PredictComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    console.log(this.form.valid);
     if (!this.windowConfig.isFullScreen) {
       this.windowConfig.resize();
     }
     const id = localStorage.getItem('choosedModel');
     this.modelService.getModels().subscribe(
       (data: any) => {
-        console.log(data);
         this.models = data.models.map(
           x => {
             return {
               header: x.model_header,
               accuracy: x.model_header.Accuracy * 100,
-              id: x.model_header.ModelId
+              id: x.model_header.ModelId,
+              type: x.model_header.ModelType
             };
           }
         );
-        if (id) {
-            console.log(this.models);
-            const index = this.models.findIndex( x => x.id === +id);
+        if (this.models && this.models.length > 0) {
+            const index = this.models.findIndex(x => x.id === +id);
             this.select(index !== -1 ? index : 0);
-        } else {
+        } /* else {
             this.select(0);
-        }
+        } */
       }
     );
   }
 
   onImageCreate(base64Image: any) {
-    this.form.get('photo').setValue(base64Image);
+    this.predictForm.get('photo').setValue(base64Image);
     this.image = base64Image;
   }
 
   predict() {
-    this.predictService.predict(this.form)
+    this.predictService.predict(this.predictForm)
       .subscribe(response => {
           console.log(response);
           this.predictionResult = response;
@@ -114,7 +115,7 @@ export class PredictComponent implements OnInit, OnDestroy {
       // console.log(reader.result)
       this.image = reader.result;
       console.log(this.image);
-      this.form.get('photo').setValue(this.image);
+      this.predictForm.get('photo').setValue(this.image);
 
     };
     console.log(event);
@@ -123,7 +124,7 @@ export class PredictComponent implements OnInit, OnDestroy {
 
   select(index: number) {
     this.selected = index;
-    this.form.get('model').setValue(this.models[index].id);
+    this.predictForm.get('model').setValue(this.models[index].id);
   }
 
   getResults() {
@@ -147,6 +148,43 @@ export class PredictComponent implements OnInit, OnDestroy {
   }
   imageCropped(event: ImageCroppedEvent) {
     this.croppedImage = event.base64;
-    this.form.get('photo').setValue(this.croppedImage);
+    this.predictForm.get('photo').setValue(this.croppedImage);
+  }
+  imageLoaded() {
+    // show cropper
+  }
+  cropperReady() {
+    // cropper ready
+  }
+  loadImageFailed() {
+    // show message
+  }
+
+  selectModel(model: any) {
+    this.selectedModel = model;
+  }
+
+  setStep(index: number) {
+    this.step = index;
+  }
+  nextStep() {
+    this.step++;
+  }
+  prevStep() {
+    this.step--;
+  }
+
+  getModelIcon(modelType: string) {
+    switch (modelType.toLowerCase()) {
+      case 'cnn': {
+        return 'build';
+      }
+      case 'mlp': {
+        return 'photo';
+      }
+      default: {
+        return 'build';
+      }
+    }
   }
 }

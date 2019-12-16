@@ -1,4 +1,50 @@
-@import '../../../styles.scss';
+.exp-panel {
+  border: 1px solid #2196f3;
+}
+
+.exp-panel-head {
+  background-color: #2196f3 !important;
+}
+.exp-panel-head:hover {
+  background-color: #2196f3 !important;
+}
+
+.text-color {
+  color: white !important;
+}
+
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+button {
+  width: 100px;
+}
+
+.model {
+  border: 1px solid #2196f3;
+  border-radius: 5px;
+  display: inline-block;
+  height: 200px;
+  margin: 10px;
+  overflow: hidden;
+  padding: 15px;
+  width: 200px;
+}
+
+.cam-btn {
+  margin-left: 10px !important;
+  margin-right: 10px !important;
+  width: 120px;
+}
+
+/* @import '../../../styles.scss';
 
 .predict-page{
     display: flex;
@@ -218,3 +264,4 @@
     }
 
 }
+ */

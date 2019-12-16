@@ -8,22 +8,25 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit, OnDestroy {
-  title = 'Project123Frontend';
-  sub: Subscription;
-  constructor( private windowConfig: WindowConfigService, private change: ChangeDetectorRef){}
 
-  ngOnInit(){
+  sub: Subscription;
+
+  constructor(
+    private windowConfig: WindowConfigService, private change: ChangeDetectorRef
+  ) {}
+
+  ngOnInit() {
     this.sub = this.windowConfig.refresh.subscribe(() => {
       console.log('called');
-      this.change.detectChanges()
+      this.change.detectChanges();
     });
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.sub.unsubscribe();
   }
 
-  get config(){
+  get config() {
     return this.windowConfig.state;
   }
 }

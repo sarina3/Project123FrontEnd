@@ -1,4 +1,52 @@
-<div class="holder">
+<div class="container">
+  <form [formGroup]="loginForm">
+    <div class="row">
+      <div class="col-12 col-sm-2 col-md-3 col-lg-4 col-xl-4"></div>
+      <div class="col-12 col-sm-8 col-md-6 col-lg-4 col-xl-4 login">
+        <mat-icon color="accent">account_circle</mat-icon>
+        Login
+      </div>
+      <div class="col-12 col-sm-2 col-md-3 col-lg-4 col-xl-4"></div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-sm-2 col-md-3 col-lg-4 col-xl-4"></div>
+      <div class="col-12 col-sm-8 col-md-6 col-lg-4 col-xl-4">
+        <mat-form-field class="full-width marg-10">
+          <input matInput type="text" placeholder="Username" formControlName="username">
+        </mat-form-field>
+      </div>
+      <div class="col-12 col-sm-2 col-md-3 col-lg-4 col-xl-4"></div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-sm-2 col-md-3 col-lg-4 col-xl-4"></div>
+      <div class="col-12 col-sm-8 col-md-6 col-lg-4 col-xl-4">
+        <mat-form-field class="full-width marg-top-10">
+          <input matInput type="password" placeholder="Password" formControlName="pass">
+        </mat-form-field>
+      </div>
+      <div class="col-12 col-sm-2 col-md-3 col-lg-4 col-xl-4"></div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-sm-2 col-md-3 col-lg-4 col-xl-4"></div>
+      <div class="col-12 col-sm-8 col-md-6 col-lg-4 col-xl-4 marg-top-10">
+        <button mat-raised-button color="accent" class="full-width" (click)="login()">
+          Log In
+        </button>
+      </div>
+      <div class="col-12 col-sm-2 col-md-3 col-lg-4 col-xl-4"></div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-sm-2 col-md-3 col-lg-4 col-xl-4"></div>
+      <div class="col-12 col-sm-8 col-md-6 col-lg-4 col-xl-4 marg-top-10">
+        <button mat-raised-button color="accent" class="full-width" (click)="signUp()">
+          Sign Up
+        </button>
+      </div>
+      <div class="col-12 col-sm-2 col-md-3 col-lg-4 col-xl-4"></div>
+    </div>
+  </form>
+</div>
+<!-- <div class="holder">
   <div class="login">
     <h2>Login</h2>
     <form [formGroup]="loginForm">
@@ -12,4 +60,4 @@
       <button mat-raised-button class="mt-3" (click)="signUp()" >Sign Up</button>
     </form>
   </div>
-</div>
+</div> -->

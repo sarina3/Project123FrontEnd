@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit {
   onkeyup(event: KeyboardEvent) {
     if (this.loginOpened) {
       if (event.keyCode === 13) {
-        this.loginComponent.submitForm();
+        this.loginComponent.login();
       }
       if (event.keyCode === 27) {
         this.loginOpened = false;

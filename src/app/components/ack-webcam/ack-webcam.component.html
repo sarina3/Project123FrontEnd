@@ -1,6 +1,6 @@
 <div class="ack-webcam-wrapper">
   <div class="camera-wrapper">
-    <ack-webcam
+    <ack-webcam *ngIf="!image"
       [options] = "options"
       (success) = "onCamSuccess($event)"
       (catch)   = "onCamError($event)">

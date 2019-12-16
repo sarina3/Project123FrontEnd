@@ -1,4 +1,104 @@
-<div class="predict-page">
+<div class="container">
+  <form [formGroup]="predictForm">
+    <mat-accordion class="example-headers-align">
+      <mat-expansion-panel class="exp-panel" [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+        <mat-expansion-panel-header class="exp-panel-head">
+          <mat-panel-title class="text-color">
+            Models
+          </mat-panel-title>
+          <mat-panel-description class="text-color">
+            {{ selectedModel ? ('Selected model: ' + selectedModel.header.Name) : 'Select model' }}
+            <mat-icon color="white">folder</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div *ngIf="models && models.length > 0" class="row">
+          <div *ngFor="let model of models" class="model" >
+            <mat-icon color="primary">{{ getModelIcon(model.type) }}</mat-icon>
+            <table>
+              <tr>
+                <th>Id</th>
+                <td>{{ model.id }}</td>
+              </tr>
+              <tr>
+                <th>Name</th>
+                <td>{{ model.header.Name }}</td>
+              </tr>
+              <tr>
+                <th>Type</th>
+                <td>{{ model.type }}</td>
+              </tr>
+              <tr>
+                <th>Accuracy</th>
+                <td>{{ model.accuracy }} %</td>
+              </tr>
+            </table>
+            <button class="btn btn-primary btn-sm full-width" (click)="selectModel(model)">Select</button>
+          </div>
+        </div>
+
+        <mat-action-row>
+          <button mat-raised-button class="btn btn-success" (click)="nextStep()">Next</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel class="exp-panel" [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+        <mat-expansion-panel-header class="exp-panel-head">
+          <mat-panel-title class="text-color">
+            Predict
+          </mat-panel-title>
+          <mat-panel-description class="text-color">
+            {{ croppedImage ? 'Image uploaded' : 'No photo or file' }}
+            <mat-icon color="white">image</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div class="row">
+          <div class="col-12 col-sm-2 col-md-3 col-lg-4 col-xl-4"></div>
+          <div class="col-12 col-sm-8 col-md-6 col-lg-4 col-xl-4 align-center marg-top-10">
+            <app-ack-webcam *ngIf="!croppedImage" 
+              [imageWidth]="imageWidth" 
+              [imageHeight]="imageHeight" 
+              (imageDone)="onImageCreate($event)">
+            </app-ack-webcam>
+          </div>
+          <div class="col-12 col-sm-2 col-md-3 col-lg-4 col-xl-4"></div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-sm-2 col-md-3 col-lg-4 col-xl-4"></div>
+          <div class="col-12 col-sm-8 col-md-6 col-lg-4 col-xl-4 align-center">
+            <button mat-raised-button color="accent" class="cam-btn" (click)="takePhoto()">Take Photo</button>
+            <button mat-raised-button color="accent" class="cam-btn" (click)="openFilePicker()">Upload Photo</button>
+          </div>
+          <div class="col-12 col-sm-2 col-md-3 col-lg-4 col-xl-4"></div>
+        </div>
+
+        <mat-action-row>
+          <button mat-raised-button class="btn btn-warning" (click)="prevStep()">Previous</button>
+          <button mat-raised-button class="btn btn-success" (click)="nextStep(); predict()" [disabled]="!this.predictForm.valid">Next</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel class="exp-panel" [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+        <mat-expansion-panel-header class="exp-panel-head">
+          <mat-panel-title class="text-color">
+            Results
+          </mat-panel-title>
+          <mat-panel-description class="text-color">
+            Progressbar?
+            <mat-icon color="white">build</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <mat-action-row>
+          <button mat-raised-button class="btn btn-warning" (click)="prevStep()">Previous</button>
+        </mat-action-row>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </form>
+</div>
+
+<!-- <div class="predict-page">
   <div class="predict-content-wrapper">
     <div class="network-picker">
       <div class="network-option-wrapper">
@@ -73,4 +173,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->

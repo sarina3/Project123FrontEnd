@@ -1,6 +1,64 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
 
-$white-half: rgba(#ffffff, 0.5);
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$birthmark-blue-primary:   mat-palette($mat-blue);
+$birthmark-blue-accent:    mat-palette($mat-light-blue, A700, A700, A700);
+// The warn palette is optional (defaults to red).
+$birthmark-blue-warn:      mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$birthmark-blue-theme: mat-light-theme(
+    $birthmark-blue-primary, 
+    $birthmark-blue-accent, 
+    $birthmark-blue-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($birthmark-blue-theme);
+
+// Define an alternate dark theme.
+$birthmark-green-primary: mat-palette($mat-green);
+$birthmark-green-accent:  mat-palette($mat-light-green, A400, A400, A400);
+$birthmark-green-warn:    mat-palette($mat-deep-orange);
+$birthmark-green-theme:   mat-dark-theme(
+    $birthmark-green-primary, 
+    $birthmark-green-accent, 
+    $birthmark-green-warn);
+
+// Include the alternative theme styles inside of a block with a CSS class. You can make this
+// CSS class whatever you want. In this example, any component inside of an element with
+// `.birthmark-dark-theme` will be affected by this alternate dark theme instead of the default theme.
+.birthmark-green-theme {
+  @include angular-material-theme($birthmark-green-theme);
+}
+
+.container {
+    margin: 20px 0px 20px 0px;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.align-center {
+    text-align: center;
+}
+
+.marg-top-10 {
+    margin-top: 10px;
+}
+
+/* $white-half: rgba(#ffffff, 0.5);
 $white: white;
 $light-gray: #b9b3b3;
 $very-light-gray: #eee;
@@ -17,8 +75,9 @@ $content-color: #0d2f94;
 $content-font-color: #116b9f;
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 
+ */
 
-
+/*
 body{
     width: 100vw !important;
     height: 100vh !important;
@@ -108,4 +167,4 @@ body{
       box-shadow: none !important;
       cursor: pointer;
     }
-}
+} */
