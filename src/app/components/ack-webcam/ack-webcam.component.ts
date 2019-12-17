@@ -50,4 +50,18 @@ export class AckWebcamComponent implements OnInit {
     this.croppedImage = event.base64;
     this.emitParent(this.croppedImage);
   }
+  imageLoaded() {
+    // show cropper
+  }
+  cropperReady() {
+    // cropper ready
+  }
+  loadImageFailed() {
+    // show message
+  }
+
+  repeat() {
+    this.image = null;
+    this.croppedImage = null;
+  }
 }

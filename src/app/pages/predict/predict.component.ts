@@ -19,7 +19,7 @@ export class PredictComponent implements OnInit, OnDestroy {
   predictForm = new FormGroup({
     model: new FormControl(null, Validators.required),
     photo: new FormControl(null, Validators.required),
-    photoDescription: new FormControl(false)
+    photoDescription: new FormControl('')
   });
 
   image;
@@ -122,6 +122,12 @@ export class PredictComponent implements OnInit, OnDestroy {
     reader.readAsDataURL(event.target.files[0]);
   }
 
+  repeat() {
+    this.image = null;
+    this.predictForm.get('photo').setValue(null);
+    this.camera.repeat();
+  }
+
   select(index: number) {
     this.selected = index;
     this.predictForm.get('model').setValue(this.models[index].id);
@@ -149,15 +155,6 @@ export class PredictComponent implements OnInit, OnDestroy {
   imageCropped(event: ImageCroppedEvent) {
     this.croppedImage = event.base64;
     this.predictForm.get('photo').setValue(this.croppedImage);
-  }
-  imageLoaded() {
-    // show cropper
-  }
-  cropperReady() {
-    // cropper ready
-  }
-  loadImageFailed() {
-    // show message
   }
 
   selectModel(model: any) {
