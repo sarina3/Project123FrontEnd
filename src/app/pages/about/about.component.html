@@ -1,18 +1,165 @@
-<div class="page p-3">
-  <h1>About us</h1>
-  <div>
-    <p>Students</p>
-    <p>Bc. Branislav Tomka</p>
-    <p>Bc. Filip Kuba</p>
-    <p>Bc. Jakub Šarina</p>
-    <p>Bc. Matej Kotora</p>
-    <p>Bc. Milan Majchrák</p>
-    <p>Bc. Miloš Foltán</p>
-    <p>Bc. Štefan Leitner</p>
-  </div>
-  <hr>
-  <div>
-    <p>Teachers</p>
-    <p>Ing. Lukáš Falát PhD.</p>
-  </div>
+<div class="container">
+  <mat-accordion class="example-headers-align">
+    <mat-expansion-panel class="exp-panel" [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+      <mat-expansion-panel-header class="exp-panel-head">
+        <mat-panel-title class="text-color">
+          Popis projektu
+        </mat-panel-title>
+        <mat-panel-description class="text-color">
+          <mat-icon>info</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div class="pad-20">
+        Dáta sú dôležité a sú všade. Znalostí získané z dát sú využiteľné a prospešné v mnohých oblastiach života,
+        medicínu nevynímajúc. Keďže dnes sa na oblasť predikčnej analytiky začína klásť čoraz väčší dôraz, je
+        predpoklad, že modely vytvorené z týchto dát budú hrať čoraz väčšiu rolu. Tento projekt kladie dôraz na využitie
+        modelov a metód strojového učenia, ktorá sa sústredí na oblasť predikčnej analytiky, t.j. ako s využitím dát
+        vytvoriť modely, ktoré budú schopné predikovať budúci stav. Práve predikčná analytika začína hrať čoraz
+        dôležitejšiu úlohu aj v oblasti medicíny. Dôvodom využívania strojového učenia v medicíne je diagnostika chorôb,
+        a z toho prameniaca efektívnejšia liečba či záchrana života. Podobné modely sa začínajú aplikovať na predikciu
+        rakoviny u pacientov, predikciu cukrovky či infarktu. Samotné praktické vedomosti a zručnosti, ktoré sa študenti
+        na projekte naučia môžu byť aplikované a využité pre tvorbu predikčných modelov v rôznych oblastiach biznis
+        prostredie nevynímajúc.
+      </div>
+
+      <mat-action-row>
+        <button mat-raised-button class="btn btn-success" (click)="nextStep()">Ďalej</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel class="exp-panel" [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+      <mat-expansion-panel-header class="exp-panel-head">
+        <mat-panel-title class="text-color">
+          Harmonogram
+        </mat-panel-title>
+        <mat-panel-description class="text-color">
+          <mat-icon>date_range</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div class="pad-20">
+        <ul>
+          <li>
+            Teoretické východiská predikčných modelov (lineárna regresia, logistická regresia, príp. rozhodovacie stromy
+            a umelé neurónové siete)
+          </li>
+          <li>
+            Aplikácia uvedených metód a ich využitie (reálne dáta, reálny problém)
+          </li>
+          <li>
+            Tvorba komplexného riešenia pre identifikovaný problém v medicínskej diagnostike s využitím analytiky, dát,
+            programovania a modelovania.
+          </li>
+        </ul>
+      </div>
+
+      <mat-action-row>
+        <button mat-raised-button class="btn btn-warning" (click)="prevStep()">Späť</button>
+        <button mat-raised-button class="btn btn-success" (click)="nextStep()">Ďalej</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel class="exp-panel" [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
+      <mat-expansion-panel-header class="exp-panel-head">
+        <mat-panel-title class="text-color">
+          Cieľ
+        </mat-panel-title>
+        <mat-panel-description class="text-color">
+          <mat-icon>my_location</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div class="pad-20">
+        Využiť predikčné modelovanie pre efektívnejšiu, rýchlejšiu a presnejšiu diagnostiku vybraných chorôb v medicíne
+        Naučiť študentov techniky pre získavanie znalostí z rôznych typov dát pomocou reálnych príkladov a reálnych dát
+        Presvedčiť študentov o konkurenčnej výhode získanej z modelov strojového učenia v medicíne
+        Študent bude tiež vedieť ako pracovať s reálnymi dátami, naučí sa využiť tieto dáta a znalostí z nich získané v
+        podnikovej informatike a biznis sfére.
+      </div>
+
+      <mat-action-row>
+        <button mat-raised-button class="btn btn-warning" (click)="prevStep()">Späť</button>
+        <button mat-raised-button class="btn btn-success" (click)="nextStep()">Ďalej</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel class="exp-panel" [expanded]="step === 3" (opened)="setStep(3)" hideToggle>
+      <mat-expansion-panel-header class="exp-panel-head">
+        <mat-panel-title class="text-color">
+          Členovia projektu
+        </mat-panel-title>
+        <mat-panel-description class="text-color">
+          <mat-icon>group_add</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div class="pad-20">
+        Garant: <a href="mailto:lukas.falat@fri.uniza.sk" target="_blank">Ing. Lukáš Falát PhD.</a>
+        <br><br>
+        Študenti na projekte:
+        <ul>
+          <li>
+            <a href="mailto:tomkabranislav402@gmail.com" target="_blank">Bc. Branislav Tomka</a>
+          </li>
+          <li>
+            <a href="mailto:" target="_blank">Bc. Filip Kuba</a>
+          </li>
+          <li>
+            <a href="mailto:sarinajakub@gmail.com" target="_blank">Bc. Jakub Šarina</a>
+          </li>
+          <li>
+            <a href="mailto:matej.kotora96@gmail.com" target="_blank">Bc. Matej Kotora</a>
+          </li>
+          <li>
+            <a href="mailto:milan.majchrak1@gmail.com" target="_blank">Bc. Milan Majchrák</a>
+          </li>
+          <li>
+            <a href="mailto:foltan.milosml@gmail.com" target="_blank">Bc. Miloš Foltán</a>
+          </li>
+          <li>
+            <a href="mailto:leitner3@fri.uniza.sk" target="_blank">Bc. Štefan Leitner</a>
+          </li>
+        </ul>
+      </div>
+
+      <mat-action-row>
+        <button mat-raised-button class="btn btn-warning" (click)="prevStep()">Späť</button>
+        <button mat-raised-button class="btn btn-success" (click)="nextStep()">Ďalej</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel class="exp-panel" [expanded]="step === 4" (opened)="setStep(4)" hideToggle>
+      <mat-expansion-panel-header class="exp-panel-head">
+        <mat-panel-title class="text-color">
+          Literatúra
+        </mat-panel-title>
+        <mat-panel-description class="text-color">
+          <mat-icon>menu_book</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div class="pad-20">
+        <ul>
+          <li>J. Chajdiak a kol.: Štatistické metódy v praxi, Bratislava: Statis, 1994</li>
+          <li>M. Marček: Viacnásobná štatistická analýza dát a modely časových radov v ekonómii, 2003</li>
+          <li>D. Marček, M. Marček, L. Pančíková: Ekonometria a soft computing, EDIS, Žilinská univerzita, Žilina,
+            Slovakia, 2008</li>
+          <li>D. Marček, Umelé neurónové siete a aplikácie, EDIS, Žilinská univerzita, Žilina, 2006.</li>
+          <li>A. Field, J. Miles, Z. Field: Discovering Statistics Using R, Sage Publications Ltd, 2012</li>
+          <li>James, G., Witten, D., Hastie, T. (2013). An Introduction to Statistical Learning: with Applications in R,
+            Springer.</li>
+          <li>Bertsimas, D., Freund, R. (2004). Data, Models, and Decisions: The Fundamentals of Management Science,
+            Dynamic Ideas.</li>
+          <li>Lander, J. (2013). R for Everyone: Advanced Analytics and Graphics, Addison-Wesley.</li>
+          <li>Sorensen, H., Ekstrom, C. T. (2014). Introduction to Statistical Data Analysis for the Life Sciences,
+            Second Edition, Chapman and Hall.</li>
+        </ul>
+      </div>
+
+      <mat-action-row>
+        <button mat-raised-button class="btn btn-warning" (click)="prevStep()">Späť</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
 </div>

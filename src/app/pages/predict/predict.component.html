@@ -13,7 +13,7 @@
         </mat-expansion-panel-header>
 
         <div *ngIf="models && models.length > 0" class="row">
-          <div *ngFor="let model of models" class="model" >
+          <div *ngFor="let model of models" class="model">
             <mat-icon color="primary">{{ getModelIcon(model.type) }}</mat-icon>
             <table>
               <tr>
@@ -61,18 +61,16 @@
               [imageHeight]="imageHeight" 
               (imageDone)="onImageCreate($event)">
             </app-ack-webcam>
-            <form [formGroup]="predictForm">
-              <mat-form-field class="example-form-field">
-                <input matInput type="text" placeholder="Photo description" formControlName="photoDescription">
-                <button mat-button *ngIf="photoDescription" matSuffix mat-icon-button aria-label="Clear" (click)="photoDescription=''">
-                  <mat-icon>close</mat-icon>
-                </button>
-              </mat-form-field>
-              <!-- <div class="marg-top-10">
-                <label for="photoDescription">Photo description</label>
-                <input class="text" class="form-control" formControlName="photoDescription">
-              </div> -->
-            </form>
+            <mat-form-field class="example-form-field">
+              <input matInput type="text" placeholder="Photo description" formControlName="photoDescription">
+              <button mat-button *ngIf="photoDescription" matSuffix mat-icon-button aria-label="Clear" (click)="photoDescription=''">
+                <mat-icon>close</mat-icon>
+              </button>
+            </mat-form-field>
+            <!-- <div class="marg-top-10">
+              <label for="photoDescription">Photo description</label>
+              <input class="text" class="form-control" formControlName="photoDescription">
+            </div> -->
           </div>
           <div class="col-12 col-sm-2 col-md-3 col-lg-4 col-xl-4"></div>
         </div>

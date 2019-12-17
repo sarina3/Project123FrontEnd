@@ -1,3 +1,32 @@
+.exp-panel {
+    border: 1px solid #2196f3;
+}
+  
+.exp-panel-head {
+    background-color: #2196f3 !important;
+}
+.exp-panel-head:hover {
+    background-color: #2196f3 !important;
+}
+  
+.text-color {
+    color: white !important;
+}
+  
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+    flex-basis: 0;
+}
+  
+.example-headers-align .mat-expansion-panel-header-description {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.pad-20 {
+    padding: 20px;
+}
+
 /* @import '../../../styles.scss';
 
 .page{
