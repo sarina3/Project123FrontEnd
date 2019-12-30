@@ -1,6 +1,9 @@
 import { Component, ChangeDetectorRef, OnInit, OnDestroy } from '@angular/core';
 import { WindowConfigService } from './services/window-config.service';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+
+import { AuthService } from './services/auth.service';
+import { ThemeService } from './services/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -10,9 +13,13 @@ import { Subscription } from 'rxjs';
 export class AppComponent implements OnInit, OnDestroy {
 
   sub: Subscription;
+  isDarkTheme: Observable<boolean>;
 
   constructor(
-    private windowConfig: WindowConfigService, private change: ChangeDetectorRef
+    private auth: AuthService,
+    private windowConfig: WindowConfigService,
+    private change: ChangeDetectorRef,
+    private themeService: ThemeService
   ) {}
 
   ngOnInit() {
@@ -20,6 +27,7 @@ export class AppComponent implements OnInit, OnDestroy {
       console.log('called');
       this.change.detectChanges();
     });
+    this.isDarkTheme = this.themeService.isDarkTheme;
   }
 
   ngOnDestroy() {
@@ -28,5 +36,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
   get config() {
     return this.windowConfig.state;
+  }
+
+  toggleDarkTheme(checked: boolean) {
+    this.themeService.setDarkTheme(checked);
   }
 }

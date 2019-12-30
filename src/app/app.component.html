@@ -1,4 +1,29 @@
 <app-header></app-header>
-<div [class.container]="!config.contentFullscreen" [class.container-fluid]="config.contentFullscreen" class="override" #content>
-  <router-outlet></router-outlet>
+<!-- <div [class.container]="!config.contentFullscreen" [class.container-fluid]="config.contentFullscreen" class="override" #content> -->
+<div [ngClass]="{'dark-theme': isDarkTheme | async, 'light-theme': isDarkTheme | async}">
+  <div class="mat-app-background">
+    <mat-toolbar color="primary">
+      <mat-toolbar-row>
+        <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item routerLink="/home">Home</button>
+          <button mat-menu-item routerLink="/predict">Predict</button>
+          <button mat-menu-item routerLink="/training-session">Train session</button>
+          <button mat-menu-item routerLink="/testing-session">Test session</button>
+          <button mat-menu-item routerLink="/model" *ngIf="!auth.isLoggedIn()">Static models</button>
+          <button mat-menu-item routerLink="/my-models" *ngIf="auth.isLoggedIn()">My models</button>
+          <button mat-menu-item routerLink="/dataset/show">Dataset</button>
+          <button mat-menu-item routerLink="/dataset/new">Create dataset</button>
+          <button mat-menu-item routerLink="/new-model" *ngIf="auth.isLoggedIn()">Create model</button>
+          <button mat-menu-item routerLink="/about">About</button>
+          <button mat-menu-item routerLink="/login" *ngIf="!auth.isLoggedIn()">Login</button>
+          <button mat-menu-item *ngIf="auth.isLoggedIn()" (click)="auth.logout()">Log out</button>
+        </mat-menu>
+        <mat-icon>wb_sunny</mat-icon>
+        <mat-slide-toggle [checked]="isDarkTheme | async" (change)="toggleDarkTheme($event.checked)"></mat-slide-toggle>
+        <mat-icon>nights_stay</mat-icon>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <router-outlet></router-outlet>
+  </div>
 </div>
