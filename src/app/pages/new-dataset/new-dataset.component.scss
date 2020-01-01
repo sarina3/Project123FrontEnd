@@ -1,3 +1,16 @@
+input[type="file"] {
+  display: none;
+}
+
+button {
+  width: 100%;
+}
+
+.header {
+  font-size: 24px;
+  text-align: center;
+}
+
 /* @import '../../../styles.scss';
 
 .holder{

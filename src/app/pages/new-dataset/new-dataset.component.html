@@ -1,32 +1,66 @@
-<div class="holder">
+<div class="container">
+  <form [formGroup]="datasetForm">
+    <div class="row align-center">
+      <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-4 offset-lg-4 col-xl-4 offset-xl-4 header">
+        <mat-icon color="accent" class="icon">create_new_folder</mat-icon>
+        Create new dataset
+      </div>
+    </div>
+    <div class="row align-center marg-top-10">
+      <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-4 offset-lg-4 col-xl-4 offset-xl-4">
+        <mat-form-field class="full-width marg-10">
+          <input matInput type="text" placeholder="Dataset name" formControlName="name">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row align-center marg-top-10">
+      <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-4 offset-lg-4 col-xl-4 offset-xl-4">
+        <button mat-raised-button color="primary" (click)="metadata.click()">
+          <mat-icon color="accent">insert_drive_file</mat-icon>
+          Metadata file
+        </button>
+        <input type="file" name="metadata" id="metadata" accept=".csv" #metadata (change)="onMetadataChange($event)">
+        <label>{{ metadataName ? metadataName : 'No metadata file choosen'}}</label>
+      </div>
+    </div>
+    <div class="row align-center marg-top-10">
+      <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-4 offset-lg-4 col-xl-4 offset-xl-4">
+        <button mat-raised-button color="primary" (click)="images.click()">
+          <mat-icon color="accent">insert_photo</mat-icon>
+          Images
+        </button>
+        <input type="file" name="images" id="images" accept="image/*" #images multiple (change)="onImagesChange($event)">
+        <label>{{ 'Images count: ' + datasetForm.value.images.length }}
+        </label>
+      </div>
+    </div>
+    <div class="row align-center">
+      <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-4 offset-lg-4 col-xl-4 offset-xl-4">
+        <button mat-raised-button color="primary" (click)="onSubmit()">
+          <mat-icon color="accent">save</mat-icon>
+          Create dataset
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- <div class="holder">
   <div class="window">
     <h1>Create new dataset</h1>
-    <form [formGroup]="datasetForm" >
+    <form [formGroup]="datasetForm">
       <mat-form-field>
-          <input matInput placeholder="Dataset name" formControlName="name">
+        <input matInput placeholder="Dataset name" formControlName="name">
       </mat-form-field>
       <div class="form-group">
         <label for="metadata">Metadata file:</label>
-        <input
-          type="file"
-          name="metadata"
-          id="metadata"
-          accept=".csv"
-          (change)="onMetadataChange($event)"
-        >
+        <input type="file" name="metadata" id="metadata" accept=".csv" (change)="onMetadataChange($event)">
       </div>
       <div class="form-group">
         <label for="images">Images:</label>
-        <input
-          type="file"
-          name="images"
-          id="images"
-          accept="image/*"
-          multiple
-          (change)="onImagesChange($event)"
-        >
+        <input type="file" name="images" id="images" accept="image/*" multiple (change)="onImagesChange($event)">
       </div>
       <button mat-raised-button type="button" (click)="onSubmit()">Create dataset</button>
     </form>
   </div>
-</div>
+</div> -->
