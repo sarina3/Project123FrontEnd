@@ -4,10 +4,15 @@ import {
   Renderer2,
   ViewChild,
   ElementRef,
-  AfterViewInit
+  AfterViewInit,
+  Inject
 } from "@angular/core";
 import { ImagesService } from "src/app/services/images.service";
 import { ImageMetadata } from "src/app/model/image-metadata.model";
+
+import { Image } from '../../model/image';
+import { IMAGES } from '../../constants/images';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: "app-photo-viewer",
@@ -28,11 +33,15 @@ export class PhotoViewerComponent implements AfterViewInit, OnInit {
   indexLocal = 0;
   indexGlobal = 0;
 
+  images = IMAGES;
+
   metadata: ImageMetadata = { lastIndex: 0, all: 0, count: 10 };
   @ViewChild("presentation", { static: true }) presentation: ElementRef;
+  
   constructor(
     private renderer: Renderer2,
-    private imagesService: ImagesService
+    private imagesService: ImagesService,
+    public dialog: MatDialog
   ) {}
 
   get leftArrowEnabled() {
@@ -44,13 +53,14 @@ export class PhotoViewerComponent implements AfterViewInit, OnInit {
   }
 
   ngAfterViewInit() {
-    this.renderer.addClass(
+    /* this.renderer.addClass(
       this.presentation.nativeElement.children[this.indexLocal],
       "active"
-    );
+    ); */
   }
 
   ngOnInit() {
+    console.log(this.metadata);
     this.imagesService.getImages(this.metadata).subscribe(
       response => {
         console.log(response);
@@ -127,5 +137,37 @@ export class PhotoViewerComponent implements AfterViewInit, OnInit {
       const end = begin + 5;
       this.photos = this.allPhotos.slice(begin, end);
     }
+  }
+
+  openDialog(i: Image) {
+    this.dialog.open(DialogDataExampleDialogComponent, {
+      data: {
+        name: i.name,
+        metaClinicalAge_approx: i.metaClinicalAge_approx,
+        metaClinicalAnatom_site_general: i.metaClinicalAnatom_site_general,
+        metaClinicalBenign_malignant: i.metaClinicalBenign_malignant,
+        meta01X: i.meta01X,
+        metaClinicalDiagnosis: i.metaClinicalDiagnosis,
+        metaClinicalDiagnosis_confirm_type: i.metaClinicalDiagnosis_confirm_type,
+        metaClinicalMelanocytic: i.metaClinicalMelanocytic,
+        metaClinicalSex: i.metaClinicalSex
+      }
+    });
+  }
+}
+
+@Component({
+  selector: 'app-dialog-data-example-dialog',
+  templateUrl: 'dialog-data-example-dialog.html',
+})
+export class DialogDataExampleDialogComponent {
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogDataExampleDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Image
+  ) {}
+
+  closeModal(): void {
+    this.dialogRef.close();
   }
 }

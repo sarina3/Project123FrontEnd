@@ -32,7 +32,8 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { MaterialModule } from './material.module';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { WebCamModule } from 'ack-angular-webcam';
-
+// entry
+import { DialogDataExampleDialogComponent } from './components/photo-viewer/photo-viewer.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { WebCamModule } from 'ack-angular-webcam';
     PredictComponent,
     TestComponent,
     TrainComponent,
+    DialogDataExampleDialogComponent
   ],
   imports: [
     AppRoutingModule,
@@ -72,6 +74,9 @@ import { WebCamModule } from 'ack-angular-webcam';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
+  entryComponents: [
+    DialogDataExampleDialogComponent
   ],
   bootstrap: [AppComponent]
 })

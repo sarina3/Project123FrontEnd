@@ -1,28 +1,33 @@
 export class Image {
-    id: string;
+    // id: string;
     name: string;
     metaClinicalAge_approx: number;
     metaClinicalAnatom_site_general: string;
     metaClinicalBenign_malignant: string;
-    metaClinicalClin_size_long_diam_mm: any;
+    // metaClinicalClin_size_long_diam_mm: any;
+    meta01X: string;
     metaClinicalDiagnosis: string;
     metaClinicalDiagnosis_confirm_type: string;
+    /*
     metaClinicalFamily_hx_mm: any;
     metaClinicalMel_class: any;
     metaClinicalMel_mitotic_index: any;
     metaClinicalMel_thick_mm: any;
     metaClinicalMel_type: any;
     metaClinicalMel_ulcer: any;
+    */
     metaClinicalMelanocytic: boolean;
-    metaClinicalNevus_type: any;
-    metaClinicalPersonal_hx_mm: any;
+    // metaClinicalNevus_type: any;
+    // metaClinicalPersonal_hx_mm: any;
     metaClinicalSex: string;
+    /*
     metaAcquisitionDermoscopic_type: any;
     metaAcquisitionImage_type: string;
     metaAcquisitionPixelsX: number;
     metaAcquisitionPixelsY: number;
+    */
 
-    constructor(
+    /* constructor(
         id: string,
         name: string,
         metaClinicalAge_approx: number,
@@ -68,5 +73,5 @@ export class Image {
         this.metaAcquisitionImage_type = metaAcquisitionImage_type,
         this.metaAcquisitionPixelsX = metaAcquisitionPixelsX,
         this.metaAcquisitionPixelsY = metaAcquisitionPixelsY;
-    }
+    } */
 }

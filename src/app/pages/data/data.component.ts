@@ -24,7 +24,7 @@ export class DataComponent implements OnInit {
         keys.push({ key, value: image[key] });
       }
     }
-    this.image = new Image(
+    /* this.image = new Image(
       keys[0].value,
       keys[1].value,
       keys[2].value,
@@ -47,6 +47,6 @@ export class DataComponent implements OnInit {
       keys[19].value,
       keys[20].value,
       keys[21].value
-    );
+    ); */
   }
 }

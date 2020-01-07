@@ -1,0 +1,46 @@
+<h1 mat-dialog-title>Image detail</h1>
+<div mat-dialog-content>
+    <table class="table table-sm">
+        <tbody>
+        <tr>
+            <th>Name</th>
+            <td>{{ data.name }}</td>
+        </tr>
+        <tr>
+            <th>Age approx</th>
+            <td>{{ data.metaClinicalAge_approx }}</td>
+        </tr>
+        <tr>
+            <th>Anatom site general</th>
+            <td>{{ data.metaClinicalAnatom_site_general }}</td>
+        </tr>
+        <tr>
+            <th>Benign / malignant</th>
+            <td>{{ data.metaClinicalBenign_malignant }}</td>
+        </tr>
+        <tr>
+            <th>Meta 0 / 1 / X</th>
+            <td>{{ data.meta01X }}</td>
+        </tr>
+        <tr>
+            <th>Diagnosis</th>
+            <td>{{ data.metaClinicalDiagnosis }}</td>
+        </tr>
+        <tr>
+            <th>Diagnosis confirm type</th>
+            <td>{{ data.metaClinicalDiagnosis_confirm_type }}</td>
+        </tr>
+        <tr>
+            <th>Melanocytic</th>
+            <td>{{ data.metaClinicalMelanocytic }}</td>
+        </tr>
+        <tr>
+            <th>Sex</th>
+            <td>{{ data.metaClinicalSex }}</td>
+        </tr>
+    </table>
+    <img [src]="'../../assets/images/' + data.name" width="100%" style="padding-top: 10px">
+</div>
+<div mat-dialog-actions style="float: right; padding-right: 15px;">
+    <button mat-raised-button color="warn" (click)="closeModal()">Close modal</button>
+</div>
