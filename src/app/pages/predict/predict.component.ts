@@ -109,6 +109,10 @@ export class PredictComponent implements OnInit, OnDestroy {
     this.camera.getImage();
   }
 
+  uploadPhoto() {
+    document.getElementById('photo').click();
+  }
+
   onFilePick(event) {
     const reader = new FileReader();
     reader.onload = () => {

@@ -77,13 +77,19 @@
         <div class="row">
           <div class="col-12 col-sm-2 col-md-3 col-lg-4 col-xl-4"></div>
           <div class="col-12 col-sm-8 col-md-6 col-lg-4 col-xl-4 align-center marg-top-10">
-            <button mat-raised-button color="accent" class="cam-btn" *ngIf="!image" (click)="takePhoto()">
+            <button mat-raised-button color="primary" class="cam-btn" *ngIf="!image" (click)="takePhoto()">
+              <mat-icon color="accent">camera_alt</mat-icon>
               Take Photo
             </button>
-            <button mat-raised-button color="accent" class="cam-btn" *ngIf="!image" (click)="openFilePicker()">
+            <br>
+            <br>
+            <button mat-raised-button color="primary" class="cam-btn" (click)="uploadPhoto()">
+              <mat-icon color="accent">insert_drive_file</mat-icon>
               Upload Photo
             </button>
-            <button mat-raised-button color="accent" class="cam-btn" *ngIf="image" (click)="repeat()">
+            <input type="file" name="photo" id="photo" accept="image/*" *ngIf="!image" #photo (change)="onFilePick($event)">
+            <button mat-raised-button color="primary" class="cam-btn" *ngIf="image" (click)="repeat()">
+              <mat-icon color="accent">repeat</mat-icon>
               Repeat
             </button>
           </div>

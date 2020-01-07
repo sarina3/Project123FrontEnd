@@ -23,8 +23,8 @@
   align-items: center;
 }
 
-button {
-  width: 100px;
+input[type="file"] {
+  display: none;
 }
 
 .model {
@@ -39,9 +39,10 @@ button {
 }
 
 .cam-btn {
+  
   margin-left: 10px !important;
   margin-right: 10px !important;
-  width: 120px;
+  width: 140px;
 }
 
 /* @import '../../../styles.scss';
