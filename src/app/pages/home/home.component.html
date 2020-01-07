@@ -1,4 +1,16 @@
-<div>
-    Znamienkový klasifikátor
-    TO DO - sem pridať nejaké info
+<div class="container">
+    <mat-grid-list cols="4" rowHeight="100px">
+        <mat-grid-tile *ngFor="let tile of tiles" 
+            class="tile pointer"
+            [colspan]="tile.cols" 
+            [rowspan]="tile.rows"
+            [style.background]="tile.color"
+            [routerLink]="tile.routerLink"
+        >
+            <mat-icon class="icon" color="accent" >{{ tile.icon }}</mat-icon>
+            <span class="text">{{ tile.text }}</span>
+            <br>
+            <!-- {{ tile.description }} -->
+        </mat-grid-tile>
+    </mat-grid-list>
 </div>
