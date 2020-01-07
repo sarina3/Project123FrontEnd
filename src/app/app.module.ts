@@ -32,8 +32,9 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { MaterialModule } from './material.module';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { WebCamModule } from 'ack-angular-webcam';
-// entry
-import { DialogDataExampleDialogComponent } from './components/photo-viewer/photo-viewer.component';
+// entries
+import { ImageDetailComponent } from './components/photo-viewer/photo-viewer.component';
+import { LayerDetailComponent } from './components/cards/cards.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,9 @@ import { DialogDataExampleDialogComponent } from './components/photo-viewer/phot
     PredictComponent,
     TestComponent,
     TrainComponent,
-    DialogDataExampleDialogComponent
+    // entries
+    ImageDetailComponent,
+    LayerDetailComponent
   ],
   imports: [
     AppRoutingModule,
@@ -76,7 +79,8 @@ import { DialogDataExampleDialogComponent } from './components/photo-viewer/phot
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   entryComponents: [
-    DialogDataExampleDialogComponent
+    ImageDetailComponent,
+    LayerDetailComponent
   ],
   bootstrap: [AppComponent]
 })

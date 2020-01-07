@@ -37,7 +37,7 @@ export class PhotoViewerComponent implements AfterViewInit, OnInit {
 
   metadata: ImageMetadata = { lastIndex: 0, all: 0, count: 10 };
   @ViewChild("presentation", { static: true }) presentation: ElementRef;
-  
+
   constructor(
     private renderer: Renderer2,
     private imagesService: ImagesService,
@@ -65,7 +65,7 @@ export class PhotoViewerComponent implements AfterViewInit, OnInit {
       response => {
         console.log(response);
         this.photos = [];
-        let tmp = [];
+        const tmp = [];
         response.data.forEach(element => {
           tmp.push({ src: "data:image/jpg;base64," + element });
         });
@@ -131,7 +131,7 @@ export class PhotoViewerComponent implements AfterViewInit, OnInit {
   }
 
   prevPhotos() {
-    if (this.indexGlobal != 0) {
+    if (this.indexGlobal !== 0) {
       this.indexGlobal--;
       const begin = this.indexGlobal * 5;
       const end = begin + 5;
@@ -140,7 +140,7 @@ export class PhotoViewerComponent implements AfterViewInit, OnInit {
   }
 
   openDialog(i: Image) {
-    this.dialog.open(DialogDataExampleDialogComponent, {
+    this.dialog.open(ImageDetailComponent, {
       data: {
         name: i.name,
         metaClinicalAge_approx: i.metaClinicalAge_approx,
@@ -157,13 +157,13 @@ export class PhotoViewerComponent implements AfterViewInit, OnInit {
 }
 
 @Component({
-  selector: 'app-dialog-data-example-dialog',
-  templateUrl: 'dialog-data-example-dialog.html',
+  selector: 'app-image-detail-dialog',
+  templateUrl: 'image-detail-dialog.html',
 })
-export class DialogDataExampleDialogComponent {
+export class ImageDetailComponent {
 
   constructor(
-    public dialogRef: MatDialogRef<DialogDataExampleDialogComponent>,
+    public dialogRef: MatDialogRef<ImageDetailComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Image
   ) {}
 

@@ -1,4 +1,186 @@
-<div class="cards-wrapper">
+<div class="container">
+  <mat-toolbar color="primary">
+    <mat-icon class="icon" color="accent">apps</mat-icon>
+    Models
+  </mat-toolbar>
+  <div class="row">
+    <div *ngFor="let model of models; let i = index" class="model col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3">
+      <mat-toolbar class="pointer" color="primary" (click)="select(i)">
+        <div>
+          <mat-icon color="accent">language</mat-icon>
+          {{ model.header.Name }}
+        </div>
+      </mat-toolbar>
+      <table>
+        <tr>
+          <th>Type</th>
+          <td>{{ model.header.ModelType }}</td>
+        </tr>
+        <tr>
+          <th>Accuracy</th>
+          <td>{{ model.accuracy }} %</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div *ngIf="selectedObj">
+    <mat-toolbar color="primary">
+      <mat-icon color="accent">details</mat-icon>
+      Selected model
+    </mat-toolbar>
+    <div class="row">
+      <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 marg-top-10">
+        <div class="table-header">
+          <mat-icon color="primary">description</mat-icon>
+          Model header
+        </div>
+        <table class="table table-sm table-condensed">
+          <tbody>
+            <tr>
+              <th>Id</th>
+              <td>{{ selectedObj.model_header.ModelId }}</td>
+            </tr>
+            <tr>
+              <th>Name</th>
+              <td>{{ selectedObj.model_header.Name }}</td>
+            </tr>
+            <tr>
+              <th>Type</th>
+              <td>{{ selectedObj.model_header.ModelType }}</td>
+            </tr>
+            <tr>
+              <th>Accuracy</th>
+              <td>{{ selectedObj.model_header.Accuracy * 100 }} %</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 marg-top-10">
+        <span class="table-header">
+          <mat-icon color="primary">photo_library</mat-icon>
+          Dataset and images
+        </span>
+        <table class="table table-sm table-condensed">
+          <tbody>
+            <tr>
+              <th>Dataset name</th>
+              <td>{{ selectedObj.data_header.DatasetUsed }}</td>
+            </tr>
+            <tr>
+              <th>Dataset description</th>
+              <td>{{ selectedObj.data_header.DatasetDesc }}</td>
+            </tr>
+            <tr>
+              <th>Photo count</th>
+              <td>{{ selectedObj.data_header['All photo count'] }}</td>
+            </tr>
+            <tr>
+              <th>Photo size</th>
+              <td>{{ selectedObj.data_header['IMG size'] }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 marg-top-10">
+        <span class="table-header">
+          <mat-icon color="primary">restore</mat-icon>
+          Images - train
+        </span>
+        <table class="table table-sm table-condensed">
+          <tbody>
+            <tr>
+              <th>Bening</th>
+              <td class="number">{{ selectedObj.data_header['TRAIN - bening'] }}</td>
+            </tr>
+            <tr>
+              <th>Malig</th>
+              <td class="number">{{ selectedObj.data_header['TRAIN - malig'] }}</td>
+            </tr>
+            <tr>
+              <th>Unspecified</th>
+              <td class="number">{{ selectedObj.data_header['TRAIN - unspecified'] }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 marg-top-10">
+        <span class="table-header">
+          <mat-icon color="primary">build</mat-icon>
+          Images - test
+        </span>
+        <table class="table table-sm table-condensed">
+          <tbody>
+            <tr>
+              <th>Bening</th>
+              <td class="number">{{ selectedObj.data_header['TEST - bening'] }}</td>
+            </tr>
+            <tr>
+              <th>Malig</th>
+              <td class="number">{{ selectedObj.data_header['TEST - malig'] }}</td>
+            </tr>
+            <tr>
+              <th>Unspecified</th>
+              <td class="number">{{ selectedObj.data_header['TEST - unspecified'] }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 marg-top-10">
+        <span class="table-header">
+          <mat-icon color="primary">check</mat-icon>
+          Images - valid
+        </span>
+        <table class="table table-sm table-condensed">
+          <tbody>
+            <tr>
+              <th>Bening</th>
+              <td class="number">{{ selectedObj.data_header['VALID - bening'] }}</td>
+            </tr>
+            <tr>
+              <th>Malig</th>
+              <td class="number">{{ selectedObj.data_header['VALID - malig'] }}</td>
+            </tr>
+            <tr>
+              <th>Unspecified</th>
+              <td class="number">{{ selectedObj.data_header['VALID - unspecified'] }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row">
+      <svg [attr.width.px]="width" [attr.height.px]="height" overflow="scroll">
+        <circle *ngFor="let node of nodes" (click)="layerDetail(node.layer)"
+          [attr.cx]="node.x"
+          [attr.cy]="node.y"
+          [attr.r]="node.r"
+          [attr.fill]="'#2196f3'">
+        </circle>
+        <line *ngFor="let line of lines"
+          [attr.x1]="line.x1"
+          [attr.y1]="line.y1"
+          [attr.x2]="line.x2"
+          [attr.y2]="line.y2"
+          [attr.stroke]="'#2196f3'"
+          [attr.stroke-width]="2">
+        </line>
+        <text *ngFor="let text of texts" (click)="layerDetail(text.layer)"
+          [attr.x]="text.x - 8" 
+          [attr.y]="text.y + 5" 
+          [style.fill]="'white'">
+          {{ text.text }}
+        </text>
+      </svg>
+    </div>
+    <div class="row">
+      <button mat-raised-button color="accent" routerLink="/training-session">Train model</button>
+      <button mat-raised-button color="accent" routerLink="/testing-session">Test model</button>
+      <button mat-raised-button color="accent" routerLink="/predict">Predict</button>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="cards-wrapper">
   <div class="left">
     <h2 class="w-100 text-center header-models">Models</h2>
     <mat-card *ngFor="let model of models; let i = index" [ngClass]="{'selected': selected === i}" (click)="select(i)">
@@ -33,24 +215,6 @@
           <h4>Layer Info</h4>
           <div *ngIf="selectedLayer > -1" class="info-content">
             <span>Layer Number: {{selectedLayer + 1}}</span>
-<!--            <span class="image-with-label">Input image dimension:-->
-<!--              <div class="image">-->
-<!--                <span class="x">{{selectedLayerObj.inputSizeX}}</span>-->
-<!--                <div class="bottom">-->
-<!--                  <span class="y">{{selectedLayerObj.inputSizeY}}</span>-->
-<!--                  <div class="rectangle">-->
-<!--                      <div class="rec-row">-->
-<!--                        <div class="rec-col"></div>-->
-<!--                        <div class="rec-col"></div>-->
-<!--                      </div>-->
-<!--                      <div class="rec-row">-->
-<!--                        <div class="rec-col"></div>-->
-<!--                        <div class="rec-col"></div>-->
-<!--                      </div>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </span>-->
             <span class="image-with-label">kernel dimension:
               <div class="image">
                 <span class="x">{{getKernelSize()[0]}}</span>
@@ -108,4 +272,4 @@
       </ng-template>
     </div>
   </div>
-</div>
+</div> -->

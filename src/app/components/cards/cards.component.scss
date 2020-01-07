@@ -1,3 +1,36 @@
+.model {
+    padding-top: 30px;
+    padding-bottom: 15px;
+}
+
+.inline-table {
+    display: inline-block;
+}
+
+table {
+    width: 100%;
+}
+
+.table-header {
+    font-size: 20px;
+}
+
+th, td {
+    padding: 5px;
+}
+
+.number {
+    text-align: right;
+}
+
+circle:hover, text:hover {
+    cursor: pointer;
+}
+
+button {
+    margin: 5px;
+}
+
 /* @import '../../../styles.scss';
 
 .cards-wrapper{
