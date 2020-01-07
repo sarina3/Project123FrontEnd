@@ -27,6 +27,14 @@ html, body {
     margin-top: 10px;
 }
 
+.icon {
+    margin: 5px;
+}
+
+.pointer:hover {
+    cursor: pointer;
+}
+
 /* $white-half: rgba(#ffffff, 0.5);
 $white: white;
 $light-gray: #b9b3b3;

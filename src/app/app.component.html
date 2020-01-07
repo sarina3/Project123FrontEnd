@@ -3,8 +3,22 @@
 <div [ngClass]="{'dark-theme': isDarkTheme | async, 'light-theme': isDarkTheme | async}">
   <div class="mat-app-background">
     <mat-toolbar color="primary">
-      <mat-toolbar-row>
-        <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+      <mat-toolbar-row class="align-right">
+        <div>
+          <mat-icon class="icon pointer" matTooltip="Home" routerLink="/home">home</mat-icon>
+          <mat-icon class="icon pointer" matTooltip="Predict" routerLink="/predict">insert_photo</mat-icon>
+          <mat-icon class="icon pointer" matTooltip="Train session" routerLink="/training-session">restore</mat-icon>
+          <mat-icon class="icon pointer" matTooltip="Test session" routerLink="/testing-session">build</mat-icon>
+          <mat-icon class="icon pointer" matTooltip="Dataset" routerLink="/dataset/show">perm_media</mat-icon>
+          <mat-icon class="icon pointer" matTooltip="Create dataset" routerLink="/dataset/new">create_new_folder</mat-icon>
+
+          <mat-icon class="icon pointer" matTooltip="My models" routerLink="/my-models" *ngIf="auth.isLoggedIn()">folder</mat-icon>
+          <mat-icon class="icon pointer" matTooltip="Create model" routerLink="/new-model" *ngIf="auth.isLoggedIn()">add_circle_outline</mat-icon>
+
+          <mat-icon class="icon pointer" matTooltip="Static models" routerLink="/model" *ngIf="!auth.isLoggedIn()">folder_shared</mat-icon>
+          <mat-icon class="icon pointer" matTooltip="About" routerLink="/about">info</mat-icon>
+        </div>
+        <!-- <button mat-button [matMenuTriggerFor]="menu">Menu</button>
         <mat-menu #menu="matMenu">
           <button mat-menu-item routerLink="/home">Home</button>
           <button mat-menu-item routerLink="/predict">Predict</button>
@@ -18,10 +32,15 @@
           <button mat-menu-item routerLink="/about">About</button>
           <button mat-menu-item routerLink="/login" *ngIf="!auth.isLoggedIn()">Login</button>
           <button mat-menu-item *ngIf="auth.isLoggedIn()" (click)="auth.logout()">Log out</button>
-        </mat-menu>
-        <mat-icon>wb_sunny</mat-icon>
-        <mat-slide-toggle [checked]="isDarkTheme | async" (change)="toggleDarkTheme($event.checked)"></mat-slide-toggle>
-        <mat-icon>nights_stay</mat-icon>
+        </mat-menu> -->
+        <div class="theme">
+          <mat-icon class="icon pointer" (click)="toggleDarkTheme($event.checked)">wb_sunny</mat-icon>
+          <mat-slide-toggle [checked]="isDarkTheme | async" (change)="toggleDarkTheme($event.checked)">
+          </mat-slide-toggle>
+          <mat-icon class="icon pointer">nights_stay</mat-icon>
+          <mat-icon class="icon pointer" matTooltip="Login" routerLink="/login" *ngIf="!auth.isLoggedIn()">account_circle</mat-icon>
+          <mat-icon class="icon pointer" matTooltip="Logout" (click)="auth.logout()" *ngIf="auth.isLoggedIn()">power_settings_new</mat-icon>
+        </div>
       </mat-toolbar-row>
     </mat-toolbar>
     <router-outlet></router-outlet>
