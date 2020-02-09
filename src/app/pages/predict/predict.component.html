@@ -67,6 +67,8 @@
                 <mat-icon>close</mat-icon>
               </button>
             </mat-form-field>
+            <img *ngIf="image" [src]="image" class="uploaded">
+            <img *ngIf="image" [src]="image" class="cropped">
             <!-- <div class="marg-top-10">
               <label for="photoDescription">Photo description</label>
               <input class="text" class="form-control" formControlName="photoDescription">
@@ -83,11 +85,11 @@
             </button>
             <br>
             <br>
-            <button mat-raised-button color="primary" class="cam-btn" (click)="uploadPhoto()">
+            <button *ngIf="!image" mat-raised-button color="primary" class="cam-btn" (click)="uploadPhoto()">
               <mat-icon color="accent">insert_drive_file</mat-icon>
               Upload Photo
             </button>
-            <input type="file" name="photo" id="photo" accept="image/*" *ngIf="!image" #photo (change)="onFilePick($event)">
+            <input type="file" name="photo" id="photo" accept="image/*" *ngIf="!image" #photo (click)="photo.value = null" (change)="onFilePick($event)">
             <button mat-raised-button color="primary" class="cam-btn" *ngIf="image" (click)="repeat()">
               <mat-icon color="accent">repeat</mat-icon>
               Repeat

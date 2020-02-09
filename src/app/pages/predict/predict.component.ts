@@ -113,17 +113,28 @@ export class PredictComponent implements OnInit, OnDestroy {
     document.getElementById('photo').click();
   }
 
-  onFilePick(event) {
-    const reader = new FileReader();
+  onFilePick(event: any) {
+
+    /* const reader = new FileReader();
     reader.onload = () => {
       // console.log(reader.result)
       this.image = reader.result;
-      console.log(this.image);
       this.predictForm.get('photo').setValue(this.image);
-
     };
-    console.log(event);
-    reader.readAsDataURL(event.target.files[0]);
+    reader.readAsDataURL(event.target.files[0]); */
+
+    if (event.target.files && event.target.files[0]) {
+      let image = null;
+      const file: File = event.target.files[0];
+      const reader: FileReader = new FileReader();
+
+      reader.onloadend = (e) => {
+        image = reader.result as string;
+        this.image = image;
+        this.predictForm.get('photo').setValue(image);
+      };
+      reader.readAsDataURL(file);
+    }
   }
 
   repeat() {
