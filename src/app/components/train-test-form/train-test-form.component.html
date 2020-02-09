@@ -1,10 +1,269 @@
+<div class="container">
+  <mat-toolbar color="primary">
+    <mat-icon class="icon" color="accent">apps</mat-icon>
+    Models
+  </mat-toolbar>
+  <form [formGroup]="form">
+    <div class="row">
+      <div *ngFor="let model of models; let i = index" class="model col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+        <mat-toolbar class="pointer" color="primary" (click)="select(i)">
+          <div>
+            <mat-icon color="accent">language</mat-icon>
+            {{ model.header.Name }}
+          </div>
+        </mat-toolbar>
+        <table>
+          <tr>
+            <th>Type</th>
+            <td>{{ model.header.ModelType }}</td>
+          </tr>
+          <tr>
+            <th>Accuracy</th>
+            <td>{{ model.accuracy }} %</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </form>
+  <div *ngIf="data">
+    <mat-toolbar color="primary">
+      <mat-icon color="accent">details</mat-icon>
+      Selected model
+    </mat-toolbar>
+    <div class="row">
+      <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 marg-top-10">
+        <div class="table-header">
+          <mat-icon color="primary">restore</mat-icon>
+          Training
+        </div>
+        <table class="table table-sm table-condensed">
+          <tbody>
+            <tr>
+              <th>Training time</th>
+              <td class="right">{{ pageTrain ? 
+                data.training_session.model_header.training.TrainingTime :
+                data.testing_session.model_header.training.TrainingTime }}
+              </td>
+            </tr>
+            <tr>
+              <th>Accuracy</th>
+              <td class="right">{{ pageTrain ? 
+                data.training_session.model_header.training.Accuracy * 100 :
+                data.testing_session.model_header.training.Accuracy * 100 | number:'1.0-2' }} %</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 marg-top-10">
+        <div class="table-header">
+          <mat-icon color="primary">build</mat-icon>
+          Testing
+        </div>
+        <table class="table table-sm table-condensed">
+          <tbody>
+            <tr>
+              <th>Accuracy</th>
+              <td class="right">{{ pageTrain ? 
+                data.training_session.model_header.testing.Accuracy * 100 :
+                data.testing_session.model_header.testing.Accuracy * 100 | number:'1.0-2' }} %
+              </td>
+            </tr>
+            <tr>
+              <th>Specificity</th>
+              <td class="right">{{ pageTrain ? 
+                data.training_session.model_header.testing.Specificity :
+                data.testing_session.model_header.testing.Specificity | number:'1.0-2' }}</td>
+            </tr>
+            <tr>
+              <th>Senzitivity</th>
+              <td class="right">{{ pageTrain ? 
+                data.training_session.model_header.testing.Senzitivity :
+                data.testing_session.model_header.testing.Senzitivity | number:'1.0-2' }}</td>
+            </tr>
+            <tr>
+              <th>True negatives</th>
+              <td class="right">{{ pageTrain ? 
+                data.training_session.model_header.testing.TrueNegatives :
+                data.testing_session.model_header.testing.TrueNegatives | number:'1.0-2' }}</td>
+            </tr>
+            <tr>
+              <th>False positives</th>
+              <td class="right">{{ pageTrain ? 
+                data.training_session.model_header.testing.FalsePositives :
+                data.testing_session.model_header.testing.FalsePositives | number:'1.0-2' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 marg-top-10">
+        <span class="table-header">
+          <mat-icon color="primary">photo_library</mat-icon>
+          Dataset and images
+        </span>
+        <table class="table table-sm table-condensed">
+          <tbody>
+            <tr>
+              <th>Dataset name</th>
+              <td class="right">{{ pageTrain ? 
+                data.training_session.dataset_header.DatasetUsed :
+                data.testing_session.dataset_header.DatasetUsed }}</td>
+            </tr>
+            <tr>
+              <th>Dataset description</th>
+              <td class="right">{{ pageTrain ? 
+                data.training_session.dataset_header.DatasetDesc :
+                data.testing_session.dataset_header.DatasetDesc }}</td>
+            </tr>
+            <tr>
+              <th>Photo count</th>
+              <td class="right">{{ pageTrain ? 
+                data.training_session.dataset_header['All photo count'] :
+                data.testing_session.dataset_header['All photo count'] }}</td>
+            </tr>
+            <tr>
+              <th>Photo size</th>
+              <td class="right">{{ pageTrain ? 
+                data.training_session.dataset_header['IMG size'] :
+                data.testing_session.dataset_header['IMG size'] }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 marg-top-10">
+        <span class="table-header">
+          <mat-icon color="primary">restore</mat-icon>
+          Images - train
+        </span>
+        <table class="table table-sm table-condensed">
+          <tbody>
+            <tr>
+              <th>Bening</th>
+              <td class="right">{{ pageTrain ? 
+                data.training_session.dataset_header['TRAIN - bening'] :
+                data.testing_session.dataset_header['TRAIN - bening'] }}</td>
+            </tr>
+            <tr>
+              <th>Malig</th>
+              <td class="right">{{ pageTrain ? 
+                data.training_session.dataset_header['TRAIN - malig'] :
+                data.testing_session.dataset_header['TRAIN - malig'] }}</td>
+            </tr>
+            <tr>
+              <th>Unspecified</th>
+              <td class="right">{{ pageTrain ? 
+                data.training_session.dataset_header['TRAIN - unspecified'] :
+                data.testing_session.dataset_header['TRAIN - unspecified'] }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 marg-top-10">
+        <span class="table-header">
+          <mat-icon color="primary">build</mat-icon>
+          Images - test
+        </span>
+        <table class="table table-sm table-condensed">
+          <tbody>
+            <tr>
+              <th>Bening</th>
+              <td class="right">{{ pageTrain ? 
+                data.training_session.dataset_header['TEST - bening'] :
+                data.testing_session.dataset_header['TEST - bening'] }}</td>
+            </tr>
+            <tr>
+              <th>Malig</th>
+              <td class="right">{{ pageTrain ? 
+                data.training_session.dataset_header['TEST - malig'] :
+                data.testing_session.dataset_header['TEST - malig'] }}</td>
+            </tr>
+            <tr>
+              <th>Unspecified</th>
+              <td class="right">{{ pageTrain ? 
+                data.training_session.dataset_header['TEST - unspecified'] :
+                data.testing_session.dataset_header['TEST - unspecified'] }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 marg-top-10">
+        <span class="table-header">
+          <mat-icon color="primary">check</mat-icon>
+          Images - valid
+        </span>
+        <table class="table table-sm table-condensed">
+          <tbody>
+            <tr>
+              <th>Bening</th>
+              <td class="right">{{ pageTrain ? 
+                data.training_session.dataset_header['VALID - bening'] :
+                data.testing_session.dataset_header['VALID - bening'] }}</td>
+            </tr>
+            <tr>
+              <th>Malig</th>
+              <td class="right">{{ pageTrain ? 
+                data.training_session.dataset_header['VALID - malig'] :
+                data.testing_session.dataset_header['VALID - malig'] }}</td>
+            </tr>
+            <tr>
+              <th>Unspecified</th>
+              <td class="right">{{ pageTrain ? 
+                data.training_session.dataset_header['VALID - unspecified'] :
+                data.testing_session.dataset_header['VALID - unspecified'] }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!--
+    <div class="row">
+      <svg [attr.width.px]="width" [attr.height.px]="height" overflow="scroll">
+        <circle *ngFor="let node of nodes" (click)="layerDetail(node.layer)"
+          [attr.cx]="node.x"
+          [attr.cy]="node.y"
+          [attr.r]="node.r"
+          [attr.fill]="'#2196f3'">
+        </circle>
+        <line *ngFor="let line of lines"
+          [attr.x1]="line.x1"
+          [attr.y1]="line.y1"
+          [attr.x2]="line.x2"
+          [attr.y2]="line.y2"
+          [attr.stroke]="'#2196f3'"
+          [attr.stroke-width]="2">
+        </line>
+        <text *ngFor="let text of texts" (click)="layerDetail(text.layer)"
+          [attr.x]="text.x - 8" 
+          [attr.y]="text.y + 5" 
+          [style.fill]="'white'">
+          {{ text.text }}
+        </text>
+      </svg>
+    </div>
+    <div class="row">
+      <button mat-raised-button color="accent" routerLink="/training-session">Train model</button>
+      <button mat-raised-button color="accent" routerLink="/testing-session">Test model</button>
+      <button mat-raised-button color="accent" routerLink="/predict">Predict</button>
+    </div>
+    -->
+    <mat-toolbar color="primary">
+    <mat-icon color="accent">show_chart</mat-icon>
+      Graphs
+    </mat-toolbar>
+    <ng-container *ngTemplateOutlet="template">
+    </ng-container>
+  </div>
+</div>
+
+<!-- 
 <div class="holder">
   <div class="network-picker">
     <h2 class="w-100 text-center header-models">{{title}}</h2>
     <div class="network-option-wrapper">
       <form [formGroup]="form">
         <mat-card *ngFor="let model of models; let i = index" [ngClass]="{'selected': selected === i}" class="card"
-                  (click)="select(i)">
+          (click)="select(i)">
           <mat-card-header class="header">
             <div class="card-content">
               <h3 class="left">{{model.header.ModelType}}</h3>
@@ -22,11 +281,12 @@
 
   </ng-container>
 </div>
+-->
 
-<ng-template #errormessage >
+<ng-template #errormessage>
   <div class="train-data">
     <div class="error">
-      <h1 style="color:red" >{{errorMessage}}</h1>
+      <h1 style="color:red">{{ errorMessage }}</h1>
       <button mat-raised-button (click)="openLiveTraining()">Show live training</button>
     </div>
   </div>
@@ -34,111 +294,165 @@
 
 <ng-template #train>
   <div class="train-data">
+    <!-- 
     <div class="train-content" *ngIf="showCharts">
       <div class="left">
         <h4>Dataset Information</h4>
         <span *ngFor="let item of getKeys('data_header')">
-                    {{item}}:&nbsp;{{dataToShow.model_info.data_header[item]}}
-                  </span>
+          {{item}}:&nbsp;{{dataToShow.model_info.data_header[item]}}
+        </span>
       </div>
       <div class="right">
         <h4>Model Information</h4>
         <span *ngFor="let item of getKeys('model_header')">
-                  {{item}}:&nbsp;{{dataToShow.model_info.model_header[item]}}
-                </span>
+          {{item}}:&nbsp;{{dataToShow.model_info.model_header[item]}}
+        </span>
       </div>
     </div>
+    -->
+
+    <div class="selectChart">
+      <mat-form-field>
+        <mat-label>Graf</mat-label>
+        <mat-select [(value)]="selectedGraf" (selectionChange)="updateChartOptions($event)">
+          <mat-option value="1">Presnost - Trenovacia m.</mat-option>
+          <mat-option value="2">Presnost - Validacna m.</mat-option>
+          <mat-option value="3">Strata - Trenovacia m.</mat-option>
+          <mat-option value="4">Strata - Validacna m.</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
     <div class="charts">
-      <google-chart
-        *ngIf="showCharts"
-        [title]="'accuracy train vs test'"
-        [type]="'LineChart'"
-        [data]="chartData1"
-        [firstRowIsData]="true"
+      <google-chart *ngIf="selectedGraf == '1' && showCharts" 
+        [title]="'Presnost - Trenovacia mnozina'"
+        [type]="'LineChart'" 
+        [data]="chartData1" 
+        [firstRowIsData]="true" 
         [columnNames]="columnNames1"
-        [options]="options"
-        [dynamicResize]="true"
-      >
+        [options]="options" 
+        [dynamicResize]="true">
       </google-chart>
-      <google-chart
-        *ngIf="showCharts"
-        [title]="'loss train vs test'"
-        [type]="'LineChart'"
-        [data]="chartData2"
-        [firstRowIsData]="true"
+      <google-chart *ngIf="selectedGraf == '2' && showCharts" 
+        [title]="'Presnost - Validacna mnozina'"
+        [type]="'LineChart'" 
+        [data]="chartData2" 
+        [firstRowIsData]="true" 
         [columnNames]="columnNames2"
-        [options]="options"
-        [dynamicResize]="true"
-      >
+        [options]="options" 
+        [dynamicResize]="true">
+      </google-chart>
+      <google-chart *ngIf="selectedGraf == '3' && showCharts" 
+        [title]="'Strata - Trenovacia mnozina'"
+        [type]="'LineChart'" 
+        [data]="chartData3" 
+        [firstRowIsData]="true" 
+        [columnNames]="columnNames1"
+        [options]="options" 
+        [dynamicResize]="true">
+      </google-chart>
+      <google-chart *ngIf="selectedGraf == '4' && showCharts" 
+        [title]="'Strata - Validacna mnozina'"
+        [type]="'LineChart'" 
+        [data]="chartData4" 
+        [firstRowIsData]="true" 
+        [columnNames]="columnNames2"
+        [options]="options" 
+        [dynamicResize]="true">
       </google-chart>
     </div>
+
     <button mat-raised-button (click)="trainModel()" class="train-btn">Train</button>
   </div>
 </ng-template>
 
 <ng-template #test>
   <div class="test-data">
-      <div class="test-content" *ngIf="showCharts">
-        <div class="left">
-          <h4>Dataset Information</h4>
-          <span *ngFor="let item of getTestKeys('dataset_header',false)">
-              {{item}}:&nbsp;{{testDataToShow.testing_session.dataset_header[item]}}
-            </span>
-        </div>
-        <div class="right">
-          <h4>Model Information</h4>
-          <div>
-            <h5>Training results</h5>
-            <span *ngFor="let item of getTestKeys('training',true)">
-                {{item}}:&nbsp;{{testDataToShow.testing_session.model_header.training[item]}}
-              </span>
-          </div>
-          <div>
-            <h5>Testing results</h5>
-            <span *ngFor="let item of getTestKeys('testing',true)">
-                {{item}}:&nbsp;{{testDataToShow.testing_session.model_header.testing[item] * 100}}
-              %</span>
-          </div>
-        </div>
+    <div class="test-content" *ngIf="showCharts">
+      <div class="selectChart">
+        <mat-form-field>
+          <mat-label>Graf</mat-label>
+          <mat-select [(value)]="selectedGraf" (selectionChange)="updateChartOptions($event)">
+            <mat-option value="5">Specificita a Senzitivita</mat-option>
+            <mat-option value="6">Skutocne negativny a Falosne negativny</mat-option>
+            <mat-option value="7">Skutocne pozitivny a Falosne pozitivny</mat-option>
+            <mat-option value="8">Uspesnost</mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
+      <div class="charts">
+        <google-chart *ngIf="selectedGraf == '5' && showCharts" 
+          [title]="'Specificita a Senzitivita'"
+          [type]="'ColumnChart'" 
+          [data]="chartData5" 
+          [firstRowIsData]="true" 
+          [columnNames]="columnNames5"
+          [options]="options" 
+          [dynamicResize]="true">
+        </google-chart>
+        <google-chart *ngIf="selectedGraf == '6' && showCharts" 
+          [title]="'Skutocne negativny a falosne negativny'"
+          [type]="'ColumnChart'" 
+          [data]="chartData6" 
+          [firstRowIsData]="true" 
+          [columnNames]="columnNames6"
+          [options]="options" 
+          [dynamicResize]="true">
+        </google-chart>
+        <google-chart *ngIf="selectedGraf == '7' && showCharts" 
+          [title]="'Skutocne pozitivny a falosne pozitivny'"
+          [type]="'ColumnChart'" 
+          [data]="chartData7" 
+          [firstRowIsData]="true" 
+          [columnNames]="columnNames7"
+          [options]="options" 
+          [dynamicResize]="true">
+        </google-chart>
+        <google-chart *ngIf="selectedGraf == '8' && showCharts" 
+          [title]="'Uspesnost'" 
+          [type]="'ColumnChart'"
+          [data]="chartData8" 
+          [firstRowIsData]="true" 
+          [columnNames]="columnNames8" 
+          [options]="options"
+          [dynamicResize]="true">
+        </google-chart>
+      </div>
+    </div>
 
-      <div class="images">
-        <h4 class="w-100 text-center">Dataset preview</h4>
-        <div class="image-wrapper" *ngFor="let img of photos">
-          <div class="image">
-            <img
-              src="https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
-          </div>
-          <div class="predict-result">
-            <h2>75%</h2>
-          </div>
-          <div class="metadata">
-            <span>
-              <span class="bold">Age:&nbsp;</span>
-              <span>26</span>
-            </span>
-            <span>
-              <span class="bold">Gender:&nbsp;</span>
-                <span>Male</span>
-            </span>
-            <span>
-              <span class="bold">Classified as:&nbsp;</span>
-                <span>Beningn</span>
-            </span>
-          </div>
+    <!-- <div class="images">
+      <h4 class="w-100 text-center">Dataset preview</h4>
+      <div class="image-wrapper" *ngFor="let img of photos">
+        <div class="image">
+          <img
+            src="https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500">
+        </div>
+        <div class="predict-result">
+          <h2>75%</h2>
+        </div>
+        <div class="metadata">
+          <span>
+            <span class="bold">Age:&nbsp;</span>
+            <span>26</span>
+          </span>
+          <span>
+            <span class="bold">Gender:&nbsp;</span>
+            <span>Male</span>
+          </span>
+          <span>
+            <span class="bold">Classified as:&nbsp;</span>
+            <span>Beningn</span>
+          </span>
         </div>
       </div>
-      <button mat-raised-button (click)="trainModel()" class="train-btn">Test</button>
+    </div> -->
+    <button mat-raised-button (click)="trainModel()" class="train-btn">Test</button>
   </div>
 </ng-template>
 
 
 <ng-template #live>
   <div class="train-data">
-    <app-live-training-session
-    [modelId]="getModelId()"
-    (sessionEnd)="onSessionEnd()"
-    >
+    <app-live-training-session [modelId]="getModelId()" (sessionEnd)="onSessionEnd()">
     </app-live-training-session>
   </div>
 </ng-template>

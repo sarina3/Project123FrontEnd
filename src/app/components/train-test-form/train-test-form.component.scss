@@ -1,3 +1,28 @@
+.model {
+  padding-top: 30px;
+  padding-bottom: 15px;
+}
+
+.inline-table {
+  display: inline-block;
+}
+
+table {
+  width: 100%;
+}
+
+.table-header {
+  font-size: 20px;
+}
+
+th, td {
+  padding: 5px;
+}
+
+.right {
+  text-align: right;
+}
+
 /* @import '../../../styles.scss';
 
 .holder{

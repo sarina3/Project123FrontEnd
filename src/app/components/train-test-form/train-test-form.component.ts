@@ -10,18 +10,19 @@ import { WindowConfigService } from 'src/app/services/window-config.service';
   styleUrls: ['./train-test-form.component.scss']
 })
 export class TrainTestFormComponent implements OnInit {
-  @ViewChild('train', {static: true}) trainTemplate: TemplateRef<any>;
-  @ViewChild('test', {static: true}) testTemplate: TemplateRef<any>;
-  @ViewChild('errormessage', {static: true}) messageTemplate: TemplateRef<any>;
-  @ViewChild('live', {static: true}) liveTemplate: TemplateRef<any>;
+  @ViewChild('train', { static: true }) trainTemplate: TemplateRef<any>;
+  @ViewChild('test', { static: true }) testTemplate: TemplateRef<any>;
+  @ViewChild('errormessage', { static: true }) messageTemplate: TemplateRef<any>;
+  @ViewChild('live', { static: true }) liveTemplate: TemplateRef<any>;
   @Input()
   title = "";
 
   @Input()
   models = [];
 
-  dataToShow: {dataset_info: any, train_history: any, model_info: any};
-  testDataToShow: {testing_session: any};
+  dataToShow: { dataset_info: any, train_history: any, model_info: any };
+  testDataToShow: { testing_session: any };
+  data: any = null;
 
   @Output()
   formSubmited = new EventEmitter<FormGroup>();
@@ -36,18 +37,21 @@ export class TrainTestFormComponent implements OnInit {
   datasetFilter = [];
   modelFilter = [];
   pageTrain = false;
-  columnNames1 = ["epoch", "train", "test"];
-  columnNames2 = ["epoch", "train", "test"];
+
+  // grafy
+  selectedGraf = '1';
+  columnNames1 = ["epoch", "train"];
+  columnNames2 = ["epoch", "test"];
 
   // https://developers.google.com/chart/interactive/docs/gallery/linechart
   // tu su vsetky atributy ktore zere options
   options = {
     legend: {
-      textStyle: {color: 'white'}
+      textStyle: { color: 'white' }
     },
     hAxis: {
-      title: 'Epoch',
-      titleTextStyle: {color: 'white'},
+      title: 'Epocha',
+      titleTextStyle: { color: 'white' },
       gridlines: {
         color: 'white'
       },
@@ -56,13 +60,17 @@ export class TrainTestFormComponent implements OnInit {
       }
     },
     vAxis: {
-      title: 'Loss',
-      titleTextStyle: {color: 'white'},
+      title: 'Presnost',
+      titleTextStyle: { color: 'white' },
       gridlines: {
         color: 'white'
       },
       textStyle: {
         color: 'white'
+      },
+      viewWindow: {
+        min: 0,
+        max: 1
       }
     },
     pointSize: 5,
@@ -72,11 +80,19 @@ export class TrainTestFormComponent implements OnInit {
     backgroundColor: {
       fill: "#262755"
     },
-    titleTextStyle: {color: 'white'},
+    titleTextStyle: { color: 'white' },
   };
-  showCharts = false;
+
+  showCharts = true;
   chartData1 = null;
   chartData2 = null;
+  chartData3 = null;
+  chartData4 = null;
+
+  chartData5 = null;
+  chartData6 = null;
+  chartData7 = null;
+  chartData8 = null;
   photos = [];
   allPhotosRoutes = [];
   errorMessage: string;
@@ -103,6 +119,10 @@ export class TrainTestFormComponent implements OnInit {
   ngOnInit() {
     if (this.route.snapshot.url[0].path.includes('train')) {
       this.pageTrain = true;
+      this.selectedGraf = '1';
+    } else {
+      this.selectedGraf = '5';
+      this.updateChartOptions({ value: this.selectedGraf });
     }
     this.modelService.getModels().subscribe(
       (data: any) => {
@@ -117,13 +137,13 @@ export class TrainTestFormComponent implements OnInit {
           }
         );
         const id = localStorage.getItem('choosedModel');
-        if (id) {
-          console.log(this.models);
-          const index = this.models.findIndex( x => x.id === +id);
+        /* if (id) {
+          // console.log(this.models);
+          const index = this.models.findIndex(x => x.id === +id);
           this.select(index !== -1 ? index : 0);
         } else {
           this.select(0);
-        }
+        } */
       }
     );
     if (!this.window.isFullScreen) {
@@ -143,40 +163,85 @@ export class TrainTestFormComponent implements OnInit {
     if (this.pageTrain) {
       this.modelService.getTrainData(this.form).subscribe(
         (data: any) => {
-          console.log(data);
           if (data.message) {
             this.errorMessage = data.message;
             return;
           }
           this.dataToShow = data;
+          this.data = data;
+
           const acc = [];
           this.dataToShow.train_history.accuracy.forEach((x, i) => {
-              const accTmp = [ i, x, this.dataToShow.train_history.val_accuracy[i]];
-              acc.push(accTmp);
-            }
+            const accTmp = [i, x];
+            acc.push(accTmp);
+          }
+          );
+          const valAcc = [];
+          this.dataToShow.train_history.val_accuracy.forEach((x, i) => {
+            const valAccTemp = [i, x];
+            valAcc.push(valAccTemp);
+          }
           );
           const loss = [];
           this.dataToShow.train_history.loss.forEach((x, i) => {
-              const lossTmp = [ i, x, this.dataToShow.train_history.val_loss[i]];
-              loss.push(lossTmp);
-            }
+            const lossTmp = [i, x];
+            loss.push(lossTmp);
+          }
+          );
+          const valLoss = [];
+          this.dataToShow.train_history.val_loss.forEach((x, i) => {
+            const valLossTmp = [i, x];
+            valLoss.push(valLossTmp);
+          }
           );
           this.chartData1 = acc;
-          this.chartData2 = loss;
+          this.chartData2 = valAcc;
+          this.chartData3 = loss;
+          this.chartData4 = valLoss;
+
           this.showCharts = true;
         }
       );
     } else {
       this.modelService.getTestData(this.form).subscribe(
         (data: any) => {
-          console.log(data);
           if (data.message) {
             this.errorMessage = data.message;
             return;
           }
+          this.data = data;
+
+          const senzASpec = [];
+          const negatives = [];
+          const positives = [];
+          const accuracyTest = [];
+          // convert string to number
+          const senzitivitaNumber = +data.testing_session.model_header.testing.Senzitivity * 100;
+          const specificitaNumber = +data.testing_session.model_header.testing.Specificity * 100;
+          senzASpec.push(['Senzitivita', senzitivitaNumber]);
+          senzASpec.push(['Specificita', specificitaNumber]);
+
+          const trueNegatives = +data.testing_session.model_header.testing.TrueNegatives * 100;
+          const falseNegatives = 100 - trueNegatives;
+          negatives.push(['Skutocne negativny', trueNegatives]);
+          negatives.push(['Falosne negativny', falseNegatives]);
+
+          const truePositives = +data.testing_session.model_header.testing.FalsePositives * 100;
+          const falsePositives = 100 - truePositives;
+          positives.push(['Skutocne pozitivny', truePositives]);
+          positives.push(['Falosne pozitivny', falsePositives]);
+
           this.testDataToShow = data;
           this.allPhotosRoutes = data.testing_session.tested_results;
           this.photos = this.allPhotosRoutes.slice(0, 2);
+
+          const accuracyTestTmp = +data.testing_session.model_header.testing.Accuracy * 100;
+          accuracyTest.push(['Uspesnost', accuracyTestTmp]);
+
+          this.chartData5 = senzASpec;
+          this.chartData6 = negatives;
+          this.chartData7 = positives;
+          this.chartData8 = accuracyTest;
           this.showCharts = true;
         }
       );
@@ -185,18 +250,80 @@ export class TrainTestFormComponent implements OnInit {
 
   trainModel() {
     if (this.pageTrain) {
-      console.log(this.form.value);
+      // console.log(this.form.value);
       this.modelService.trainModel(this.form).subscribe(
         data => {
           this.live = true;
-          console.log(this.getModelId());
+          // console.log(this.getModelId());
         }
       );
     } else {
       this.modelService.testModel(this.form).subscribe(
-        data => {console.log('test successfull'); }
+        data => {
+          // console.log('test successfull');
+        }
       );
     }
+  }
+
+  updateChartOptions(option: any) { // zmeni nazov x-ovej suradnice
+    switch (option.value) {
+      case "1":
+        // zisti maximum z hodnot aby som mohol upravit velkost x-ovej osi
+        this.options.vAxis.viewWindow.max = this.getMaximumFromChart(this.chartData1);
+        this.options.vAxis.title = 'Presnost';
+        break;
+      case "2":
+        // zisti maximum z hodnot aby som mohol upravit velkost x-ovej osi
+        this.options.vAxis.viewWindow.max = this.getMaximumFromChart(this.chartData2);
+        this.options.vAxis.title = 'Presnost';
+        break;
+      case "3":
+        // zisti maximum z hodnot aby som mohol upravit velkost x-ovej osi
+        this.options.vAxis.viewWindow.max = this.getMaximumFromChart(this.chartData3);
+        this.options.vAxis.title = 'Strata';
+        break;
+      case "4":
+        // console.log(option.value)
+        // zisti maximum z hodnot aby som mohol upravit velkost x-ovej osi
+        this.options.vAxis.viewWindow.max = this.getMaximumFromChart(this.chartData4);
+        this.options.vAxis.title = 'Strata';
+        break;
+      case "5":
+        // zisti maximum z hodnot aby som mohol upravit velkost x-ovej osi
+        this.options.vAxis.viewWindow.max = 100;
+        this.options.vAxis.title = '%';
+        this.options.hAxis.title = '';
+        break;
+      case "6":
+        // zisti maximum z hodnot aby som mohol upravit velkost x-ovej osi
+        this.options.vAxis.viewWindow.max = 100;
+        this.options.vAxis.title = '%';
+        this.options.hAxis.title = '';
+        break;
+      case "7":
+        // zisti maximum z hodnot aby som mohol upravit velkost x-ovej osi
+        this.options.vAxis.viewWindow.max = 100;
+        this.options.vAxis.title = '%';
+        this.options.hAxis.title = '';
+        break;
+      case "7":
+        // zisti maximum z hodnot aby som mohol upravit velkost x-ovej osi
+        this.options.vAxis.viewWindow.max = 100;
+        this.options.vAxis.title = '%';
+        this.options.hAxis.title = '';
+        break;
+    }
+  }
+
+  getMaximumFromChart(chart: any): any {
+    let max = 0;
+    for (const ch of chart) {
+      if (ch[1] > max) {
+        max = chart[1];
+      }
+    }
+    max = Math.ceil(max);
   }
 
   getKeys(of: string) {
@@ -211,9 +338,9 @@ export class TrainTestFormComponent implements OnInit {
   }
 
   openLiveTraining() {
-    console.log('live', this.live);
+    // console.log('live', this.live);
     this.live = true;
-    console.log('live1', this.live);
+    // console.log('live1', this.live);
     this.cd.detectChanges();
   }
 
