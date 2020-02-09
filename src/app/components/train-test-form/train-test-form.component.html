@@ -31,7 +31,7 @@
       Selected model
     </mat-toolbar>
     <div class="row">
-      <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 marg-top-10">
+      <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 marg-top-10" *ngIf="!pageTrain">
         <div class="table-header">
           <mat-icon color="primary">restore</mat-icon>
           Training
@@ -40,22 +40,18 @@
           <tbody>
             <tr>
               <th>Training time</th>
-              <td class="right">{{ pageTrain ? 
-                data.training_session.model_header.training.TrainingTime :
-                data.testing_session.model_header.training.TrainingTime }}
+              <td class="right">{{ data.testing_session.model_header.training.TrainingTime }}
               </td>
             </tr>
             <tr>
               <th>Accuracy</th>
-              <td class="right">{{ pageTrain ? 
-                data.training_session.model_header.training.Accuracy * 100 :
-                data.testing_session.model_header.training.Accuracy * 100 | number:'1.0-2' }} %</td>
+              <td class="right">{{ data.testing_session.model_header.training.Accuracy * 100 | number:'1.0-2' }} %</td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 marg-top-10">
+      <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 marg-top-10" *ngIf="!pageTrain">
         <div class="table-header">
           <mat-icon color="primary">build</mat-icon>
           Testing
@@ -64,34 +60,24 @@
           <tbody>
             <tr>
               <th>Accuracy</th>
-              <td class="right">{{ pageTrain ? 
-                data.training_session.model_header.testing.Accuracy * 100 :
-                data.testing_session.model_header.testing.Accuracy * 100 | number:'1.0-2' }} %
+              <td class="right">{{ data.testing_session.model_header.testing.Accuracy * 100 | number:'1.0-2' }} %
               </td>
             </tr>
             <tr>
               <th>Specificity</th>
-              <td class="right">{{ pageTrain ? 
-                data.training_session.model_header.testing.Specificity :
-                data.testing_session.model_header.testing.Specificity | number:'1.0-2' }}</td>
+              <td class="right">{{ data.testing_session.model_header.testing.Specificity | number:'1.0-2' }}</td>
             </tr>
             <tr>
               <th>Senzitivity</th>
-              <td class="right">{{ pageTrain ? 
-                data.training_session.model_header.testing.Senzitivity :
-                data.testing_session.model_header.testing.Senzitivity | number:'1.0-2' }}</td>
+              <td class="right">{{ data.testing_session.model_header.testing.Senzitivity | number:'1.0-2' }}</td>
             </tr>
             <tr>
               <th>True negatives</th>
-              <td class="right">{{ pageTrain ? 
-                data.training_session.model_header.testing.TrueNegatives :
-                data.testing_session.model_header.testing.TrueNegatives | number:'1.0-2' }}</td>
+              <td class="right">{{ data.testing_session.model_header.testing.TrueNegatives | number:'1.0-2' }}</td>
             </tr>
             <tr>
               <th>False positives</th>
-              <td class="right">{{ pageTrain ? 
-                data.training_session.model_header.testing.FalsePositives :
-                data.testing_session.model_header.testing.FalsePositives | number:'1.0-2' }}</td>
+              <td class="right">{{ data.testing_session.model_header.testing.FalsePositives | number:'1.0-2' }}</td>
             </tr>
           </tbody>
         </table>
@@ -107,25 +93,25 @@
             <tr>
               <th>Dataset name</th>
               <td class="right">{{ pageTrain ? 
-                data.training_session.dataset_header.DatasetUsed :
+                data.dataset_info.DatasetUsed :
                 data.testing_session.dataset_header.DatasetUsed }}</td>
             </tr>
             <tr>
               <th>Dataset description</th>
               <td class="right">{{ pageTrain ? 
-                data.training_session.dataset_header.DatasetDesc :
+                data.dataset_info.DatasetDesc :
                 data.testing_session.dataset_header.DatasetDesc }}</td>
             </tr>
             <tr>
               <th>Photo count</th>
               <td class="right">{{ pageTrain ? 
-                data.training_session.dataset_header['All photo count'] :
+                data.dataset_info['All photo count'] :
                 data.testing_session.dataset_header['All photo count'] }}</td>
             </tr>
             <tr>
               <th>Photo size</th>
               <td class="right">{{ pageTrain ? 
-                data.training_session.dataset_header['IMG size'] :
+                data.dataset_info['IMG size'] :
                 data.testing_session.dataset_header['IMG size'] }}</td>
             </tr>
           </tbody>
@@ -141,19 +127,19 @@
             <tr>
               <th>Bening</th>
               <td class="right">{{ pageTrain ? 
-                data.training_session.dataset_header['TRAIN - bening'] :
+                data.dataset_info['TRAIN - bening'] :
                 data.testing_session.dataset_header['TRAIN - bening'] }}</td>
             </tr>
             <tr>
               <th>Malig</th>
               <td class="right">{{ pageTrain ? 
-                data.training_session.dataset_header['TRAIN - malig'] :
+                data.dataset_info['TRAIN - malig'] :
                 data.testing_session.dataset_header['TRAIN - malig'] }}</td>
             </tr>
             <tr>
               <th>Unspecified</th>
               <td class="right">{{ pageTrain ? 
-                data.training_session.dataset_header['TRAIN - unspecified'] :
+                data.dataset_info['TRAIN - unspecified'] :
                 data.testing_session.dataset_header['TRAIN - unspecified'] }}</td>
             </tr>
           </tbody>
@@ -169,19 +155,19 @@
             <tr>
               <th>Bening</th>
               <td class="right">{{ pageTrain ? 
-                data.training_session.dataset_header['TEST - bening'] :
+                data.dataset_info['TEST - bening'] :
                 data.testing_session.dataset_header['TEST - bening'] }}</td>
             </tr>
             <tr>
               <th>Malig</th>
               <td class="right">{{ pageTrain ? 
-                data.training_session.dataset_header['TEST - malig'] :
+                data.dataset_info['TEST - malig'] :
                 data.testing_session.dataset_header['TEST - malig'] }}</td>
             </tr>
             <tr>
               <th>Unspecified</th>
               <td class="right">{{ pageTrain ? 
-                data.training_session.dataset_header['TEST - unspecified'] :
+                data.dataset_info['TEST - unspecified'] :
                 data.testing_session.dataset_header['TEST - unspecified'] }}</td>
             </tr>
           </tbody>
@@ -197,19 +183,19 @@
             <tr>
               <th>Bening</th>
               <td class="right">{{ pageTrain ? 
-                data.training_session.dataset_header['VALID - bening'] :
+                data.dataset_info['VALID - bening'] :
                 data.testing_session.dataset_header['VALID - bening'] }}</td>
             </tr>
             <tr>
               <th>Malig</th>
               <td class="right">{{ pageTrain ? 
-                data.training_session.dataset_header['VALID - malig'] :
+                data.dataset_info['VALID - malig'] :
                 data.testing_session.dataset_header['VALID - malig'] }}</td>
             </tr>
             <tr>
               <th>Unspecified</th>
               <td class="right">{{ pageTrain ? 
-                data.training_session.dataset_header['VALID - unspecified'] :
+                data.dataset_info['VALID - unspecified'] :
                 data.testing_session.dataset_header['VALID - unspecified'] }}</td>
             </tr>
           </tbody>
