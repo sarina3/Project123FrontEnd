@@ -5,9 +5,13 @@
             </ng-template>
         <mat-step class="lbl" label="Pick network type">
                 <div class="first-step-layout stepper-step-height">
+                    <mat-toolbar color="primary">
+                      <mat-toolbar-row>
+                        <i class="fas fa-clipboard-list"></i><span>&nbsp;Choose network type</span>
+                      </mat-toolbar-row>
+                    </mat-toolbar>
                     <div class="first-step-content">
                         <form [formGroup]="modelForm">
-                            <h3>Choose network type</h3>
                             <div>
                                 <mat-form-field>
                                     <input type="text" placeholder="Model name" matInput formControlName="modelName">
@@ -30,9 +34,13 @@
         </mat-step>
         <mat-step label="Choose Optimizer">
             <div class="first-step-layout stepper-step-height">
+                <mat-toolbar color="primary">
+                  <mat-toolbar-row>
+                    <i class="fas fa-clipboard-list"></i><span>&nbsp;Choose optimizer type</span>
+                  </mat-toolbar-row>
+                </mat-toolbar>
                 <div class="first-step-content">
                     <form [formGroup]="optimizerForm">
-                        <h3>Choose Optimizer</h3>
                         <div>
                             <mat-form-field>
                                 <mat-label>Loss: </mat-label>
@@ -68,6 +76,11 @@
     </mat-step>
         <mat-step label="Layers configuration">
             <div class="second-step-layout stepper-step-height">
+                <mat-toolbar color="primary">
+                    <mat-toolbar-row>
+                      <i class="fas fa-cog"></i><span>&nbsp;Configure your network</span>
+                    </mat-toolbar-row>
+                </mat-toolbar>
                 <div class="second-step-content">
                     <div class="left">
                         <div *ngFor="let card of layers;let i = index" class="card" (click)="activate(i)">
@@ -109,8 +122,17 @@
         </mat-step>
         <mat-step label="Validation">
             <div class="second-step-layout stepper-step-height">
+                <mat-toolbar color="primary">
+                    <mat-toolbar-row>
+                      <i class="fas fa-tasks"></i><span>&nbsp;Validation</span>
+                    </mat-toolbar-row>
+                </mat-toolbar>
                 <div class="third-step-content" *ngIf="!areInvalid() else thirdWithInvalid">
-                    <h4>Everything is valid you can continue</h4>
+                    <mat-toolbar color="primary">
+                        <mat-toolbar-row>
+                          <i class="fas fa-check"></i><span>&nbsp;Everything is valid you can continue</span>
+                        </mat-toolbar-row>
+                    </mat-toolbar>
                     <div class="btns-wrapper">
                             <button mat-raised-button (click)="submit()" class="mr-1" >Submit</button>
                             <button mat-raised-button matStepperPrevious class="mr-1" >Back</button>

@@ -1,6 +1,11 @@
 /* @import '../styles.scss'; */
 .mat-app-background {
     height: 100% !important;
+
+  app-model-builder {
+    height: 100% !important;
+    width: 100% !important;
+  }
 }
 
 /* .light-theme, .dark-theme {

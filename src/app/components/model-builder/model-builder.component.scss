@@ -1,20 +1,15 @@
-/* @import '../../../styles.scss';
+@import '../../../styles.scss';
 
 .builder-wrapper{
     display: flex;
     flex-flow: column wrap;
     flex: 1;
-    background-color: $dark-ocean-blue-surround;
 
 
     mat-horizontal-stepper{
         width: 100%;
         height: 100%;
-        font-family: 'Cabin Sketch', cursive !important;
-        background-color: $dark-blue-header !important;
-        .lbl{
-          color:red !important;
-        }
+        background-color: transparent;
     }
 
     .first-step-layout{
@@ -23,9 +18,8 @@
         flex-flow: column nowrap;
         justify-content: center;
         align-items: center;
-        background-color: $dark-blue-header !important;
-        border: 2px solid $orange-border;
         border-radius: 20px;
+        background-color: transparent;
 
         .first-step-content{
             padding: 1rem;
@@ -33,8 +27,6 @@
             height: 400px;
             display: flex;
             flex-flow: column wrap;
-            background-color: $dark-blue-content;
-            border: 2px solid $orange-border;
             border-radius: 20px;
 
             form{
@@ -48,9 +40,8 @@
                     flex-flow: column wrap;
                 }
               h3{
-                font-family: 'Cabin Sketch', cursive;
-                color: $white !important;
-                font-size: 2rem;
+                background-color: #2196f3;
+                color: white;
               }
             }
         }
@@ -70,9 +61,7 @@
                 display: flex;
                 flex-flow: column wrap;
                 flex: 1 0 150px;
-                background-color: $dark-blue-header !important;
                 border-radius: 20px;
-                border: 2px solid $orange-border;
 
                 mat-select{
                     width: 0;
@@ -81,11 +70,6 @@
                 .card{
                     display: flex;
                     flex-flow: row wrap;
-                    background-color: $dark-blue-header !important;
-
-                    &:hover{
-                        background-color: $very-light-gray;
-                    }
 
 
                     & > div:first-child{
@@ -108,7 +92,6 @@
                         justify-content: center;
                         flex: 0;
                         color: rgba($color: #000000, $alpha: 0.5);
-                        border-left: 1px solid $light-gray
                     }
                 }
 
@@ -127,7 +110,6 @@
                     flex-flow: column wrap;
                     justify-content: space-around;
                     flex: 1;
-                    background-color: $white;
 
                     form{
                         display: flex;
@@ -143,7 +125,6 @@
                     justify-content: center;
                     flex: 0 0 60px;
                     margin-top: 6px;
-                    background-color: $white;
                 }
             }
 
@@ -155,14 +136,15 @@
             justify-content: space-around;
             align-self: center;
             justify-self: center;
-            width: 300px;
+            width: 400px;
             height: 400px;
-            background-color: $dark-blue-cards !important;
+            .mat-toolbar-row{
+              justify-content: center;
+            }
 
             h4{
                 text-align: center;
               font-family: 'Cabin Sketch', cursive;
-              color: $white !important;
             }
         }
 
@@ -181,4 +163,3 @@
         }
     }
 }
- */

@@ -1,6 +1,6 @@
 <!-- <app-header></app-header> -->
 <!-- <div [class.container]="!config.contentFullscreen" [class.container-fluid]="config.contentFullscreen" class="override" #content> -->
-<div [ngClass]="{'dark-theme': isDarkTheme | async, 'light-theme': isDarkTheme | async}">
+<div class="mat-app-background" [ngClass]="{'dark-theme': isDarkTheme | async, 'light-theme': isDarkTheme | async}">
   <div class="mat-app-background">
     <mat-toolbar color="primary">
       <mat-toolbar-row class="align-right">
