@@ -16,11 +16,15 @@ export class AppComponent implements OnInit, OnDestroy {
   isDarkTheme: Observable<boolean>;
 
   constructor(
-    private auth: AuthService,
+    private authService: AuthService,
     private windowConfig: WindowConfigService,
     private change: ChangeDetectorRef,
     private themeService: ThemeService
   ) {}
+
+  get auth() {
+    return this.authService;
+  }
 
   ngOnInit() {
     this.sub = this.windowConfig.refresh.subscribe(() => {

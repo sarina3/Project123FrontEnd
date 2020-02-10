@@ -10,7 +10,11 @@ import { AuthService } from 'src/app/services/auth.service';
 export class HeaderComponent implements OnInit {
   loginOpened = false;
   @ViewChild(LoginComponent, { static: false }) loginComponent: LoginComponent;
-  constructor(private auth: AuthService) {}
+  constructor(private authService: AuthService) {}
+
+  get auth() {
+    return this.authService;
+  }
 
   ngOnInit() {
     console.log(this.auth.isLoggedIn())
