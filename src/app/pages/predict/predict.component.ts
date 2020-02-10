@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewEncapsulation, Input } from '@angular/core';
 import { PredictService } from '../../services/predict/predict.service';
 import { SelectData } from 'src/app/components/select/select.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -22,7 +22,7 @@ export class PredictComponent implements OnInit, OnDestroy {
     photoDescription: new FormControl('')
   });
 
-  image;
+  image: any = null;
   selectedOption: number;
   file;
 
@@ -87,8 +87,8 @@ export class PredictComponent implements OnInit, OnDestroy {
   }
 
   onImageCreate(base64Image: any) {
-    this.predictForm.get('photo').setValue(base64Image);
-    this.image = base64Image;
+    this.image = base64Image.image;
+    this.predictForm.get('photo').setValue(base64Image.image);
   }
 
   predict() {
@@ -139,6 +139,7 @@ export class PredictComponent implements OnInit, OnDestroy {
 
   repeat() {
     this.image = null;
+    this.croppedImage = null;
     this.predictForm.get('photo').setValue(null);
     this.camera.repeat();
   }
@@ -198,5 +199,19 @@ export class PredictComponent implements OnInit, OnDestroy {
         return 'build';
       }
     }
+  }
+
+  getImage() {
+    return this.predictForm.get('photo').value;
+  }
+
+  imageLoaded() {
+    // show cropper
+  }
+  cropperReady() {
+    // cropper ready
+  }
+  loadImageFailed() {
+    // show message
   }
 }

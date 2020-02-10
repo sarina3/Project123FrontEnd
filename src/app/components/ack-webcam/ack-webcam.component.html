@@ -5,7 +5,7 @@
       (success) = "onCamSuccess($event)"
       (catch)   = "onCamError($event)">
     </ack-webcam>
-    <image-cropper class="image-cropper" *ngIf="image"
+    <!-- <image-cropper class="image-cropper" *ngIf="image"
       [imageBase64]="image"
       [imageChangedEvent]="imageChangedEvent"
       [maintainAspectRatio]="true"
@@ -19,6 +19,6 @@
     </image-cropper>
     <div *ngIf="croppedImage" class="cropp">
       <img [src]="croppedImage" />
-    </div>
+    </div> -->
   </div>
 </div>

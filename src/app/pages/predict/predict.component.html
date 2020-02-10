@@ -56,23 +56,32 @@
         <div class="row">
           <div class="col-12 col-sm-2 col-md-3 col-lg-4 col-xl-4"></div>
           <div class="col-12 col-sm-8 col-md-6 col-lg-4 col-xl-4 align-center marg-top-10">
-            <app-ack-webcam
+            <app-ack-webcam *ngIf="!image"
               [imageWidth]="imageWidth" 
               [imageHeight]="imageHeight" 
               (imageDone)="onImageCreate($event)">
             </app-ack-webcam>
+            <image-cropper class="image-cropper" *ngIf="image"
+              [imageBase64]="image"
+              [imageChangedEvent]="imageChangedEvent"
+              [maintainAspectRatio]="true"
+              [aspectRatio]="imageWidth / imageHeight"
+              [resizeToWidth]="imageWidth"
+              format="png"
+              (imageCropped)="imageCropped($event)"
+              (imageLoaded)="imageLoaded()"
+              (cropperReady)="cropperReady()"
+              (loadImageFailed)="loadImageFailed()">
+            </image-cropper>
+            <div *ngIf="croppedImage" class="cropp">
+              <img [src]="croppedImage" />
+            </div>
             <mat-form-field class="example-form-field">
               <input matInput type="text" placeholder="Photo description" formControlName="photoDescription">
               <button mat-button *ngIf="predictForm.controls.photoDescription.value !== '' " matSuffix mat-icon-button aria-label="Clear" (click)="predictForm.controls.photoDescription.reset('')">
                 <mat-icon>close</mat-icon>
               </button>
             </mat-form-field>
-            <img *ngIf="image" [src]="image" class="uploaded">
-            <img *ngIf="image" [src]="image" class="cropped">
-            <!-- <div class="marg-top-10">
-              <label for="photoDescription">Photo description</label>
-              <input class="text" class="form-control" formControlName="photoDescription">
-            </div> -->
           </div>
           <div class="col-12 col-sm-2 col-md-3 col-lg-4 col-xl-4"></div>
         </div>
@@ -113,6 +122,32 @@
             <mat-icon color="white">build</mat-icon>
           </mat-panel-description>
         </mat-expansion-panel-header>
+
+        <div class="row">
+          <div class="col-12 col-sm-2 col-md-3 col-lg-4 col-xl-4"></div>
+          <div class="col-12 col-sm-8 col-md-6 col-lg-4 col-xl-4 align-center marg-top-10" >
+            <img [src]="getImage()">
+            <table>
+              <tr>
+                <th>1</th>
+                <td>2</td>
+              </tr>
+              <tr>
+                <th>3</th>
+                <td>4</td>
+              </tr>
+              <tr>
+                <th>5</th>
+                <td>6</td>
+              </tr>
+              <tr>
+                <th>7</th>
+                <td>8</td>
+              </tr>
+            </table>
+          </div>
+          <div class="col-12 col-sm-2 col-md-3 col-lg-4 col-xl-4"></div>
+        </div>
 
         <mat-action-row>
           <button mat-raised-button class="btn btn-warning" (click)="prevStep()">Previous</button>

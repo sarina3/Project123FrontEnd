@@ -14,7 +14,7 @@ export class AckWebcamComponent implements OnInit {
   @Input() imageHeight: number = 64;
   croppedImage: any = '';
 
-  @ViewChild(WebCamComponent,{static:false}) webcam: WebCamComponent;
+  @ViewChild(WebCamComponent, { static: false }) webcam: WebCamComponent;
   options = null;
   image: string = null;
 
