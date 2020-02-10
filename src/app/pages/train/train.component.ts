@@ -5,4 +5,9 @@ import { Component } from '@angular/core';
   templateUrl: './train.component.html',
   styleUrls: ['./train.component.scss']
 })
-export class TrainComponent {}
+export class TrainComponent {
+  models = [];
+
+  getTrainData(event) {
+  }
+}
