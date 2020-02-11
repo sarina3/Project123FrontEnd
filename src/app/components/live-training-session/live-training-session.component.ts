@@ -19,26 +19,28 @@ export class LiveTrainingSessionComponent implements OnInit, OnDestroy {
   columnNames = ['epoch', 'train', 'test'];
   options = {
     legend: {
-      textStyle: {color: 'white'}
+      textStyle: {color: 'black'}
     },
+    width: 0,
+    height: 300,
     hAxis: {
       title: 'Epoch',
-      titleTextStyle: {color: 'white'},
+      titleTextStyle: {color: 'black'},
       gridlines: {
-        color: 'white'
+        color: 'black'
       },
       textStyle: {
-        color: 'white'
+        color: 'black'
       }
     },
     vAxis: {
       title: 'Loss',
-      titleTextStyle: {color: 'white'},
+      titleTextStyle: {color: 'black'},
       gridlines: {
-        color: 'white'
+        color: 'black'
       },
       textStyle: {
-        color: 'white'
+        color: 'black'
       }
     },
     pointSize: 5,
@@ -46,9 +48,9 @@ export class LiveTrainingSessionComponent implements OnInit, OnDestroy {
       color: 'black',
     },
     backgroundColor: {
-      fill: "#262755"
+      fill: "transparent"
     },
-    titleTextStyle: {color: 'white'},
+    titleTextStyle: {color: 'black'},
   };
   currentEpoch = 0;
   maxEpoch = 0.0;
@@ -122,5 +124,9 @@ export class LiveTrainingSessionComponent implements OnInit, OnDestroy {
 
   capitalize(data: string) {
     return data.charAt(0).toUpperCase() + data.slice(1);
+  }
+
+  onResize(event) {
+    this.options.width = event.newWidth;
   }
 }

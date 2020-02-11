@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" (resized)="onResize($event)"></div>
   <mat-toolbar color="primary">
     <mat-icon class="icon" color="accent">apps</mat-icon>
     Models
@@ -247,8 +247,8 @@
     </mat-toolbar>
     <ng-container *ngTemplateOutlet="template"></ng-container>
   </div>
-</div>
-<!-- 
+<!-- </div>
+
 <div class="holder">
   <div class="network-picker">
     <h2 class="w-100 text-center header-models">{{title}}</h2>
@@ -286,7 +286,6 @@
 
 <ng-template #train>
   <div class="train-data">
-    <!-- 
     <div class="train-content" *ngIf="showCharts">
       <div class="left">
         <h4>Dataset Information</h4>
@@ -301,22 +300,22 @@
         </span>
       </div>
     </div>
-    -->
 
-    <div class="selectChart">
-      <mat-form-field>
-        <mat-label>Graf</mat-label>
-        <mat-select [(value)]="selectedGraf" (selectionChange)="updateChartOptions($event)">
-          <mat-option value="1">Presnost - Trenovacia m.</mat-option>
-          <mat-option value="2">Presnost - Validacna m.</mat-option>
-          <mat-option value="3">Strata - Trenovacia m.</mat-option>
-          <mat-option value="4">Strata - Validacna m.</mat-option>
+
+    <div class="selectChart ">
+      <mat-form-field >
+        <mat-label>Graph</mat-label>
+        <mat-select  [(value)]="selectedGraf" (selectionChange)="updateChartOptions($event)">
+          <mat-option value="1">Accuracy - Training</mat-option>
+          <mat-option value="2">Accuracy - Validation</mat-option>
+          <mat-option value="3">Loss - Training</mat-option>
+          <mat-option value="4">Loss - Validation</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
-    <div class="charts">
+    <div class="charts ">
       <google-chart *ngIf="selectedGraf == '1' && showCharts" 
-        [title]="'Presnost - Trenovacia mnozina'"
+        [title]="'Accuracy - Training set'"
         [type]="'LineChart'" 
         [data]="chartData1" 
         [firstRowIsData]="true" 
@@ -325,7 +324,7 @@
         [dynamicResize]="true">
       </google-chart>
       <google-chart *ngIf="selectedGraf == '2' && showCharts" 
-        [title]="'Presnost - Validacna mnozina'"
+        [title]="'Accuracy - Validation set'"
         [type]="'LineChart'" 
         [data]="chartData2" 
         [firstRowIsData]="true" 
@@ -334,7 +333,7 @@
         [dynamicResize]="true">
       </google-chart>
       <google-chart *ngIf="selectedGraf == '3' && showCharts" 
-        [title]="'Strata - Trenovacia mnozina'"
+        [title]="'Loss - Training set'"
         [type]="'LineChart'" 
         [data]="chartData3" 
         [firstRowIsData]="true" 
@@ -343,7 +342,7 @@
         [dynamicResize]="true">
       </google-chart>
       <google-chart *ngIf="selectedGraf == '4' && showCharts" 
-        [title]="'Strata - Validacna mnozina'"
+        [title]="'Loss - Validation set'"
         [type]="'LineChart'" 
         [data]="chartData4" 
         [firstRowIsData]="true" 
@@ -362,18 +361,18 @@
     <div class="test-content" *ngIf="showCharts">
       <div class="selectChart">
         <mat-form-field>
-          <mat-label>Graf</mat-label>
+          <mat-label>Graph</mat-label>
           <mat-select [(value)]="selectedGraf" (selectionChange)="updateChartOptions($event)">
-            <mat-option value="5">Specificita a Senzitivita</mat-option>
-            <mat-option value="6">Skutocne negativny a Falosne negativny</mat-option>
-            <mat-option value="7">Skutocne pozitivny a Falosne pozitivny</mat-option>
-            <mat-option value="8">Uspesnost</mat-option>
+            <mat-option value="5">Senzitivity and Specificity</mat-option>
+            <mat-option value="6">True negatives and False negatives</mat-option>
+            <mat-option value="7">True positives and False positives</mat-option>
+            <mat-option value="8">Accuracy</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
       <div class="charts">
         <google-chart *ngIf="selectedGraf == '5' && showCharts" 
-          [title]="'Specificita a Senzitivita'"
+          [title]="'Senzitivity and Specificity'"
           [type]="'ColumnChart'" 
           [data]="chartData5" 
           [firstRowIsData]="true" 
@@ -382,7 +381,7 @@
           [dynamicResize]="true">
         </google-chart>
         <google-chart *ngIf="selectedGraf == '6' && showCharts" 
-          [title]="'Skutocne negativny a falosne negativny'"
+          [title]="'True negatives and False negatives'"
           [type]="'ColumnChart'" 
           [data]="chartData6" 
           [firstRowIsData]="true" 
@@ -391,7 +390,7 @@
           [dynamicResize]="true">
         </google-chart>
         <google-chart *ngIf="selectedGraf == '7' && showCharts" 
-          [title]="'Skutocne pozitivny a falosne pozitivny'"
+          [title]="'True positives and False positives'"
           [type]="'ColumnChart'" 
           [data]="chartData7" 
           [firstRowIsData]="true" 
@@ -400,7 +399,7 @@
           [dynamicResize]="true">
         </google-chart>
         <google-chart *ngIf="selectedGraf == '8' && showCharts" 
-          [title]="'Uspesnost'" 
+          [title]="'Accuracy'" 
           [type]="'ColumnChart'"
           [data]="chartData8" 
           [firstRowIsData]="true" 
@@ -410,8 +409,9 @@
         </google-chart>
       </div>
     </div>
+    
 
-    <!-- <div class="images">
+    <div class="images">
       <h4 class="w-100 text-center">Dataset preview</h4>
       <div class="image-wrapper" *ngFor="let img of photos">
         <div class="image">
@@ -436,7 +436,7 @@
           </span>
         </div>
       </div>
-    </div> -->
+    </div>
     <button mat-raised-button (click)="trainModel()" class="train-btn">Test</button>
   </div>
 </ng-template>
