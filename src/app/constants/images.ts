@@ -56,7 +56,7 @@ export const IMAGES: Image[] = [
     metaClinicalMelanocytic: false,
     metaClinicalSex: 'male'
   },
-  /* {
+  {
     name: 'ISIC_0024311.jpg',
     metaClinicalAge_approx: 75,
     metaClinicalAnatom_site_general: 'posterior torso',
@@ -199,6 +199,7 @@ export const IMAGES: Image[] = [
     metaClinicalMelanocytic: false,
     metaClinicalSex: 'male'
   },
+  /*
   {
     name: 'ISIC_0024324.jpg',
     metaClinicalAge_approx: 85,
