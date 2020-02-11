@@ -32,6 +32,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
 import { MaterialModule } from './material.module';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { WebCamModule } from 'ack-angular-webcam';
+import { AngularResizedEventModule } from 'angular-resize-event';
 // entries
 import { ImageDetailComponent } from './components/photo-viewer/photo-viewer.component';
 import { LayerDetailComponent } from './components/cards/cards.component';
@@ -73,7 +74,8 @@ import { LayerDetailComponent } from './components/cards/cards.component';
     GoogleChartsModule.forRoot(),
     ImageCropperModule,
     MaterialModule,
-    WebCamModule
+    WebCamModule,
+    AngularResizedEventModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
