@@ -73,7 +73,7 @@
               (cropperReady)="cropperReady()"
               (loadImageFailed)="loadImageFailed()">
             </image-cropper>
-            <div *ngIf="croppedImage" class="cropp">
+            <!-- <div *ngIf="croppedImage" class="cropp">
               <img [src]="croppedImage" />
             </div>
             <mat-form-field class="example-form-field">
@@ -81,7 +81,7 @@
               <button mat-button *ngIf="predictForm.controls.photoDescription.value !== '' " matSuffix mat-icon-button aria-label="Clear" (click)="predictForm.controls.photoDescription.reset('')">
                 <mat-icon>close</mat-icon>
               </button>
-            </mat-form-field>
+            </mat-form-field> -->
           </div>
           <div class="col-12 col-sm-2 col-md-3 col-lg-4 col-xl-4"></div>
         </div>

@@ -132,6 +132,10 @@ export class PredictComponent implements OnInit, OnDestroy {
         image = reader.result as string;
         this.image = image;
         this.predictForm.get('photo').setValue(image);
+
+        if (event.srcElement && event.srcElement.value) {
+          this.predictForm.get('photoDescription').setValue(event.srcElement.value);
+        }
       };
       reader.readAsDataURL(file);
     }
