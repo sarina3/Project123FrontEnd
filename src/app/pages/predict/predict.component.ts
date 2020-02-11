@@ -124,6 +124,9 @@ export class PredictComponent implements OnInit, OnDestroy {
     reader.readAsDataURL(event.target.files[0]); */
 
     if (event.target.files && event.target.files[0]) {
+
+      console.log(event);
+
       let image = null;
       const file: File = event.target.files[0];
       const reader: FileReader = new FileReader();
@@ -133,8 +136,8 @@ export class PredictComponent implements OnInit, OnDestroy {
         this.image = image;
         this.predictForm.get('photo').setValue(image);
 
-        if (event.srcElement && event.srcElement.value) {
-          this.predictForm.get('photoDescription').setValue(event.srcElement.value);
+        if (file.name) {
+          this.predictForm.get('photoDescription').setValue(file.name);
         }
       };
       reader.readAsDataURL(file);
