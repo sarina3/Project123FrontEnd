@@ -130,8 +130,6 @@ export class PredictComponent implements OnInit, OnDestroy {
 
     if (event.target.files && event.target.files[0]) {
 
-      console.log(event);
-
       let image = null;
       const file: File = event.target.files[0];
       const reader: FileReader = new FileReader();
@@ -168,8 +166,11 @@ export class PredictComponent implements OnInit, OnDestroy {
     ];
   }
 
-  getMetadata() {
-    return Object.keys(this.predictionResult.metadata);
+  getMetadata(att: string) {
+    const m = this.predictionResult['metadata'];
+    const meta = m[att];
+    return meta;
+    // return Object.keys(this.predictionResult.metadata);
   }
 
   openFilePicker() {

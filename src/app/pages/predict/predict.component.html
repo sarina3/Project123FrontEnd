@@ -140,19 +140,56 @@
                   {{ getResultAttribute('Classification class').toLowerCase() === 'malignant' ? ' / Zhubný' : ' / Nezhubný' }}
                 </td>
               </tr>
-              <tr class="column">
-                <th>Classification result</th>
+              <tr>
+                <th class="column">Classification result</th>
                 <td>{{ getResultAttribute('Classification result') }}</td>
               </tr>
-              <tr class="column">
-                <th>Popis</th>
+              <tr>
+                <th class="column">Popis</th>
                 <td [ngClass]="{ 'malignant': getResultOk() }">
                   {{ getResultAttribute('prediction_info') }}
                 </td>
               </tr>
-              <tr class="column" *ngIf="getResultAttribute('metadata')">
-                <th>metadata</th>
+              <!-- <tr" >
+                <th class="column">metadata</th>
                 <td>{{ getResultAttribute('metadata') }}</td>
+              </tr> -->
+            </table>
+          </div>
+          <div *ngIf="predictionResult" class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 align-center marg-top-10">
+            {{ getResultAttribute('metadata') ? 'Metadata' : '' }}
+            <table *ngIf="getResultAttribute('metadata')">
+              <tr *ngIf="getMetadata('anatom_site_general')">
+                <th class="column">anatom_site_general</th>
+                <td>{{ getMetadata('anatom_site_general') }}</td>
+              </tr>
+              <tr *ngIf="getMetadata('diagnosis_confirm_type')">
+                <th class="column">diagnosis_confirm_type</th>
+                <td>{{ getMetadata('diagnosis_confirm_type') }}</td>
+              </tr>
+              <tr *ngIf="getMetadata('diagnosis')">
+                <th class="column">diagnosis</th>
+                <td>{{ getMetadata('diagnosis') }}</td>
+              </tr>
+              <tr *ngIf="getMetadata('age_approx')">
+                <th class="column">age_approx</th>
+                <td>{{ getMetadata('age_approx') }}</td>
+              </tr>
+              <tr *ngIf="getMetadata('bening_malignant')">
+                <th class="column">bening_malignant</th>
+                <td>{{ getMetadata('bening_malignant') }}</td>
+              </tr>
+              <tr *ngIf="getMetadata('sex')">
+                <th class="column">sex</th>
+                <td>{{ getMetadata('sex') }}</td>
+              </tr>
+              <tr *ngIf="getMetadata('x_0_1')">
+                <th class="column">x_0_1</th>
+                <td>{{ getMetadata('x_0_1') }}</td>
+              </tr>
+              <tr *ngIf="getMetadata('name')">
+                <th class="column">name</th>
+                <td>{{ getMetadata('name') }}</td>
               </tr>
             </table>
           </div>
