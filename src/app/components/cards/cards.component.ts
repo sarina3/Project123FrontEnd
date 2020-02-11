@@ -279,10 +279,21 @@ export class CardsComponent implements OnInit {
     }
     for (let i = 0; i < this.selectedObj.layers.layers.length - 1; i++) {
       for (let j = 1; j < 4; j++) {
-        for (let k = 1; k < 4; k++) {
+
+        const cls = this.selectedObj.layers.layers[i].class;
+        if (cls === 'DENSE' || cls === 'FLATTENING') {
+          for (let k = 1; k < 4; k++) {
+            this.lines.push({
+              x1: (i + 1) * 75 + 40 + 20,
+              y1: k * 50,
+              x2: (i + 1) * 75 + 2 * 40 + 15,
+              y2: j * 50
+            });
+          }
+        } else {
           this.lines.push({
             x1: (i + 1) * 75 + 40 + 20,
-            y1: k * 50,
+            y1: j * 50,
             x2: (i + 1) * 75 + 2 * 40 + 15,
             y2: j * 50
           });

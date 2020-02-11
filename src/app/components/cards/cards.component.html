@@ -149,7 +149,8 @@
       </div>
     </div>
     <div class="row">
-      <svg [attr.width.px]="width" [attr.height.px]="height" overflow="scroll">
+      <div class="network">
+        <svg [attr.width.px]="width" [attr.height.px]="height">
         <circle *ngFor="let node of nodes" (click)="layerDetail(node.layer)"
           [attr.cx]="node.x"
           [attr.cy]="node.y"
@@ -170,7 +171,8 @@
           [style.fill]="'white'">
           {{ text.text }}
         </text>
-      </svg>
+        </svg>  
+      </div>
     </div>
     <div class="row">
       <button mat-raised-button color="accent" routerLink="/training-session">Train model</button>
