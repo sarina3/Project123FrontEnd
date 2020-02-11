@@ -1,6 +1,8 @@
 /* @import '../styles.scss'; */
 .mat-app-background {
-    height: 100% !important;
+
+  min-height: 100vh;
+  height: auto;
 
   app-model-builder {
     height: 100% !important;
