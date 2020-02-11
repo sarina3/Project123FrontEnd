@@ -41,6 +41,8 @@ export class PredictComponent implements OnInit, OnDestroy {
   step = 0;
   selectedModel = null;
 
+  spinnerVisible = false;
+
   get canShowResult() {
     // console.log('change emitted');
     return this.showResult;
@@ -92,13 +94,16 @@ export class PredictComponent implements OnInit, OnDestroy {
   }
 
   predict() {
+    this.spinnerVisible = true;
     this.predictService.predict(this.predictForm)
       .subscribe(response => {
-          console.log(response);
           this.predictionResult = response;
           this.showResult = true;
-        }
-      );
+          this.spinnerVisible = false;
+        }, err => {
+          console.log(err);
+          this.spinnerVisible = false;
+        });
   }
 
   onSelect(event: SelectData) {
@@ -220,5 +225,13 @@ export class PredictComponent implements OnInit, OnDestroy {
   }
   loadImageFailed() {
     // show message
+  }
+
+  getResultAttribute(att: string) {
+    return this.predictionResult[att];
+  }
+
+  getResultOk() {
+    return this.predictionResult['Classification class'].toLowerCase() === 'malignant';
   }
 }

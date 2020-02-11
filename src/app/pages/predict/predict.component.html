@@ -125,28 +125,37 @@
 
         <div class="row">
           <div class="col-12 col-sm-2 col-md-3 col-lg-4 col-xl-4"></div>
-          <div class="col-12 col-sm-8 col-md-6 col-lg-4 col-xl-4 align-center marg-top-10" >
+          <div class="col-12 col-sm-8 col-md-6 col-lg-4 col-xl-4 align-center marg-top-10">
             <img [src]="getImage()">
-            <table>
+          </div>
+          <div class="col-12 col-sm-2 col-md-3 col-lg-4 col-xl-4"></div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 align-center marg-top-10">
+            <table *ngIf="predictionResult" class="result">
               <tr>
-                <th>1</th>
-                <td>2</td>
+                <th class="column">Classification class</th>
+                <td [ngClass]="{ 'malignant': getResultOk(), 'bening': !getResultOk() }">
+                  {{ getResultAttribute('Classification class') }}
+                  {{ getResultAttribute('Classification class').toLowerCase() === 'malignant' ? ' / Zhubný' : ' / Nezhubný' }}
+                </td>
               </tr>
-              <tr>
-                <th>3</th>
-                <td>4</td>
+              <tr class="column">
+                <th>Classification result</th>
+                <td>{{ getResultAttribute('Classification result') }}</td>
               </tr>
-              <tr>
-                <th>5</th>
-                <td>6</td>
+              <tr class="column">
+                <th>Popis</th>
+                <td [ngClass]="{ 'malignant': getResultOk() }">
+                  {{ getResultAttribute('prediction_info') }}
+                </td>
               </tr>
-              <tr>
-                <th>7</th>
-                <td>8</td>
+              <tr class="column" *ngIf="getResultAttribute('metadata')">
+                <th>metadata</th>
+                <td>{{ getResultAttribute('metadata') }}</td>
               </tr>
             </table>
           </div>
-          <div class="col-12 col-sm-2 col-md-3 col-lg-4 col-xl-4"></div>
         </div>
 
         <mat-action-row>

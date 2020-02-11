@@ -53,6 +53,21 @@ input[type="file"] {
   padding: 15px;
 }
 
+.result{
+  font-size: 16px;
+}
+
+.column {
+  width: 170px;
+}
+
+.bening {
+  color: green
+}
+.malignant {
+  color: red;
+}
+
 /* @import '../../../styles.scss';
 
 .predict-page{
