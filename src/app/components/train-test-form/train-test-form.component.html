@@ -240,8 +240,14 @@
     <ng-container *ngTemplateOutlet="template">
     </ng-container>
   </div>
+  <div *ngIf="errorMessage">
+    <mat-toolbar color="primary">
+      <mat-icon color="accent">details</mat-icon>
+      Selected model
+    </mat-toolbar>
+    <ng-container *ngTemplateOutlet="template"></ng-container>
+  </div>
 </div>
-
 <!-- 
 <div class="holder">
   <div class="network-picker">
