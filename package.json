@@ -24,14 +24,9 @@
     "@ng-bootstrap/ng-bootstrap": "^4.2.2",
     "@types/socket.io-client": "^1.4.32",
     "angular-google-charts": "^0.1.6",
-<<<<<<< HEAD
     "angular-resize-event": "^1.2.1",
-    "bootstrap": "^4.0.0",
-    "core-js": "^2.5.4",
-=======
     "bootstrap": "^4.4.1",
     "core-js": "^2.6.11",
->>>>>>> d2aa23b505911b16ec7d01d7a452bc880b516b8c
     "hammerjs": "^2.0.8",
     "jquery": "^3.4.1",
     "ngx-image-cropper": "^2.1.2",

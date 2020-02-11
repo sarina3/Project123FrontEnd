@@ -94,6 +94,7 @@ export class PredictComponent implements OnInit, OnDestroy {
   }
 
   predict() {
+    this.predictionResult = null;
     this.spinnerVisible = true;
     this.predictService.predict(this.predictForm)
       .subscribe(response => {
@@ -168,7 +169,9 @@ export class PredictComponent implements OnInit, OnDestroy {
 
   getMetadata(att: string) {
     const m = this.predictionResult['metadata'];
+    console.log('m', m);
     const meta = m[att];
+    console.log('meta', meta);
     return meta;
     // return Object.keys(this.predictionResult.metadata);
   }
